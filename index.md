@@ -1,4 +1,4 @@
-## Arquitectura de Computadores
+## Arquitectura de Computadores 2020-II
 You can use the [editor on GitHub](https://github.com/arquitecturaG3/arquitecturaG3.github.io/edit/main/index.md) to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
