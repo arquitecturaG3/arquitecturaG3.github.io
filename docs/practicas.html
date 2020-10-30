@@ -55,22 +55,27 @@
 
   <!-- Page Content -->
   <div class="container" style="margin-top: 3%;">
-    <div class="row justify-content-center">
 
-      <div class="col-md-3 ">
-        <div class="menu" style="position: fixed; margin-top:  3%;">
-          <div class="titulo" style="font-size: 32px; margin-bottom:10%"><b>Practicas<br></b></div>
-          <ol>
-            <li type="disc">
-              <dd><a href="#practica1">Practica 1</a></dd>
-            </li>
-          </ol>
-        </div>
+    <div class="col-md-3 ">
+      <div class="menu" style="position: fixed; margin-top:  3%;">
+        <div class="titulo" style="font-size: 32px; margin-bottom:10%"><b>Practicas<br></b></div>
+        <ol>
+          <li type="disc">
+            <dd><a href="#practica1">Practica 1</a></dd>
 
+          </li>
+          <li type="disc">
+
+            <dd><a href="#practica2">Practica 2</a></dd>
+          </li>
+        </ol>
       </div>
 
-      <div class="col-md-6 align-self-center" id="practica1">
-        <div style="margin-top:10%;margin-bottom: 10%; text-align:justify; align-content: center;">
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-6 align-self-center">
+        <div style="text-align:justify; align-content: center;padding-top: 10%;" id="practica1">
           <div class="titulo"><b>Práctica 1: Familiarizándose con las sesiones prácticas e introducción al curso.</b>
           </div>
           <br>
@@ -163,16 +168,19 @@
             <br>
 
             Si analizamos la tabla podemos ver que todas las categorias han aumentando drasticamente, cantidad de
-            transistores usados, cantidad de operaciones que puede realizar el procesador cada segundo, el almacenamiento
-            de los datos y en memoria, a su vez el consumo tambien ha disminuido drasticamente, y otro factor que tambien
-            es importante pero no se envidencia en la tabla son las dimensiones, el tamaño de todos estos componentes se han visto 
+            transistores usados, cantidad de operaciones que puede realizar el procesador cada segundo, el
+            almacenamiento
+            de los datos y en memoria, a su vez el consumo tambien ha disminuido drasticamente, y otro factor que
+            tambien
+            es importante pero no se envidencia en la tabla son las dimensiones, el tamaño de todos estos componentes se
+            han visto
             reducidos de manera exponencial.
 
             <div class="img-container">
               <img src="./imgs/sizecom.jpg" style="width: 400px" alt="">
             </div>
 
-   
+
 
             <br>
 
@@ -384,8 +392,386 @@
           </ol>
 
         </div>
+
+        <div style="text-align:justify; align-content: center;padding-top: 10%;" id="practica2">
+          <div class="titulo"><b>Práctica 2: Nand2Tetris</b>
+          </div>
+          <br>
+
+          <ol>
+
+            <li>¿Cuál es el objetivo de ese proyecto con sus palabras y describa que debe hacer para desarrollarlo?</li>
+            <li>En el sitio web respectivo para esta práctica (no olvide identificarlo correctamente), agregue los
+              principales elementos de entrega de la práctica: códigos realizados (bien documentados), resultados y
+              descripción de los mismos.</li>
+
+            <br>
+            <b>Códigos realizados</b>
+            <br>
+            <br>
+
+            <div class="panel-group" id="accordion">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Not">
+                      Not</a>
+                  </h4>
+                </div>
+                <div id="Not" class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    <pre><code>
+CHIP Not {
+  IN in;
+  OUT out;
+
+  PARTS:
+  Nand(a=in, b=in, out=out);
+}
+</code></pre>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#And">
+                      And</a>
+                  </h4>
+                </div>
+                <div id="And" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <pre><code>
+CHIP Not {
+  IN in;
+  OUT out;
+
+  PARTS:
+  Nand(a=in, b=in, out=out);
+}
+</code></pre>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Or">
+                      Or</a>
+                  </h4>
+                </div>
+                <div id="Or" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <pre><code>
+CHIP Not {
+  IN in;
+  OUT out;
+
+  PARTS:
+  Nand(a=in, b=in, out=out);
+}
+</code></pre>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Xor">
+                      Xor</a>
+                  </h4>
+                </div>
+                <div id="Xor" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <pre><code>
+CHIP Not {
+  IN in;
+  OUT out;
+
+  PARTS:
+  Nand(a=in, b=in, out=out);
+}
+</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Mux">
+                      Mux</a>
+                  </h4>
+                </div>
+                <div id="Mux" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <pre><code>
+CHIP Not {
+  IN in;
+  OUT out;
+
+  PARTS:
+  Nand(a=in, b=in, out=out);
+}
+</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#DMux">
+                      DMux</a>
+                  </h4>
+                </div>
+                <div id="DMux" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <pre><code>
+CHIP Not {
+  IN in;
+  OUT out;
+
+  PARTS:
+  Nand(a=in, b=in, out=out);
+}
+</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Not16">
+                      Not16</a>
+                  </h4>
+                </div>
+                <div id="Not16" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <pre><code>
+CHIP Not {
+  IN in;
+  OUT out;
+
+  PARTS:
+  Nand(a=in, b=in, out=out);
+}
+</code></pre>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#And16">
+                      And16</a>
+                  </h4>
+                </div>
+                <div id="And16" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <pre><code>
+CHIP Not {
+  IN in;
+  OUT out;
+
+  PARTS:
+  Nand(a=in, b=in, out=out);
+}
+</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Or16">
+                      Or16</a>
+                  </h4>
+                </div>
+                <div id="Or16" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <pre><code>
+CHIP Not {
+  IN in;
+  OUT out;
+
+  PARTS:
+  Nand(a=in, b=in, out=out);
+}
+</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Mux16">
+                      Mux16</a>
+                  </h4>
+                </div>
+                <div id="Mux16" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <pre><code>
+CHIP Not {
+  IN in;
+  OUT out;
+
+  PARTS:
+  Nand(a=in, b=in, out=out);
+}
+</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Or8Way">
+                      Or8Way</a>
+                  </h4>
+                </div>
+                <div id="Or8Way" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <pre><code>
+CHIP Not {
+  IN in;
+  OUT out;
+
+  PARTS:
+  Nand(a=in, b=in, out=out);
+}
+</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Mux4Way16">
+                      Mux4Way16</a>
+                  </h4>
+                </div>
+                <div id="Mux4Way16" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <pre><code>
+CHIP Not {
+  IN in;
+  OUT out;
+
+  PARTS:
+  Nand(a=in, b=in, out=out);
+}
+</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Mux8Way16">
+                      Mux8Way16</a>
+                  </h4>
+                </div>
+                <div id="Mux8Way16" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <pre><code>
+CHIP Not {
+  IN in;
+  OUT out;
+
+  PARTS:
+  Nand(a=in, b=in, out=out);
+}
+</code></pre>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#DMux4Way">
+                      DMux4Way</a>
+                  </h4>
+                </div>
+                <div id="DMux4Way" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <pre><code>
+CHIP Not {
+  IN in;
+  OUT out;
+
+  PARTS:
+  Nand(a=in, b=in, out=out);
+}
+</code></pre>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#DMux8Way">
+                      DMux8Way</a>
+                  </h4>
+                </div>
+                <div id="DMux8Way" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <pre><code>
+CHIP Not {
+  IN in;
+  OUT out;
+
+  PARTS:
+  Nand(a=in, b=in, out=out);
+}
+</code></pre>
+                  </div>
+                </div>
+              </div>
+
+
+              <li>Responda la pregunta dada en el curso respectivo al dia jueves 5 de noviembre.</li>
+
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, quod pariatur corrupti nemo
+              necessitatibus quisquam expedita consectetur dolorem ullam, aperiam soluta porro at sit magni odit alias
+              officia qui. Cum.
+
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, quod pariatur corrupti nemo
+              necessitatibus quisquam expedita consectetur dolorem ullam, aperiam soluta porro at sit magni odit alias
+              officia qui. Cum.
+
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, quod pariatur corrupti nemo
+              necessitatibus quisquam expedita consectetur dolorem ullam, aperiam soluta porro at sit magni odit alias
+              officia qui. Cum.
+
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, quod pariatur corrupti nemo
+              necessitatibus quisquam expedita consectetur dolorem ullam, aperiam soluta porro at sit magni odit alias
+              officia qui. Cum.
+
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, quod pariatur corrupti nemo
+              necessitatibus quisquam expedita consectetur dolorem ullam, aperiam soluta porro at sit magni odit alias
+              officia qui. Cum.
+          </ol>
+
+        </div>
       </div>
     </div>
+
+
+
+  </div>
 
   </div>
 </body>
