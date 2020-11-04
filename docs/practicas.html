@@ -424,7 +424,8 @@
 CHIP Not {
   IN in;
   OUT out;
-
+//Se pide un bit y por medio de la funcion Nand se niega, siendo las entradas del Nand el bit que pedimos acá. De esta forma 
+hallamos el Not
   PARTS:
   Nand(a=in, b=in, out=out);
 }
@@ -445,7 +446,8 @@ CHIP Not {
   CHIP And {
     IN a, b;
     OUT out;
-
+// Compuerta And, su estructura interna es similar a la 
+compuerta primitiva Nand, por lo que se opta por negar la salida.
     PARTS:
     Nand(a=a, b=b, out=x);
     Not(in=x, out=out);
@@ -467,7 +469,7 @@ CHIP Not {
 CHIP Or {
   IN a, b;
   OUT out;
-
+// Se pide dos entradas "a" y "b", cada entrada se pasa por una compuerta Nand como resultado tenemos "x" y luego  estas tambien se pasa por una compuerta Nand 
   PARTS:
   Nand(a=a, b=a, out=x);
   Nand(a=b, b=b, out=y);
@@ -490,7 +492,8 @@ CHIP Or {
   CHIP Xor {
     IN a, b;
     OUT out;
-
+// Se piden dos bit como entradas a cada uno se le pasa por la 
+funcion And un bit y la negacion del otro el resultado de estos los ingresamos como entradas para la funcion Or
     PARTS:
     Not(in=a, out=x);
     Not(in=b, out=y);
@@ -516,7 +519,8 @@ CHIP Or {
   CHIP Mux {
     IN a, b, sel;
     OUT out;
-
+// Se piden tres entradas siendo una el selector  luego tenemos una And que llevara el "sel" negado junto con la entrada "b"  y otra and con el "sel" y la entrada "a"  el resultado de estas 
+And las ingresamos en una Or
     PARTS:
     Not(in=sel, out=x);
     And(a=sel, b=b, out=y);
@@ -541,7 +545,9 @@ CHIP Or {
   CHIP DMux {
     IN in, sel;
     OUT a, b;
-
+// El delmultiplexor esta posee 2 entradas, una entrada in y 
+otra la entrada del selector, la salida esta definida como "a" 
+que es una salida de una compuerta And donde el selector a sido negado, y otra "b" en el cual el selector no ha sido negado.
     PARTS:
     Not(in=sel, out=x);
     And(a=x, b=in, out=a);
@@ -565,9 +571,8 @@ CHIP Or {
   CHIP Not16 {
     IN in[16];
     OUT out[16];
-
+//se tiene un vector de 16 puertos llenos de bits y se pasa por una compuerta Not cada índice del vector
     PARTS:
-    // Put your code here:
     Not(in=in[0], out=out[0]);
     Not(in=in[1], out=out[1]);
     Not(in=in[2], out=out[2]);
@@ -604,7 +609,9 @@ CHIP Or {
   CHIP And16 {
     IN a[16], b[16];
     OUT out[16];
-
+//Poseemos una compuerta And con 2 arreglos de entradas con un 
+tamaño de 16 bits, "a" y "b", estos compara las entradas 
+del indice en el cual se ubiquen independientemente
     PARTS:
     And(a=a[0], b=b[0], out=out[0]);
     And(a=a[1], b=b[1], out=out[1]);
@@ -641,7 +648,7 @@ CHIP Or {
   CHIP Or16 {
     IN a[16], b[16];
     OUT out[16];
-
+//se piden dos vectores de tamaño 16 lleno de bit y se pasa por una compuerta Or cada índice igual de los vectores
     PARTS:
     Or(a=a[0], b=b[0], out=out[0]);
     Or(a=a[1], b=b[1], out=out[1]);
@@ -678,7 +685,8 @@ CHIP Or {
   CHIP Mux16 {
     IN a[16], b[16], sel;
     OUT out[16];
-
+//se pide dos arreglos de tamaño 16 llenos de bit y una entrada para el selector cada índice igual de los vectores se introduce a un Multiplexor sencillo como resultado tenemos un vector de 
+los valores de cada Mux
     PARTS:
     Mux(a=a[0], b=b[0], sel=sel, out=out[0]);
     Mux(a=a[1], b=b[1], sel=sel, out=out[1]);
@@ -715,7 +723,9 @@ CHIP Or {
   CHIP Or8Way {
     IN in[8];
     OUT out;
-
+/ Se piden 8 bit y se hace una piramide invertida de compuertas Or siendo las primeras 4 las entradas en secuencia para cada 
+una, luego de estas ocho entradas la primera fila de compuertas las pasa a 4 entradas para dos conpuertas, y estas reducen las 
+entradas a dos para la Or final
     PARTS:
     Or(a=in[0], b=in[1], out=x);
     Or(a=in[2], b=in[3], out=y);
@@ -743,7 +753,9 @@ CHIP Or {
   CHIP Mux4Way16 {
     IN a[16], b[16], c[16], d[16], sel[2];
     OUT out[16];
-
+// Se pide 4 vectores de tamaño 16 llenos de bit y un arreglo 
+tamaño 2 para el sel se divide la funcionalidad en dos Mux16 
+ingresando como entradas al primero dos vectores y al segundo los otros dos, y el resultado de estos seran la entradas para otro Mux16 que dará el resultado deseado
     PARTS:
     Mux16(a=a,b=b,sel=sel[0],out=x);
     Mux16(a=c,b=d,sel=sel[0],out=y);
@@ -769,7 +781,10 @@ CHIP Or {
         e[16], f[16], g[16], h[16],
         sel[3];
     OUT out[16];
-
+// Se requieren 8 arreglos de 16 bit y un arreglo de tamaño 3 
+para emular los sel vamos a dividir la funcionalidad en dos 
+Mux4Way16 dandole al primero los primeros 4 arreglos de datos y al segundo los otros cuatro, luego tomamos los resultados de 
+estos y los ingresamos a un Mux16
     PARTS:
     Mux4Way16(a=a,b=b,c=c,d=d,sel=sel[0..1],out=x);
     Mux4Way16(a=e,b=f,c=g,d=h,sel=sel[0..1],out=y);
@@ -794,7 +809,8 @@ CHIP Or {
   CHIP DMux4Way {
     IN in, sel[2];
     OUT a, b, c, d;
-
+// Cuando la entrada "in" es 1 los bit de entrada del "selector" nos definen la salida de "a", "b", "c", "d", cuando la entrada "in" es 0 no importa la configuracion, o mas claramente sus 
+salidas son 0. Se comprende que el "Selector" se define como un arreglo de 2 campos, 1 y 0.
     PARTS:
     DMux(in=in,sel=sel[1],a=x,b=y);
     DMux(in=x,sel=sel[0],a=a,b=b);
@@ -819,9 +835,9 @@ CHIP Or {
   CHIP DMux8Way {
     IN in, sel[3];
     OUT a, b, c, d, e, f, g, h;
-
+// Cuando la entrada "in" es 1 los bit de entrada del "selector" nos definen la salida de "a", "b", "c", "d", "e", "f", "g", "h" cuando la entrada "in" es 0 no importa la configuracion, o mas 
+claramente sus salidas son 0. Se comprende que el "Selector" se define como un arreglo de tamaño 3 con las combinaciones de  1 y 0.
     PARTS:
-    // Put your code here:
     DMux(in=in,sel=sel[2],a=x,b=y);
     DMux4Way(in=x,sel=sel[0..1],a=a,b=b,c=c,d=d);
     DMux4Way(in=y,sel=sel[0..1],a=e,b=f,c=g,d=h);
