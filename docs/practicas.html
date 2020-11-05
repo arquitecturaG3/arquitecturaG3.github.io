@@ -436,9 +436,9 @@
                 <div id="Not" class="panel-collapse collapse in">
                   <div class="panel-body">
                     <pre><code>
-// Se pide un bit y por medio de la funcion Nand se niega, 
-// siendo las entradas del Nand el bit que pedimos acá. 
-// De esta forma hallamos el Not
+// La entrada esta conformada por un unico bit 
+// para implementar el not se hace uso de una compuerta Nand
+// donde cada entrada es el mismo bit
 
 CHIP Not {
   IN in;
@@ -467,9 +467,9 @@ CHIP Not {
                 <div id="And" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
-// Compuerta And, su estructura interna es similar a la 
-// compuerta primitiva Nand, por lo que se 
-// opta por negar la salida.
+// La compuerta And puede ser vista como
+// la negacion de una compuerta Nand
+// A = (A')'
 
   CHIP And {
     IN a, b;
@@ -501,18 +501,21 @@ CHIP Not {
                 <div id="Or" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
-// Se pide dos entradas "a" y "b", cada entrada 
-// se pasa por una compuerta Nand como resultado 
-// tenemos "x" y luego  estas tambien se pasa 
-// por una compuerta Nand 
+// Tenemos como entradas 'a' y 'b'
+// negamos ambas entradas 
+// y las pasamos por una Nand
+// Dada la identidad basica
+// a'b' = (a + b)' negamos ambos lados
+// (a'b')' = a + b
+
 
 CHIP Or {
   IN a, b;
   OUT out;
 
   PARTS:
-  Nand(a=a, b=a, out=x);
-  Nand(a=b, b=b, out=y);
+  Not(in=a, out=x);
+  Not(in=b, out=y);
   Nand(a=x, b=y, out=out);
 }                    
 </code></pre> <a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Or.out">output</a>
@@ -538,10 +541,13 @@ CHIP Or {
                   <div class="panel-body">
                     <pre><code>
 
-// Se piden dos bit como entradas a cada uno 
-// se le pasa por la funcion And un bit y la negacion 
-// del otro el resultado de estos los ingresamos como 
-// entradas para la funcion Or
+// Tenemos como entrada  'a' y 'b'
+// Dado que el xor lo podemos definir como:
+// xor(a,b) = a'b + a'b
+// Negamos ambas entradas
+// Se realiza un and entre cada entrada
+// y la negacion de la otra entrada
+// Esta dos salidas se pasan por un Or
 
   CHIP Xor {
     IN a, b;
@@ -576,11 +582,13 @@ CHIP Or {
                 <div id="Mux" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
-// Se piden tres entradas siendo una el selector  
-// luego tenemos una And que llevara el "sel" 
-// negado junto con la entrada "b"  y otra and 
-// con el "sel" y la entrada "a"  el resultado de estas 
-// And las ingresamos en una Or
+// Tenemos como entradas 'a,'b' y 'sel'
+// sel siendo sel un selector
+// Dado que el Multiplexor los podemos definir como:
+// Mux(a,b,sel) = (a*sel')+(b*sel)
+// Negamos el selector y lo usamos junto 'a' en un and
+// y usamos el selector sin negar junto con 'b' en otro and
+// Finalmente ambas salidas las pasamos por un Or
 
   CHIP Mux {
     IN a, b, sel;
@@ -622,7 +630,7 @@ CHIP Or {
 // la salida esta conformada por las variables a y b
 // Para implementar el demultiplexor es necesario
 // usar una compuerta And donde el selector a sido negado, 
-// y otra "b" en el cual el selector no ha sido negado.
+// y retornamos "b" con selector sin negar.
 
   CHIP DMux {
     IN in, sel;
@@ -655,8 +663,10 @@ CHIP Or {
                 <div id="Not16" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
-// Se tiene un vector de 16 puertos llenos de bits y 
-// se pasa por una compuerta Not cada índice del vector
+// La entrada esta dada por un vector de 16 bits
+// Dado que cada elemento del vector es independiente
+// Lo que debemos hacer es realizar un not a cada uno
+// de los elementos del vector
   CHIP Not16 {
     IN in[16];
     OUT out[16];
@@ -704,10 +714,10 @@ CHIP Or {
                 <div id="And16" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
-// Poseemos una compuerta And con 2 
-//arreglos de entradas con un 
-// tamaño de 16 bits, "a" y "b", estos compara las entradas 
-// del indice en el cual se ubiquen independientemente
+// La entrada esta dada por dos vectores de 16 bits
+// Dado que cada elemento del vector es independiente
+// Realizamos un And entre cada uno de los elementos
+// de los vectores que comparten la misma posicion
 
   CHIP And16 {
     IN a[16], b[16];
@@ -757,8 +767,8 @@ CHIP Or {
                   <div class="panel-body">
                     <pre><code>
 // La entrada esta dada por dos vectores de 16 bits
-// y se pasa por una compuerta Or 
-// cada índice igual de los vectores
+// Similar a lo realizado con la compuerta And16
+// Solo que en este caso realizamos la operacion Or
 
   CHIP Or16 {
     IN a[16], b[16];
@@ -810,9 +820,10 @@ CHIP Or {
                     <pre><code>
 // La entrada son dos vectores de 16 bits
 // y una entrada para el selector 
-// cada índice igual de los vectores se introduce 
-// a un Multiplexor sencillo como resultado 
-// tenemos un vector de los valores de cada Mux
+// Similar a las compuertas anteriores 
+// Realizamos la operacion Mux
+// Entre cada uno de los elementos de los vectores
+// Que comparten la misma posicion
 
   CHIP Mux16 {
     IN a[16], b[16], sel;
@@ -862,12 +873,14 @@ CHIP Or {
                 <div id="Or8Way" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
-// Se piden 8 bit y se hace una piramide 
-// invertida de compuertas Or siendo las 
-// primeras 4 las entradas en secuencia para cada 
-// una, luego de estas ocho entradas la primera fila 
-// de compuertas las pasa a 4 entradas para dos conpuertas, 
-// y estas reducen las  entradas a dos para la Or final
+// La entrada esta dada por un vector de 8 bits
+// Agrupamos los la entrada en 4 grupos de 2 bits
+// Aplicamos un Or a cada uno de los grupos
+// Esto nos da una salida de 4 bits, que volvemos
+// A agrupar en 2 grupos de dos bits
+// Realizamos otra vez la operacion Or
+// Realizamos una utlima operacion Or a las dos ultimas
+// salidas
 
   CHIP Or8Way {
     IN in[8];
@@ -878,8 +891,10 @@ CHIP Or {
     Or(a=in[2], b=in[3], out=y);
     Or(a=in[4], b=in[5], out=z);
     Or(a=in[6], b=in[7], out=w);
+
     Or(a=x, b=y, out=r);
     Or(a=z, b=w, out=s);
+
     Or(a=r, b=s, out=out);
 }
 </code></pre><a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Or8Way.out">output</a>
@@ -905,12 +920,14 @@ CHIP Or {
                 <div id="Mux4Way16" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
-// Se pide 4 vectores de 16 bits y un arreglo 
-// tamaño 2 para el sel se divide la 
-// funcionalidad en dos Mux16 ingresando como 
-// entradas al primero dos vectores y al segundo 
-// los otros dos, y el resultado de estos seran 
-// la entradas para otro Mux16 que dará el resultado deseado
+// La entrada esta dadad por 4 vectores de 16 bits
+// y un selector de 2 bits
+// agrupamos las entradas en dos grupos de 2 vectores
+// acada una le aplicamos un Mux16 
+// con la primera posicion del selector
+// Finalmente aplicamos un Mux16 
+// con la segunda posicion del selector
+// A las dos salidas de la operacion anterior
 
   CHIP Mux4Way16 {
     IN a[16], b[16], c[16], d[16], sel[2];
@@ -948,14 +965,14 @@ CHIP Or {
                 <div id="Mux8Way16" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
-// Se requieren 8 arreglos de 16 bits 
-// y un arreglo de tamaño 3 
-// para emular los sel vamos a 
-// dividir el vector en dos 
-// Mux4Way16 dandole al primero los primeros 
-// 4 arreglos de datos y al segundo los otros cuatro, 
-// luego tomamos los resultados de 
-// estos y los ingresamos a un Mux16
+// La entrada esta dada por 8 arreglos de 16 bits
+// y su respectivo selector de 3 bits
+// Similar al Mux4Way16
+// Agrupamos la entrada en dos grupos de 4 vectores
+// Realizamos el Mux4Way16 ya implementado
+// Junto con las dos primeras posiciones del selector 
+// Finalmente las salidas las pasamos por un Mux16
+// y la ultima posicion del selector
 
   CHIP Mux8Way16 {
     IN a[16], b[16], c[16], d[16],
@@ -1003,12 +1020,13 @@ CHIP Or {
                 <div id="DMux4Way" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
-// Cuando la entrada "in" es 1 los bit de entrada
-// del "selector" nos definen la salida 
-// de "a", "b", "c", "d", cuando la entrada 
-// "in" es 0 no importa la configuracion, o mas claramente sus 
-// salidas son 0. Se comprende que el "Selector" 
-// se define como un arreglo de 2 campos, 1 y 0.
+// Tenemos como entradas un bit 'in' y un selector de dos bits
+// Realizamos un DMux a la entrada y 
+// con la ultima posicion del selector 
+// Realizamos un DMux con la primera posicion del selector
+// Y las salidas respectivas de la operacion anterior
+// De esta forma estamos seleccionando la posicion en la que
+// retornaremos la entrada original de forma anidada
 
   CHIP DMux4Way {
     IN in, sel[2];
@@ -1046,13 +1064,12 @@ CHIP Or {
                 <div id="DMux8Way" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
-// Cuando la entrada "in" es 1 los bit de entrada 
-// del "selector" nos definen la salida de 
-// "a", "b", "c", "d", "e", "f", "g", "h" cuando 
-// la entrada "in" es 0 no importa la configuracion, 
-// o mas claramente sus salidas son 0. Se comprende 
-// que el "Selector" se define como un arreglo de 
-// tamaño 3 con las combinaciones de  1 y 0.
+// Similar a la compuerta DMux4Way solo que
+// en este caso hay un nivel de 'anidamiento' adicional
+// para ellos realizamos un Dmux simple y el sel[2]
+// Seguido de un DMUx4Way a los dos grupos
+// de las 4 variables de salida junto con
+// el selector y sus dos primeras posiciones
 
   CHIP DMux8Way {
     IN in, sel[3];
