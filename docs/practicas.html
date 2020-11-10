@@ -401,12 +401,30 @@
           <ol>
 
             <li>¿Cuál es el objetivo de ese proyecto con sus palabras y describa que debe hacer para desarrollarlo?</li>
+            <br>
+
+            <p>El objetivo del proyecto consiste en implementar el funcionamiento de compuertas logicas partiendo desde
+              la
+              compuerta primitiva (Nand), hasta finalizar con multiplexores y demultiplexores de 4 caminos, las
+              compuertas
+              mas complejas son implementadas en base a las compuertas mas simples ya implementadas anteriormente.
+
+              <br><br>
+              Para el desarrollo del proyecto es necesario aplicar lo aprendido sobre algebra booleana, para asi poder
+              descomponer compuertas
+              complejas en compuertas mas simples, al final podemos ver como todas las operaciones fundamentales y
+              aquellas que derivan de estas pueden ser construidas apartir de unicamente compuertas Nand.
+            </p>
+            <br>
+
             <li>En el sitio web respectivo para esta práctica (no olvide identificarlo correctamente), agregue los
               principales elementos de entrega de la práctica: códigos realizados (bien documentados), resultados y
               descripción de los mismos.</li>
 
             <br>
-            <b>Códigos realizados</b>
+            <b>Códigos realizados <a
+                href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/tree/main/practicas/nand2tetris/projects/01">[Enlace
+                Github]</a> </b>
             <br>
             <br>
 
@@ -421,6 +439,10 @@
                 <div id="Not" class="panel-collapse collapse in">
                   <div class="panel-body">
                     <pre><code>
+// La entrada esta conformada por un unico bit 
+// para implementar el not se hace uso de una compuerta Nand
+// donde cada entrada es el mismo bit
+
 CHIP Not {
   IN in;
   OUT out;
@@ -428,7 +450,13 @@ CHIP Not {
   PARTS:
   Nand(a=in, b=in, out=out);
 }
-</code></pre>
+</code></pre> <a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Not.out">output</a>
+
+                    <pre><code>
+  |  in   |  out  |
+  |   0   |   1   |
+  |   1   |   0   |
+  </code></pre>
                   </div>
                 </div>
               </div>
@@ -442,6 +470,10 @@ CHIP Not {
                 <div id="And" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
+// La compuerta And puede ser vista como
+// la negacion de una compuerta Nand
+// A = (A')'
+
   CHIP And {
     IN a, b;
     OUT out;
@@ -450,6 +482,14 @@ CHIP Not {
     Nand(a=a, b=b, out=x);
     Not(in=x, out=out);
 }
+</code></pre> <a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/And.out">output</a>
+
+                    <pre><code>
+  |   a   |   b   |  out  |
+  |   0   |   0   |   0   |
+  |   0   |   1   |   0   |
+  |   1   |   0   |   0   |
+  |   1   |   1   |   1   |
 </code></pre>
                   </div>
                 </div>
@@ -464,16 +504,32 @@ CHIP Not {
                 <div id="Or" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
+// Tenemos como entradas 'a' y 'b'
+// negamos ambas entradas 
+// y las pasamos por una Nand
+// Dada la identidad basica
+// a'b' = (a + b)' negamos ambos lados
+// (a'b')' = a + b
+
+
 CHIP Or {
   IN a, b;
   OUT out;
 
   PARTS:
-  Nand(a=a, b=a, out=x);
-  Nand(a=b, b=b, out=y);
+  Not(in=a, out=x);
+  Not(in=b, out=y);
   Nand(a=x, b=y, out=out);
 }                    
-</code></pre>
+</code></pre> <a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Or.out">output</a>
+
+                    <pre><code>
+  |   a   |   b   |  out  |
+  |   0   |   0   |   0   |
+  |   0   |   1   |   1   |
+  |   1   |   0   |   1   |
+  |   1   |   1   |   1   |                 
+  </code></pre>
                   </div>
                 </div>
               </div>
@@ -487,6 +543,15 @@ CHIP Or {
                 <div id="Xor" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
+
+// Tenemos como entrada  'a' y 'b'
+// Dado que el xor lo podemos definir como:
+// xor(a,b) = a'b + a'b
+// Negamos ambas entradas
+// Se realiza un and entre cada entrada
+// y la negacion de la otra entrada
+// Esta dos salidas se pasan por un Or
+
   CHIP Xor {
     IN a, b;
     OUT out;
@@ -498,6 +563,13 @@ CHIP Or {
     And(a=x, b=b, out=d);
     Or(a=c, b=d, out=out);
 }
+</code></pre><a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Xor.out">output</a>
+                    <pre><code>
+  |   a   |   b   |  out  |
+  |   0   |   0   |   0   |
+  |   0   |   1   |   1   |
+  |   1   |   0   |   1   |
+  |   1   |   1   |   0   | 
 </code></pre>
                   </div>
                 </div>
@@ -513,6 +585,14 @@ CHIP Or {
                 <div id="Mux" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
+// Tenemos como entradas 'a,'b' y 'sel'
+// siendo 'sel' un selector
+// Dado que el Multiplexor los podemos definir como:
+// Mux(a,b,sel) = (a*sel')+(b*sel)
+// Negamos el selector y lo usamos junto 'a' en un and
+// y usamos el selector sin negar junto con 'b' en otro and
+// Finalmente ambas salidas las pasamos por un Or
+
   CHIP Mux {
     IN a, b, sel;
     OUT out;
@@ -523,6 +603,17 @@ CHIP Or {
     And(a=x, b=a, out=z);
     Or(a=y, b=z, out=out);
 }
+</code></pre><a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux.out">output</a>
+                    <pre><code>
+  |   a   |   b   |  sel  |  out  |
+  |   0   |   0   |   0   |   0   |
+  |   0   |   0   |   1   |   0   |
+  |   0   |   1   |   0   |   0   |
+  |   0   |   1   |   1   |   1   |
+  |   1   |   0   |   0   |   1   |
+  |   1   |   0   |   1   |   0   |
+  |   1   |   1   |   0   |   1   |
+  |   1   |   1   |   1   |   1   |
 </code></pre>
                   </div>
                 </div>
@@ -538,6 +629,12 @@ CHIP Or {
                 <div id="DMux" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
+// El delmultiplexor posee 2 entradas, in y sel
+// la salida esta conformada por las variables a y b
+// Para implementar el demultiplexor es necesario
+// usar una compuerta And donde el selector a sido negado, 
+// y retornamos "b" con selector sin negar.
+
   CHIP DMux {
     IN in, sel;
     OUT a, b;
@@ -547,6 +644,13 @@ CHIP Or {
     And(a=x, b=in, out=a);
     And(a=sel, b=in, out=b);
 }
+</code></pre><a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/DMux.out">output</a>
+                    <pre><code>
+  |  in   |  sel  |   a   |   b   |
+  |   0   |   0   |   0   |   0   |
+  |   0   |   1   |   0   |   0   |
+  |   1   |   0   |   1   |   0   |
+  |   1   |   1   |   0   |   1   |
 </code></pre>
                   </div>
                 </div>
@@ -562,12 +666,15 @@ CHIP Or {
                 <div id="Not16" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
+// La entrada esta dada por un vector de 16 bits
+// Dado que cada elemento del vector es independiente
+// Lo que debemos hacer es realizar un not a cada uno
+// de los elementos del vector
   CHIP Not16 {
     IN in[16];
     OUT out[16];
 
     PARTS:
-    // Put your code here:
     Not(in=in[0], out=out[0]);
     Not(in=in[1], out=out[1]);
     Not(in=in[2], out=out[2]);
@@ -585,6 +692,15 @@ CHIP Or {
     Not(in=in[14], out=out[14]);
     Not(in=in[15], out=out[15]);
 }               
+</code></pre><a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Not16.out">output</a>
+
+                    <pre><code>
+  |        in        |       out        |
+  | 0000000000000000 | 1111111111111111 |
+  | 1111111111111111 | 0000000000000000 |
+  | 1010101010101010 | 0101010101010101 |
+  | 0011110011000011 | 1100001100111100 |
+  | 0001001000110100 | 1110110111001011 |    
 </code></pre>
                   </div>
                 </div>
@@ -601,6 +717,11 @@ CHIP Or {
                 <div id="And16" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
+// La entrada esta dada por dos vectores de 16 bits
+// Dado que cada elemento del vector es independiente
+// Realizamos un And entre cada uno de los elementos
+// de los vectores que comparten la misma posicion
+
   CHIP And16 {
     IN a[16], b[16];
     OUT out[16];
@@ -623,7 +744,17 @@ CHIP Or {
     And(a=a[14], b=b[14], out=out[14]);
     And(a=a[15], b=b[15], out=out[15]);
 }
-</code></pre>
+</code></pre><a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/And16.out">output</a>
+
+                    <pre><code style='font-size: 12px;'> 
+  |        a         |        b         |       out        |
+  | 0000000000000000 | 0000000000000000 | 0000000000000000 |
+  | 0000000000000000 | 1111111111111111 | 0000000000000000 |
+  | 1111111111111111 | 1111111111111111 | 1111111111111111 |
+  | 1010101010101010 | 0101010101010101 | 0000000000000000 |
+  | 0011110011000011 | 0000111111110000 | 0000110011000000 |
+  | 0001001000110100 | 1001100001110110 | 0001000000110100 |
+  </code></pre>
                   </div>
                 </div>
               </div>
@@ -638,6 +769,10 @@ CHIP Or {
                 <div id="Or16" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
+// La entrada esta dada por dos vectores de 16 bits
+// Similar a lo realizado con la compuerta And16
+// Solo que en este caso realizamos la operacion Or
+
   CHIP Or16 {
     IN a[16], b[16];
     OUT out[16];
@@ -660,6 +795,17 @@ CHIP Or {
     Or(a=a[14], b=b[14], out=out[14]);
     Or(a=a[15], b=b[15], out=out[15]);
 }
+</code></pre><a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Or16.out">output</a>
+
+                    <pre><code style='font-size: 12px;'>
+  |        a         |        b         |       out        |
+  | 0000000000000000 | 0000000000000000 | 0000000000000000 |
+  | 0000000000000000 | 1111111111111111 | 1111111111111111 |
+  | 1111111111111111 | 1111111111111111 | 1111111111111111 |
+  | 1010101010101010 | 0101010101010101 | 1111111111111111 |
+  | 0011110011000011 | 0000111111110000 | 0011111111110011 |
+  | 0001001000110100 | 1001100001110110 | 1001101001110110 |
+  
 </code></pre>
                   </div>
                 </div>
@@ -675,6 +821,13 @@ CHIP Or {
                 <div id="Mux16" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
+// La entrada son dos vectores de 16 bits
+// y una entrada para el selector 
+// Similar a las compuertas anteriores 
+// Realizamos la operacion Mux
+// Entre cada uno de los elementos de los vectores
+// Que comparten la misma posicion
+
   CHIP Mux16 {
     IN a[16], b[16], sel;
     OUT out[16];
@@ -697,6 +850,17 @@ CHIP Or {
     Mux(a=a[14], b=b[14], sel=sel, out=out[14]);
     Mux(a=a[15], b=b[15], sel=sel, out=out[15]);
 }
+</code></pre><a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux16.out">output</a>
+                    <pre><code style='font-size: 12px;'>
+  |        a         |        b         | sel |       out        |
+  | 0000000000000000 | 0000000000000000 |  0  | 0000000000000000 |
+  | 0000000000000000 | 0000000000000000 |  1  | 0000000000000000 |
+  | 0000000000000000 | 0001001000110100 |  0  | 0000000000000000 |
+  | 0000000000000000 | 0001001000110100 |  1  | 0001001000110100 |
+  | 1001100001110110 | 0000000000000000 |  0  | 1001100001110110 |
+  | 1001100001110110 | 0000000000000000 |  1  | 0000000000000000 |
+  | 1010101010101010 | 0101010101010101 |  0  | 1010101010101010 |
+  | 1010101010101010 | 0101010101010101 |  1  | 0101010101010101 |
 </code></pre>
                   </div>
                 </div>
@@ -712,6 +876,15 @@ CHIP Or {
                 <div id="Or8Way" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
+// La entrada esta dada por un vector de 8 bits
+// Agrupamos los la entrada en 4 grupos de 2 bits
+// Aplicamos un Or a cada uno de los grupos
+// Esto nos da una salida de 4 bits, que volvemos
+// A agrupar en 2 grupos de dos bits
+// Realizamos otra vez la operacion Or
+// Realizamos una utlima operacion Or a las dos ultimas
+// salidas
+
   CHIP Or8Way {
     IN in[8];
     OUT out;
@@ -721,11 +894,21 @@ CHIP Or {
     Or(a=in[2], b=in[3], out=y);
     Or(a=in[4], b=in[5], out=z);
     Or(a=in[6], b=in[7], out=w);
+
     Or(a=x, b=y, out=r);
     Or(a=z, b=w, out=s);
+
     Or(a=r, b=s, out=out);
 }
-</code></pre>
+</code></pre><a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Or8Way.out">output</a>
+                    <pre><code>
+  |     in     | out |
+  |  00000000  |  0  |
+  |  11111111  |  1  |
+  |  00010000  |  1  |
+  |  00000001  |  1  |
+  |  00100110  |  1  |
+  </code></pre>
                   </div>
                 </div>
               </div>
@@ -740,6 +923,15 @@ CHIP Or {
                 <div id="Mux4Way16" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
+// La entrada esta dadad por 4 vectores de 16 bits
+// y un selector de 2 bits
+// agrupamos las entradas en dos grupos de 2 vectores
+// acada una le aplicamos un Mux16 
+// con la primera posicion del selector
+// Finalmente aplicamos un Mux16 
+// con la segunda posicion del selector
+// A las dos salidas de la operacion anterior
+
   CHIP Mux4Way16 {
     IN a[16], b[16], c[16], d[16], sel[2];
     OUT out[16];
@@ -749,7 +941,19 @@ CHIP Or {
     Mux16(a=c,b=d,sel=sel[0],out=y);
     Mux16(a=x,b=y,sel=sel[1],out=out);                    
 }
-</code></pre>
+</code></pre> <a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux4Way16.out">output</a>
+                    <pre><code style='font-size: 8px;'> 
+  |        a         |        b         |        c         |        d         | sel  |       out        |
+  | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 |  00  | 0000000000000000 |
+  | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 |  01  | 0000000000000000 |
+  | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 |  10  | 0000000000000000 |
+  | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 |  11  | 0000000000000000 |
+  | 0001001000110100 | 1001100001110110 | 1010101010101010 | 0101010101010101 |  00  | 0001001000110100 |
+  | 0001001000110100 | 1001100001110110 | 1010101010101010 | 0101010101010101 |  01  | 1001100001110110 |
+  | 0001001000110100 | 1001100001110110 | 1010101010101010 | 0101010101010101 |  10  | 1010101010101010 |
+  | 0001001000110100 | 1001100001110110 | 1010101010101010 | 0101010101010101 |  11  | 0101010101010101 |
+  
+  </code></pre>
                   </div>
                 </div>
               </div>
@@ -764,6 +968,15 @@ CHIP Or {
                 <div id="Mux8Way16" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
+// La entrada esta dada por 8 arreglos de 16 bits
+// y su respectivo selector de 3 bits
+// Similar al Mux4Way16
+// Agrupamos la entrada en dos grupos de 4 vectores
+// Realizamos el Mux4Way16 ya implementado
+// Junto con las dos primeras posiciones del selector 
+// Finalmente las salidas las pasamos por un Mux16
+// y la ultima posicion del selector
+
   CHIP Mux8Way16 {
     IN a[16], b[16], c[16], d[16],
         e[16], f[16], g[16], h[16],
@@ -775,7 +988,26 @@ CHIP Or {
     Mux4Way16(a=e,b=f,c=g,d=h,sel=sel[0..1],out=y);
     Mux16(a=x,b=y,sel=sel[2],out=out);
 }
-</code></pre>
+</code></pre> <a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux8Way16.out">output</a>
+                    <pre><code style='font-size: 4px;'>
+  |        a         |        b         |        c         |        d         |        e         |        f         |        g         |        h         |  sel  |       out        |
+  | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 |  000  | 0000000000000000 |
+  | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 |  001  | 0000000000000000 |
+  | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 |  010  | 0000000000000000 |
+  | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 |  011  | 0000000000000000 |
+  | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 |  100  | 0000000000000000 |
+  | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 |  101  | 0000000000000000 |
+  | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 |  110  | 0000000000000000 |
+  | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 | 0000000000000000 |  111  | 0000000000000000 |
+  | 0001001000110100 | 0010001101000101 | 0011010001010110 | 0100010101100111 | 0101011001111000 | 0110011110001001 | 0111100010011010 | 1000100110101011 |  000  | 0001001000110100 |
+  | 0001001000110100 | 0010001101000101 | 0011010001010110 | 0100010101100111 | 0101011001111000 | 0110011110001001 | 0111100010011010 | 1000100110101011 |  001  | 0010001101000101 |
+  | 0001001000110100 | 0010001101000101 | 0011010001010110 | 0100010101100111 | 0101011001111000 | 0110011110001001 | 0111100010011010 | 1000100110101011 |  010  | 0011010001010110 |
+  | 0001001000110100 | 0010001101000101 | 0011010001010110 | 0100010101100111 | 0101011001111000 | 0110011110001001 | 0111100010011010 | 1000100110101011 |  011  | 0100010101100111 |
+  | 0001001000110100 | 0010001101000101 | 0011010001010110 | 0100010101100111 | 0101011001111000 | 0110011110001001 | 0111100010011010 | 1000100110101011 |  100  | 0101011001111000 |
+  | 0001001000110100 | 0010001101000101 | 0011010001010110 | 0100010101100111 | 0101011001111000 | 0110011110001001 | 0111100010011010 | 1000100110101011 |  101  | 0110011110001001 |
+  | 0001001000110100 | 0010001101000101 | 0011010001010110 | 0100010101100111 | 0101011001111000 | 0110011110001001 | 0111100010011010 | 1000100110101011 |  110  | 0111100010011010 |
+  | 0001001000110100 | 0010001101000101 | 0011010001010110 | 0100010101100111 | 0101011001111000 | 0110011110001001 | 0111100010011010 | 1000100110101011 |  111  | 1000100110101011 |
+  </code></pre>
                   </div>
                 </div>
               </div>
@@ -791,6 +1023,14 @@ CHIP Or {
                 <div id="DMux4Way" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
+// Tenemos como entradas un bit 'in' y un selector de dos bits
+// Realizamos un DMux a la entrada y 
+// con la ultima posicion del selector 
+// Realizamos un DMux con la primera posicion del selector
+// Y las salidas respectivas de la operacion anterior
+// De esta forma estamos seleccionando la posicion en la que
+// retornaremos la entrada original de forma anidada
+
   CHIP DMux4Way {
     IN in, sel[2];
     OUT a, b, c, d;
@@ -800,7 +1040,18 @@ CHIP Or {
     DMux(in=x,sel=sel[0],a=a,b=b);
     DMux(in=y,sel=sel[0],a=c,b=d);
 }
-</code></pre>
+</code></pre><a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/DMux4Way.out">output</a>
+                    <pre><code>
+  | in  | sel  |  a  |  b  |  c  |  d  |
+  |  0  |  00  |  0  |  0  |  0  |  0  |
+  |  0  |  01  |  0  |  0  |  0  |  0  |
+  |  0  |  10  |  0  |  0  |  0  |  0  |
+  |  0  |  11  |  0  |  0  |  0  |  0  |
+  |  1  |  00  |  1  |  0  |  0  |  0  |
+  |  1  |  01  |  0  |  1  |  0  |  0  |
+  |  1  |  10  |  0  |  0  |  1  |  0  |
+  |  1  |  11  |  0  |  0  |  0  |  1  |
+  </code></pre>
                   </div>
                 </div>
               </div>
@@ -816,43 +1067,179 @@ CHIP Or {
                 <div id="DMux8Way" class="panel-collapse collapse">
                   <div class="panel-body">
                     <pre><code>
+// Similar a la compuerta DMux4Way solo que
+// en este caso hay un nivel de 'anidamiento' adicional
+// para ellos realizamos un Dmux simple y el sel[2]
+// Seguido de un DMUx4Way a los dos grupos
+// de las 4 variables de salida junto con
+// el selector y sus dos primeras posiciones
+
   CHIP DMux8Way {
     IN in, sel[3];
     OUT a, b, c, d, e, f, g, h;
 
     PARTS:
-    // Put your code here:
     DMux(in=in,sel=sel[2],a=x,b=y);
     DMux4Way(in=x,sel=sel[0..1],a=a,b=b,c=c,d=d);
     DMux4Way(in=y,sel=sel[0..1],a=e,b=f,c=g,d=h);
 }
-</code></pre>
+</code></pre><a href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/DMux8Way.out">output</a>
+                    <pre><code style='font-size: 10px;'>
+  | in  |  sel  |  a  |  b  |  c  |  d  |  e  |  f  |  g  |  h  |
+  |  0  |  000  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |
+  |  0  |  001  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |
+  |  0  |  010  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |
+  |  0  |  011  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |
+  |  0  |  100  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |
+  |  0  |  101  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |
+  |  0  |  110  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |
+  |  0  |  111  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |
+  |  1  |  000  |  1  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |
+  |  1  |  001  |  0  |  1  |  0  |  0  |  0  |  0  |  0  |  0  |
+  |  1  |  010  |  0  |  0  |  1  |  0  |  0  |  0  |  0  |  0  |
+  |  1  |  011  |  0  |  0  |  0  |  1  |  0  |  0  |  0  |  0  |
+  |  1  |  100  |  0  |  0  |  0  |  0  |  1  |  0  |  0  |  0  |
+  |  1  |  101  |  0  |  0  |  0  |  0  |  0  |  1  |  0  |  0  |
+  |  1  |  110  |  0  |  0  |  0  |  0  |  0  |  0  |  1  |  0  |
+  |  1  |  111  |  0  |  0  |  0  |  0  |  0  |  0  |  0  |  1  |
+  </code></pre>
                   </div>
                 </div>
               </div>
 
-
+              <br>
               <li>Responda la pregunta dada en el curso respectivo al dia jueves 5 de noviembre.</li>
 
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, quod pariatur corrupti nemo
-              necessitatibus quisquam expedita consectetur dolorem ullam, aperiam soluta porro at sit magni odit alias
-              officia qui. Cum.
+              <br>
 
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, quod pariatur corrupti nemo
-              necessitatibus quisquam expedita consectetur dolorem ullam, aperiam soluta porro at sit magni odit alias
-              officia qui. Cum.
+              <b>Pregunta: Tomar su computador y/o telefono y responder que implica en terminos de, curva de
+                aprendizaje, transporte, precio en el mercado </b>
+              <br><br>
 
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, quod pariatur corrupti nemo
-              necessitatibus quisquam expedita consectetur dolorem ullam, aperiam soluta porro at sit magni odit alias
-              officia qui. Cum.
+              <p> Como ejemplo del computador tomamos el equipo de uno de nuestros integrantes, el cual presentamos
+                a continuación, dicho computador fue adquirido por piezas y ensamblado en el mismo lugar de compra, esto
+                se decidio asi ya que al tener en cuenta el precio de transporte, el envio del equipo ensamblado supone
+                un menor volumen a transportar y por consiguiente un menor costo de envio.</p>
 
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, quod pariatur corrupti nemo
-              necessitatibus quisquam expedita consectetur dolorem ullam, aperiam soluta porro at sit magni odit alias
-              officia qui. Cum.
+              <table class="tftable" border="1">
+                <tr>
+                  <th>Nombre producto</th>
+                  <th>Valor comercial COP </th>
 
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, quod pariatur corrupti nemo
-              necessitatibus quisquam expedita consectetur dolorem ullam, aperiam soluta porro at sit magni odit alias
-              officia qui. Cum.
+                </tr>
+
+                <tr>
+                  <td>GPU Nvidia GTX 1050 2GB</td>
+                  <td> 466.387 </td>
+
+                </tr>
+
+                <tr>
+                  <td>CPU Ryzen 3 1300X</td>
+                  <td>356.302</td>
+
+                </tr>
+
+                <tr>
+                  <td>MOBO Asrock AB350M-HDV</td>
+                  <td> 221.486</td>
+
+                </tr>
+
+
+                <tr>
+                  <td>Fuente de poder EVGA 750WBQ</td>
+                  <td>256.302</td>
+
+                </tr>
+
+                <tr>
+                  <td>Memoria RAM 16GB 3200Mhz</td>
+                  <td>320.000</td>
+
+                </tr>
+
+                <tr>
+                  <td>SSD 240GB</td>
+                  <td>157.983</td>
+
+                </tr>
+              </table>
+
+              <br>
+              <b>Curva de aprendizaje</b>
+
+              <p>
+                Dependiendo de si es el primer computador que una persona adquiere, o ya ha tenido contacto
+                anteriormente con estos dispositivos, la curva de aprendizaje puede variar
+                entre cada individuo, segun la experiencia del compañero de este ejemplo ya habia tenido contacto
+                anteriormente y no presento mayor dificultad, en cambio fue una gran mejora al aumentar la potencia de
+                computo con este nuevo equipo, si se presentaron algunas eventualidades, como lo son la instalacion
+                de nuevos drivers. Ahora en terminos generales, cada nueva generacion de jovenes nacen dentro de este
+                mundo digital, siendo nativos digitales los cuales cuentan con facilidad a la hora de manejar las nuevas
+                tecnologias.
+              </p>
+
+
+
+              <br>
+              <b>Transporte</b>
+
+              <p>Debido a que colombia no es un pais lider en manufacturación de dispositivos tecnologicos, casi la
+                totalidad de las piezas de los computadores que se venden a nivel nacional son importadas, luego el
+                transporte y aranceles reflejan un aumento en el costo comercial del equipo a la hora de ser adquirido.
+              <p>
+
+              <p>Por ejemplo segun el decreto <a
+                  href="https://www.dian.gov.co/normatividad/UVT/Resoluci%C3%B3n%20000084%20de%2028-11-2019.pdf">No. 478
+                  del 25 Marzo de 2020</a> , reglamenta exclusion de IVA a computadores
+                que no superen 50 UVT (35.607 COP) al momento de la venta, esto quiere decir que si queremos adquirir un
+                computador y este vale mas de 1.780.350 COP tendremos que tener en cuenta que deberemos pagar un IVA
+                suponiendo un incremento del 19% sobre el valor del producto.
+              </p>
+
+
+              <br>
+              <b>Precio de mercado</b>
+
+              <p>
+                El precio de mercado, de un dispositivo tecnologico varia dependiendo del pais donde este sera
+                comercializado, en el caso de colombia los precios de la tecnologia se ven incrementados por factores
+                como, el transporte para su importacion, los aranceles y el IVA (mencionado anteriormente)
+                por lo que el precio de la tecnologia en paises en desarrollo es mayor frente a paises de primer mundo,
+                teniendo en cuanta tambien que en los primeros por lo general el <a
+                  href="https://blog.formaciongerencial.com/indice-big-mac-y-sus-nuevas-interpretaciones/">poder
+                  adquisitvo </a> de la poblacion es
+                menor.
+              </p>
+              <div class="img-container">
+                <img style="width: 400px"
+                  src="https://blog.formaciongerencial.com/wp-content/uploads/2009/10/Captura-de-pantalla-2019-02-22-a-las-17.51.02.png"
+                  alt="">
+              </div>
+
+              <br>
+              <b>Referencias </b>
+              <ol>
+                <li type="disc">
+                  <a href="https://www.dian.gov.co/normatividad/UVT/Resoluci%C3%B3n%20000084%20de%2028-11-2019.pdf">
+                    Decreto No. 478 del 25 Marzo de 2020
+                  </a>
+                </li>
+                <li type="disc">
+                  <a href="https://blog.formaciongerencial.com/indice-big-mac-y-sus-nuevas-interpretaciones/">
+                    Indice Big Mac
+                  </a>
+                </li>
+              </ol>
+
+
+              <!-- https://www.dian.gov.co/normatividad/UVT/Resoluci%C3%B3n%20000084%20de%2028-11-2019.pdf -->
+
+              <!-- https://blog.formaciongerencial.com/indice-big-mac-y-sus-nuevas-interpretaciones/ -->
+
+
+
           </ol>
 
         </div>
