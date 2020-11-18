@@ -1,20 +1,15 @@
-// This file is part of www.nand2tetris.org
-// and the book "The Elements of Computing Systems"
-// by Nisan and Schocken, MIT Press.
-// File name: projects/01/Mux16.hdl
-
-/**
- * 16-bit multiplexor: 
- * for i = 0..15 out[i] = a[i] if sel == 0 
- *                        b[i] if sel == 1
- */
+// La entrada son dos vectores de 16 bits
+// y una entrada para el selector 
+// Similar a las compuertas anteriores 
+// Realizamos la operacion Mux
+// Entre cada uno de los elementos de los vectores
+// Que comparten la misma posicion
 
 CHIP Mux16 {
     IN a[16], b[16], sel;
     OUT out[16];
 
     PARTS:
-    // Put your code here:
     Mux(a=a[0], b=b[0], sel=sel, out=out[0]);
     Mux(a=a[1], b=b[1], sel=sel, out=out[1]);
     Mux(a=a[2], b=b[2], sel=sel, out=out[2]);

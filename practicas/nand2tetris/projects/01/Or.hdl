@@ -1,21 +1,17 @@
-// This file is part of www.nand2tetris.org
-// and the book "The Elements of Computing Systems"
-// by Nisan and Schocken, MIT Press.
-// File name: projects/01/Or.hdl
+/ Tenemos como entradas 'a' y 'b'
+// negamos ambas entradas 
+// y las pasamos por una Nand
+// Dada la identidad basica
+// a'b' = (a + b)' negamos ambos lados
+// (a'b')' = a + b
 
- /**
- * Or gate:
- * out = 1 if (a == 1 or b == 1)
- *       0 otherwise
- */
 
 CHIP Or {
-    IN a, b;
-    OUT out;
+  IN a, b;
+  OUT out;
 
-    PARTS:
-    // Put your code here:
-    Not(in=a, out=x);
-    Not(in=b, out=y);
-    Nand(a=x, b=y, out=out);
-}
+  PARTS:
+  Not(in=a, out=x);
+  Not(in=b, out=y);
+  Nand(a=x, b=y, out=out);
+}  

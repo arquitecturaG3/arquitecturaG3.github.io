@@ -1,19 +1,12 @@
-// This file is part of www.nand2tetris.org
-// and the book "The Elements of Computing Systems"
-// by Nisan and Schocken, MIT Press.
-// File name: projects/01/Or16.hdl
-
-/**
- * 16-bit bitwise Or:
- * for i = 0..15 out[i] = (a[i] or b[i])
- */
+// La entrada esta dada por dos vectores de 16 bits
+// Similar a lo realizado con la compuerta And16
+// Solo que en este caso realizamos la operacion Or
 
 CHIP Or16 {
     IN a[16], b[16];
     OUT out[16];
 
     PARTS:
-    // Put your code here:
     Or(a=a[0], b=b[0], out=out[0]);
     Or(a=a[1], b=b[1], out=out[1]);
     Or(a=a[2], b=b[2], out=out[2]);

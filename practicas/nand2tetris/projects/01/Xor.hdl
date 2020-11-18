@@ -1,19 +1,16 @@
-// This file is part of www.nand2tetris.org
-// and the book "The Elements of Computing Systems"
-// by Nisan and Schocken, MIT Press.
-// File name: projects/01/Xor.hdl
+// Tenemos como entrada  'a' y 'b'
+// Dado que el xor lo podemos definir como:
+// xor(a,b) = a'b + a'b
+// Negamos ambas entradas
+// Se realiza un and entre cada entrada
+// y la negacion de la otra entrada
+// Esta dos salidas se pasan por un Or
 
-/**
- * Exclusive-or gate:
- * out = not (a == b)
- */
-
-CHIP Xor {
+  CHIP Xor {
     IN a, b;
     OUT out;
 
     PARTS:
-    // Put your code here:
     Not(in=a, out=x);
     Not(in=b, out=y);
     And(a=a, b=y, out=c);

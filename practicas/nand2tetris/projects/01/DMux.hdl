@@ -1,20 +1,14 @@
-// This file is part of www.nand2tetris.org
-// and the book "The Elements of Computing Systems"
-// by Nisan and Schocken, MIT Press.
-// File name: projects/01/DMux.hdl
-
-/**
- * Demultiplexor:
- * {a, b} = {in, 0} if sel == 0
- *          {0, in} if sel == 1
- */
+// El delmultiplexor posee 2 entradas, in y sel
+// la salida esta conformada por las variables a y b
+// Para implementar el demultiplexor es necesario
+// usar una compuerta And donde el selector a sido negado, 
+// y retornamos "b" con selector sin negar.
 
 CHIP DMux {
     IN in, sel;
     OUT a, b;
 
     PARTS:
-    // Put your code here:
     Not(in=sel, out=x);
     And(a=x, b=in, out=a);
     And(a=sel, b=in, out=b);

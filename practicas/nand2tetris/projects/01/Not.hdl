@@ -1,7 +1,6 @@
-// This file is part of www.nand2tetris.org
-// and the book "The Elements of Computing Systems"
-// by Nisan and Schocken, MIT Press.
-// File name: projects/01/Not.hdl
+// La entrada esta conformada por un unico bit 
+// para implementar el not se hace uso de una compuerta Nand
+// donde cada entrada es el mismo bit
 
 /**
  * Not gate:
