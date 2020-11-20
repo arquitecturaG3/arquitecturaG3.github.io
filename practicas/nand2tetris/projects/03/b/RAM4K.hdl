@@ -4,6 +4,16 @@
  * the in value is loaded into the memory location specified by address 
  * (the loaded value will be emitted to out from the next time step onward).
  */
+ // Se tiene como entradas dos vectores 'in' tamaño 16 y
+ // 'address' tamaño 12 y una entrada load, siendo los índices
+ // del 9 al 11 de 'address' 
+ // los selectores de los Chip DMux8Way y Mux8Way16;
+ // primero pasamos los datos por el DMux8Way el cual nos dará 
+ // el valor de los load para los siguientes ocho Chip  RAM512
+ // la cual usa los  índices del 0 al 8 de 'address' 
+ // y estos Chip sus 'out' seran las entradas para el chip Mux8Way16
+ // hallando  este ultimo el 'out' esperado
+
 
 CHIP RAM4K {
     IN in[16], load, address[12];
