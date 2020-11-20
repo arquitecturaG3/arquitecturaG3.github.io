@@ -5,6 +5,17 @@
  * else if (inc[t] == 1)   out[t+1] = out[t] + 1  (integer addition)
  * else                    out[t+1] = out[t]
  */
+ // Tiene como entradas un vector 'in' tamaño 16 y variables
+ // que seran los indicativos de incremento, reinicio y carga
+ // Para cumplir los requerimiento que se pide se toman del
+ // menos al más importante(inc,load,reset) respectivamete 
+ // comenzamos con un Chip Inc16 el cual incrementará la variable data
+ // a un Mux16 se pasa como entradas la 'data' y la 'dataInc' y como
+ // selector la variable 'Inc' el out de este Mux16 lo tomamos como 
+ // una entrada para un siguiente Mux16 y la otra entrada es el vector 'in'
+ // como selector tendrá load, de igual manera la salida de este será la entrada 
+ // de otro Mux16 tomando como la otra entrada  'false' y el selector 'reset'
+ // por ultimo este out 'v3' será la entrada del Chip register y este dá el out final
 
 CHIP PC {
     // En el Chip PC tenemos 4 posibles casos
