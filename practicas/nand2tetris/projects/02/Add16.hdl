@@ -2,6 +2,13 @@
  * Adds two 16-bit values.
  * The most significant carry bit is ignored.
  */
+//Esta compuerta esta conformada por 16 FullAdder su funcionamiento
+//es simple ya que lo que hace esta compuerta es Sumar la entrada b y la
+//entrada c en cada uno de sus espacios del bus de 16 bits y usa como
+//tercera entrada en este caso a como el retorno de la posición 
+//anterior. Al inicio de la iteracion como no existe una valor previo 
+//para a, este toma el valor de false, la salida es almacenada en un bus de 16 //bits y el valor retornado se guarda en la variable carry
+ 
 
 CHIP Add16 {
     IN a[16], b[16];
