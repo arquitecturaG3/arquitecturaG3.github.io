@@ -5,6 +5,11 @@
  */
 
 CHIP Register {
+    // La implementacion del Register
+    // es basicamente un arreglo de 16 Bits	
+    // asociamos cada entrada a su respectivo Bit
+    // y su salida
+
     IN in[16], load;
     OUT out[16];
 

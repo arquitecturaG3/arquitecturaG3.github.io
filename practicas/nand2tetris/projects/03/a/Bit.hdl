@@ -5,6 +5,11 @@
  */
 
 CHIP Bit {
+    // Para implementar el chip Bit es necesario de un Mux
+    // Y un Flip-Flop tipo D, con el Mux decidimos si
+    // dada la entrada load, actualizamos la salida out
+    // o conservamos la informacion anterior usando el DFF
+
     IN in, load;
     OUT out;        
 

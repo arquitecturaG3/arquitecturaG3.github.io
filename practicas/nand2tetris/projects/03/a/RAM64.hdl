@@ -6,6 +6,14 @@
  */
 
 CHIP RAM64 {
+    // La RAM64 se puede ver como la implementacion de 8 RAM8
+    // y a su vez su implementacion es similiar a la de la RAM8
+    // solo que en este caso sustituimos los Registros por RAM8
+    // Usamos las primeras 3 posiciones de la entrada address
+    // para las posiciones de las RAM8, y las ultimas 3 posiciones
+    // para seleccionar cual de estas RAM8 seran actualizadas y 
+    // posteriormente retornar su salida
+
     IN in[16], load, address[6];    
     OUT out[16];
 

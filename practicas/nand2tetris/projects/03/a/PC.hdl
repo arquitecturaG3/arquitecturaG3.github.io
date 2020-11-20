@@ -7,6 +7,18 @@
  */
 
 CHIP PC {
+    // En el Chip PC tenemos 4 posibles casos
+    // resetear, sustituir,incrementar,mantener
+    // para decidir cual de estas 4 salidas retornamos
+    // implementamos una secuencia de Mux16
+    // primero decidimos entre mantener o incrementar
+    // seguido de decidir entre la salida anterior y sustituir
+    // para finalmente decidir entre la salida anterior o resetear
+    // Debido al funcionamiento de los Mux16 para implementar
+    // las condiciones en el orden indicado, esta son evaluadas
+    // desde la ultima hasta la primera, la salida final
+    // es almacenada en una Registro de 16 Bitsn y la variable data
+
     IN in[16],load,inc,reset;
     OUT out[16];
 
@@ -14,6 +26,7 @@ CHIP PC {
     // Put your code here:
 
     Inc16(in=data, out=dataInc);
+
     Mux16(a=data, b=dataInc, sel=inc, out=v1);
 
     Mux16(a=v1, b=in, sel=load, out=v2);

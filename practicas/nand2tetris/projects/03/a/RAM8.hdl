@@ -6,6 +6,15 @@
  */
 
 CHIP RAM8 {
+    // En la RAM8 tenemos 8 registros cada uno de 16 Bits
+    // cada registro esta asociado a una direccion en el arreglo address
+    // con un demultiplexor 8 way seleccionamos cual Registro actualizaremos
+    // seguido de esto ejecutamos los 8 Registros en donde uno de ellos
+    // uno de ellos tendra su entrada load = 1 dada la salida del DMux8Way
+    // finalmente usamos un Mux8Way16 para seleccionar cual de las 8 salidas
+    // de los registros retornaremos, siendo este el mismo señalado por la 
+    // entrada address
+
     IN in[16], load, address[3];
     OUT out[16];
 
