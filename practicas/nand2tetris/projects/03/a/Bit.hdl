@@ -9,6 +9,12 @@ CHIP Bit {
     // Y un Flip-Flop tipo D, con el Mux decidimos si
     // dada la entrada load, actualizamos la salida out
     // o conservamos la informacion anterior usando el DFF
+    // Tenemos como entrada 'in','load'
+    // junto a una variable temporal 'temp' la cual
+    // se usará en el chip Mux siendo una entrada al igual que 'in'
+    // y 'load' será el selector, el out del Mux ('m') se pasa
+    // como entrada al Data Flip-flop junto con la variable temporal
+    // dandonos la salida out
 
     IN in, load;
     OUT out;        
