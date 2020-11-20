@@ -8,7 +8,7 @@
 //tercera entrada en este caso a como el retorno de la posición 
 //anterior. Al inicio de la iteracion como no existe una valor previo 
 //para a, este toma el valor de false, la salida es almacenada en un bus de 16 
-//bits y el valor retornado se guarda en la variable carry
+//bits y el valor retornado se guarda en la variable carry.
  
 
 CHIP Add16 {
