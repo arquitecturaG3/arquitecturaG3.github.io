@@ -42,6 +42,10 @@ CHIP ALU {
    // La ALU es un circuito digital que proporciona operaciones aritméticas 
    // y lógicas. Es el bloque de construcción fundamental de la unidad central 
    // de procesamiento de una computadora.
+   //la ALU la cual básicamente compila todas las compuertas vistas previamente y 
+   //expulsa una tabla de verdad en la que se ven todas las compuertas en acción. 
+   //Dentro de sus funciones esta: Convertir en cero las entradas, negarlas, sumarlas, 
+   //compararlas, incluso convertirlas a valores negativos
 
    // Zero the x input
     Mux16(a=x, b=false, sel=zx, out=x1);
