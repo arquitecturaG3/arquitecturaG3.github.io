@@ -2,6 +2,13 @@
  * 16-bit incrementer:
  * out = in + 1 (arithmetic addition)
  */
+//La compuerta Inc16 es similar a la Add16 en este caso se usan 16 HalfAdder
+//dado que la unica diferencia es que se le añade un 1 en la entrada, 
+//es gracias a esta entrada y que solo contamos con un bus de 16 bits 
+//que utilizamos un HalfAdder. esta compuerta suma la entrada a que toma del bus 
+//de 16 bits y la entrada b que en esta ocacion inicia con un 1, el resultado se 
+//almacena en un bus de 16 bit y retorna en la variabla carry para ser utilizada 
+//con entrada b en la proxima operacion, similar al add16
 
 CHIP Inc16 {
     IN in[16];
