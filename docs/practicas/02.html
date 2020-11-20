@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<!--
+    Plain-Academic by Vasilios Mavroudis
+    Released under the Simplified BSD License/FreeBSD (2-clause) License.
+    https://github.com/mavroudisv/plain-academic
+-->
+
+<html lang="en">
+
+<head>
+  <title>Arquitectura</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+  <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
+
+</head>
+
+<body>
+
+
+  <!-- Navigation -->
+
+  <nav class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="../../index.html">Inicio</a></li>
+          <li><a href="../integrantes.html">Integrantes</a></li>
+          <li><a href="../practicas.html">Practicas</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <!-- Page Content -->
+  <div class="container" style="margin-top: 3%;">
+
+    <div class="col-md-3 ">
+      <div class="menu" style="position: fixed; margin-top:  3%;">
+        <div class="titulo" style="font-size: 32px; margin-bottom:10%"><b>Practicas<br></b></div>
+        <ol>
+          <li type="disc">
+            <dd><a href="./01.html">Practica 1</a></dd>
+
+          </li>
+          <li type="disc">
+
+            <dd><a href="./02.html">Practica 2</a></dd>
+          </li>
+
+          <li type="disc">
+
+            <dd><a href="./03.html">Practica 3</a></dd>
+          </li>
+        </ol>
+      </div>
+
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-6 align-self-center">
+
+
+
+
+        <div style="text-align:justify; align-content: center;padding-top: 10%;" id="practica2">
+          <div class="titulo"><b>Práctica 2: Nand2Tetris</b>
+          </div>
+          <br>
+
+          <ol>
+
+            <li>¿Cuál es el objetivo de ese proyecto con sus palabras y describa que debe hacer para desarrollarlo?</li>
+            <br>
+
+            <p>El objetivo del proyecto consiste en implementar el funcionamiento de compuertas logicas partiendo desde
+              la
+              compuerta primitiva (Nand), hasta finalizar con multiplexores y demultiplexores de 4 caminos, las
+              compuertas
+              mas complejas son implementadas en base a las compuertas mas simples ya implementadas anteriormente.
+
+              <br><br>
+              Para el desarrollo del proyecto es necesario aplicar lo aprendido sobre algebra booleana, para asi poder
+              descomponer compuertas
+              complejas en compuertas mas simples, al final podemos ver como todas las operaciones fundamentales y
+              aquellas que derivan de estas pueden ser construidas apartir de unicamente compuertas Nand.
+            </p>
+            <br>
+
+            <li>En el sitio web respectivo para esta práctica (no olvide identificarlo correctamente), agregue los
+              principales elementos de entrega de la práctica: códigos realizados (bien documentados), resultados y
+              descripción de los mismos.</li>
+
+            <br>
+            <b>Códigos realizados <a
+                href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/tree/main/practicas/nand2tetris/projects/01">[Enlace
+                Github]</a> </b>
+            <br>
+            <br>
+
+            <div class="panel-group" id="accordion">
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Not">
+                      Not</a>
+                  </h4>
+                </div>
+                <div id="Not" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    code
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Not.hdl"></script>
+                    output 
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Not.out"></script>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#And">
+                      And</a>
+                  </h4>
+                </div>
+                <div id="And" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    code
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/And.hdl"></script>
+                    output 
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/And.out"></script>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Or">
+                      Or</a>
+                  </h4>
+                </div>
+                <div id="Or" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    code
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Or.hdl"></script>
+                    output 
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Or.out"></script>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Xor">
+                      Xor</a>
+                  </h4>
+                </div>
+                <div id="Xor" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    code
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Xor.hdl"></script>
+                    output 
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Xor.out"></script>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Mux">
+                      Mux</a>
+                  </h4>
+                </div>
+                <div id="Mux" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    code
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux.hdl"></script>
+                    output 
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux.out"></script>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#DMux">
+                      DMux</a>
+                  </h4>
+                </div>
+                <div id="DMux" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    code
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux.hdl"></script>
+                    output 
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux.out"></script>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Not16">
+                      Not16</a>
+                  </h4>
+                </div>
+                <div id="Not16" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    code
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux.hdl"></script>
+                    output 
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux.out"></script>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#And16">
+                      And16</a>
+                  </h4>
+                </div>
+                <div id="And16" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    code
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux.hdl"></script>
+                    output 
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux.out"></script>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Or16">
+                      Or16</a>
+                  </h4>
+                </div>
+                <div id="Or16" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    code
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Or16.hdl"></script>
+                    output 
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Or16.out"></script>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Mux16">
+                      Mux16</a>
+                  </h4>
+                </div>
+                <div id="Mux16" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    code
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux16.hdl"></script>
+                    output 
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux16.out"></script>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Or8Way">
+                      Or8Way</a>
+                  </h4>
+                </div>
+                <div id="Or8Way" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    code
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Or8Way.hdl"></script>
+                    output 
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Or8Way.out"></script>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Mux4Way16">
+                      Mux4Way16</a>
+                  </h4>
+                </div>
+                <div id="Mux4Way16" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    code
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux4Way16.hdl"></script>
+                    output 
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux4Way16.out"></script>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Mux8Way16">
+                      Mux8Way16</a>
+                  </h4>
+                </div>
+                <div id="Mux8Way16" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    code
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux8Way16.hdl"></script>
+                    output 
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/Mux8Way16.out"></script>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#DMux4Way">
+                      DMux4Way</a>
+                  </h4>
+                </div>
+                <div id="DMux4Way" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    code
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/DMux4Way.hdl"></script>
+                    output 
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/DMux4Way.out"></script>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#DMux8Way">
+                      DMux8Way</a>
+                  </h4>
+                </div>
+                <div id="DMux8Way" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    code
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/DMux8Way.hdl"></script>
+                    output 
+                    <script src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/01/DMux8Way.out"></script>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+              <br>
+              <li>Responda la pregunta dada en el curso respectivo al dia jueves 5 de noviembre.</li>
+
+              <br>
+
+              <b>Pregunta: Tomar su computador y/o telefono y responder que implica en terminos de, curva de
+                aprendizaje, transporte, precio en el mercado </b>
+              <br><br>
+
+              <p> Como ejemplo del computador tomamos el equipo de uno de nuestros integrantes, el cual presentamos
+                a continuación, dicho computador fue adquirido por piezas y ensamblado en el mismo lugar de compra, esto
+                se decidio asi ya que al tener en cuenta el precio de transporte, el envio del equipo ensamblado supone
+                un menor volumen a transportar y por consiguiente un menor costo de envio.</p>
+
+              <table class="tftable" border="1">
+                <tr>
+                  <th>Nombre producto</th>
+                  <th>Valor comercial COP </th>
+
+                </tr>
+
+                <tr>
+                  <td>GPU Nvidia GTX 1050 2GB</td>
+                  <td> 466.387 </td>
+
+                </tr>
+
+                <tr>
+                  <td>CPU Ryzen 3 1300X</td>
+                  <td>356.302</td>
+
+                </tr>
+
+                <tr>
+                  <td>MOBO Asrock AB350M-HDV</td>
+                  <td> 221.486</td>
+
+                </tr>
+
+
+                <tr>
+                  <td>Fuente de poder EVGA 750WBQ</td>
+                  <td>256.302</td>
+
+                </tr>
+
+                <tr>
+                  <td>Memoria RAM 16GB 3200Mhz</td>
+                  <td>320.000</td>
+
+                </tr>
+
+                <tr>
+                  <td>SSD 240GB</td>
+                  <td>157.983</td>
+
+                </tr>
+              </table>
+
+              <br>
+              <b>Curva de aprendizaje</b>
+
+              <p>
+                Dependiendo de si es el primer computador que una persona adquiere, o ya ha tenido contacto
+                anteriormente con estos dispositivos, la curva de aprendizaje puede variar
+                entre cada individuo, segun la experiencia del compañero de este ejemplo ya habia tenido contacto
+                anteriormente y no presento mayor dificultad, en cambio fue una gran mejora al aumentar la potencia de
+                computo con este nuevo equipo, si se presentaron algunas eventualidades, como lo son la instalacion
+                de nuevos drivers. Ahora en terminos generales, cada nueva generacion de jovenes nacen dentro de este
+                mundo digital, siendo nativos digitales los cuales cuentan con facilidad a la hora de manejar las nuevas
+                tecnologias.
+              </p>
+
+
+
+              <br>
+              <b>Transporte</b>
+
+              <p>Debido a que colombia no es un pais lider en manufacturación de dispositivos tecnologicos, casi la
+                totalidad de las piezas de los computadores que se venden a nivel nacional son importadas, luego el
+                transporte y aranceles reflejan un aumento en el costo comercial del equipo a la hora de ser adquirido.
+              <p>
+
+              <p>Por ejemplo segun el decreto <a
+                  href="https://www.dian.gov.co/normatividad/UVT/Resoluci%C3%B3n%20000084%20de%2028-11-2019.pdf">No. 478
+                  del 25 Marzo de 2020</a> , reglamenta exclusion de IVA a computadores
+                que no superen 50 UVT (35.607 COP) al momento de la venta, esto quiere decir que si queremos adquirir un
+                computador y este vale mas de 1.780.350 COP tendremos que tener en cuenta que deberemos pagar un IVA
+                suponiendo un incremento del 19% sobre el valor del producto.
+              </p>
+
+
+              <br>
+              <b>Precio de mercado</b>
+
+              <p>
+                El precio de mercado, de un dispositivo tecnologico varia dependiendo del pais donde este sera
+                comercializado, en el caso de colombia los precios de la tecnologia se ven incrementados por factores
+                como, el transporte para su importacion, los aranceles y el IVA (mencionado anteriormente)
+                por lo que el precio de la tecnologia en paises en desarrollo es mayor frente a paises de primer mundo,
+                teniendo en cuanta tambien que en los primeros por lo general el <a
+                  href="https://blog.formaciongerencial.com/indice-big-mac-y-sus-nuevas-interpretaciones/">poder
+                  adquisitvo </a> de la poblacion es
+                menor.
+              </p>
+              <div class="img-container">
+                <img style="width: 400px"
+                  src="https://blog.formaciongerencial.com/wp-content/uploads/2009/10/Captura-de-pantalla-2019-02-22-a-las-17.51.02.png"
+                  alt="">
+              </div>
+
+              <br>
+              <b>Referencias </b>
+              <ol>
+                <li type="disc">
+                  <a href="https://www.dian.gov.co/normatividad/UVT/Resoluci%C3%B3n%20000084%20de%2028-11-2019.pdf">
+                    Decreto No. 478 del 25 Marzo de 2020
+                  </a>
+                </li>
+                <li type="disc">
+                  <a href="https://blog.formaciongerencial.com/indice-big-mac-y-sus-nuevas-interpretaciones/">
+                    Indice Big Mac
+                  </a>
+                </li>
+              </ol>
+              <!-- https://www.dian.gov.co/normatividad/UVT/Resoluci%C3%B3n%20000084%20de%2028-11-2019.pdf -->
+
+              <!-- https://blog.formaciongerencial.com/indice-big-mac-y-sus-nuevas-interpretaciones/ -->
+
+          </ol>
+        </div>
+
+
+
+      </div>
+    </div>
+
+
+
+  </div>
+
+  </div>
+</body>
+
+</html>
