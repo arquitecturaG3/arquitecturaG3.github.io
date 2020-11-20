@@ -3,6 +3,11 @@
  * If load[t] == 1 then out[t+1] = in[t]
  * else out does not change
  */
+ // Como entradas tenemos un vector de tamaño 16 'in[16]'
+ // y el load sacando un chip bit de cada índice del vector in
+ // con la condicion que se guarde el out hasta que se cumpla
+ // la condicion de cambiar
+
 
 CHIP Register {
     // La implementacion del Register
