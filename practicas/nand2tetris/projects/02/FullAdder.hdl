@@ -9,6 +9,10 @@ CHIP FullAdder {
 
     PARTS:
     // Put you code here:
+    // FullAdder es un sumador que recibe tres entradas y produce dos salidas
+    // Las dos primeras entradas son A y B y la tercera entrada es un acarreo
+    // de entrada como C-IN. El acarreo de salida se designa como C-OUT y la 
+    // salida normal se designa como S, que es SUM.
     Xor(a=a, b=b, out=x);
     Xor(a=x, b=c, out=sum);
     And(a=c, b=x, out=y);

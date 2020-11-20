@@ -9,6 +9,10 @@ CHIP HalfAdder {
 
     PARTS:
     // Put you code here:
+    // La suma de 2 bits se realiza mediante un circuito de combinación 
+    // llamado Half sumador. Las variables de entrada son bits de suma y 
+    // suma y las variables de salida son bits de suma y transporte. A y B 
+    // son los dos bits de entrada.
     And(a=a, b=b, out=carry);
     Xor(a=a, b=b, out=sum);
 }

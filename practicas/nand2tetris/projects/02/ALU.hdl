@@ -38,6 +38,11 @@ CHIP ALU {
 
     PARTS:
    // Put you code here:
+   
+   // La ALU es un circuito digital que proporciona operaciones aritméticas 
+   // y lógicas. Es el bloque de construcción fundamental de la unidad central 
+   // de procesamiento de una computadora.
+
    // Zero the x input
     Mux16(a=x, b=false, sel=zx, out=x1);
     Not16(in=x1, out=Nx);
