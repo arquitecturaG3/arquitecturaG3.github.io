@@ -1,7 +1,7 @@
-// La entrada esta dadad por 4 vectores de 16 bits
+// La entrada esta dada por 4 vectores de 16 bits
 // y un selector de 2 bits
 // agrupamos las entradas en dos grupos de 2 vectores
-// acada una le aplicamos un Mux16 
+// a cada una le aplicamos un Mux16 
 // con la primera posicion del selector
 // Finalmente aplicamos un Mux16 
 // con la segunda posicion del selector
