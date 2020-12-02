@@ -28,11 +28,12 @@ CHIP Memory {
 
     PARTS:
     // Put your code here:
-    DMux(in=load, sel=address[14], a=loadram, b=loadscreen);
+    DMux(in=load, sel=address[14], a=loadram, b=loadscreen); // Decidimos si acceder a la Ram o Screen
 
-    RAM16K(in=in, address=address[0..13], load=loadram, out=outram);
-    Screen(in=in, address=address[0..12], load=loadscreen, out=outscreen);
-    Keyboard(out=outkbd);
+    RAM16K(in=in, address=address[0..13], load=loadram, out=outram); // Accedemos  a la Ram
+    Screen(in=in, address=address[0..12], load=loadscreen, out=outscreen); // Acedemos al Screen
+    Keyboard(out=outkbd); // Accedemos al teclado
 
-    Mux4Way16(a=outram, b=outram, c=outscreen, d=outkbd, sel=address[13..14], out=out);
+    // Seleccionamos cual de las operaciones anteriores retornar
+    Mux4Way16(a=outram, b=outram, c=outscreen, d=outkbd, sel=address[13..14], out=out); 
 }
