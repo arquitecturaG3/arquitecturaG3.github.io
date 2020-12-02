@@ -18,7 +18,7 @@ D=M     // D=i
 @0
 D=D-M   // D=i-R0
 @END
-D;JGE    // if i-R0 >= 0 goto END
+D;JGE    // Si-R0 >= 0 terminar
 
 @1
 D=M     // D=R1
@@ -27,7 +27,7 @@ M=D+M   // R2=R2+R1
 @i
 M=M+1   // i=i+1
 @LOOP
-0;JMP   // Repeat
+0;JMP   // Repetir
 (END)
 @END
-0;JMP
+0;JMP   // Hacer mientras
