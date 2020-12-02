@@ -21,7 +21,18 @@ CHIP Computer {
     PARTS:
     // Put your code here:
 
+    // asignamos la ROM direccion PC, salida vector de instrucciones
     ROM32K(address=pc, out=instruction);
+
+
+    // El CPU procesa la salidas que ofrezca la memoria 
+    // la salida de la ROM (el vector de instrucciones) y la señal de reset
+    // como salidas writeM,outM,addressM que se van a la memoria
+    // y pc la cual se va a la ROM
     CPU(inM=memoryOut, instruction=instruction, reset=reset, outM=outM, writeM=writeM, addressM=addressM, pc=pc);
+
+
+    // Recibe las 3 salidas del  CPU mencionadas anteriormente como entrada
+    // su salida memoryOut va al CPU como entrada
     Memory(in=outM, load=writeM, address=addressM, out=memoryOut);
 }
