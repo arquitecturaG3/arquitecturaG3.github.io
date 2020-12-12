@@ -32,7 +32,7 @@ def comp(cadena):
     'D|M': ['1', '0', '1', '0', '1', '0', '1']}
     return dic[cadena]
 
-def compDest(inDest): //metodo dest
+def compDest(inDest): #metodo dest
     Dest = {'None': (0,0,0), 
            'M':(0,0,1), 
            'D':(0,1,0), 
