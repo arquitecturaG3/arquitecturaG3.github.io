@@ -55,6 +55,12 @@ def jump_comp(jump): #funcion para definir el jump
     'JMP':[1,1,1]}
     return jumps[jump]
 
+def clear_line(i):
+    i = ('' if i[0:2] == '//' else i)   
+    i = i.replace('\n','')
+    i = i.replace(' ' ,'')
+    i = (i.split('//')[0] if i != '' else i)
+    return i
 
 def clear_file(lines):
     symbols = {        
@@ -62,11 +68,13 @@ def clear_file(lines):
     _ = [ symbols.update({'R'+str(i) : i }) for i in range(16)]
     names = ['SCREEN','KBD','SP','LCL','ARG','THIS','THAT']
     values = [16384,24576,0,1,2,3,4]    
-    _ = [ symbols.update({i:j}) for i,j in zip(names,values)]          
-    lines = [  ( '' if i[0:2] == '//' else i) for i in lines ]
-    lines = [ i.replace('\n','') for i in lines]    
-    lines = [ i.replace(' ' ,'') for i in lines]
-    lines = [ i.split('//')[0] for i in lines if '' != i]
+    _ = [ symbols.update({i:j}) for i,j in zip(names,values)]     
+         
+    lines = [  clear_line(i) for i in lines ]
+    lines = [ i for i in lines if '' != i]
+    print(lines)
+    
+    
     cant = 0    
     temp = []
     for i,j in zip(lines,range(len(lines))):
