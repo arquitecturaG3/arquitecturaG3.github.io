@@ -52,7 +52,7 @@ def jump_comp(jump):
     'JLT':(1,0,0), 
     'JNE':(1,0,1),
     'JLE':(1,1,0),
-    ''JMP:(1,1,1)}
+    'JMP':(1,1,1)}
     return jumps[jump]
 
 def clear_file(lines):
