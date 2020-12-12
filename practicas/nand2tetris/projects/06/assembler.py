@@ -44,16 +44,17 @@ def compDest(inDest): #metodo dest
     return Dest[inDest]
 print(compDest("MD"))
 
-def jump_comp(jump):
-    jumps= {'None': (0,0,0), 
-    'JGT':(0,0,1),
-    'JEQ':(0,1,0),
-    'JGE':(0,1,1),
-    'JLT':(1,0,0), 
-    'JNE':(1,0,1),
-    'JLE':(1,1,0),
-    'JMP':(1,1,1)}
+def jump_comp(jump): #funcion para definir el jump
+    jumps= {'None': [0,0,0], 
+    'JGT':[0,0,1],
+    'JEQ':[0,1,0],
+    'JGE':[0,1,1],
+    'JLT':[1,0,0], 
+    'JNE':[1,0,1],
+    'JLE':[1,1,0],
+    'JMp':[1,1,1]}
     return jumps[jump]
+
 
 def clear_file(lines):
     lines = [  ( '' if i[0:2] == '//' else i) for i in lines ]
