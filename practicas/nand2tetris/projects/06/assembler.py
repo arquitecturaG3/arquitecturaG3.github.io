@@ -33,14 +33,14 @@ def comp(cadena):
     return dic[cadena]
 
 def compDest(inDest): #metodo dest
-    Dest = {'None': (0,0,0), 
-           'M':(0,0,1), 
-           'D':(0,1,0), 
-           'MD':(0,1,1), 
-           'A':(1,0,0), 
-           'AM':(1,0,1), 
-           'AD':(1,1,0), 
-           'AMD':(1,1,1) }
+    Dest = {'None': [0,0,0], 
+           'M':[0,0,1], 
+           'D':[0,1,0], 
+           'MD':[0,1,1], 
+           'A':[1,0,0], 
+           'AM':[1,0,1], 
+           'AD':[1,1,0], 
+           'AMD':[1,1,1] }
     return Dest[inDest]
 print(compDest("MD"))
 
