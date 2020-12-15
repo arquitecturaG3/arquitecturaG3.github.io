@@ -1,6 +1,29 @@
 import sys
   
-    
+"""
+Esamblador implementado en python el cual
+traduce programas escritos en el lenguaje
+simbolico de ensamblador Hack Languaje
+a codigo binario
+
+Intrucciones de ejecucion:
+
+Para traducir un archivo file.asm ejecute la
+siguiente estructura de comando en consola
+
+> python assembler.py route/to/file.asm
+
+El programa leera el archivo indicado en la ruta
+como argumento y escribira un archivo con el mismo
+nombre con extension .hack este contendra 
+la traduccion a codigo binario
+
+Nota: El comando debe ser ejecutado dentro de la carpeta
+que contenga el archivo assembler.py
+
+"""    
+
+
 def getBinario15(p):
     binario = bin(int(p))[2:]    
     numBin = [ int(i) for i in binario]
