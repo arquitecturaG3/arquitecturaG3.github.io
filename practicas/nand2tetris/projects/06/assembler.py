@@ -1,7 +1,7 @@
 import sys
   
 """
-Esamblador implementado en python el cual
+Ensamblador implementado en python el cual
 traduce programas escritos en el lenguaje
 simbolico de ensamblador Hack Languaje
 a codigo binario
