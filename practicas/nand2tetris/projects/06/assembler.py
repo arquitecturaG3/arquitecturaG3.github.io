@@ -1,5 +1,13 @@
 import sys
 
+
+    
+def getBinario15(p):
+    binario = bin(int(p))[2:]    
+    numBin = [ int(i) for i in binario]
+    return numBin
+
+
 def comp(input):
     comp_dict = {
     '0':   [0, 1, 0, 1, 0, 1, 0], 
@@ -41,18 +49,21 @@ def dest(input): #metodo dest
     'AM' :[1,0,1], 
     'AD' :[1,1,0], 
     'AMD':[1,1,1] }
+
     return dest_dict[input]
 
 
 def jump(input): #funcion para definir el jump
-    jump_dict= {'None': [0,0,0], 
+    jump_dict= {'': [0,0,0], 
     'JGT':[0,0,1],
     'JEQ':[0,1,0],
     'JGE':[0,1,1],
     'JLT':[1,0,0], 
     'JNE':[1,0,1],
     'JLE':[1,1,0],
-    'JMP':[1,1,1]}
+    'JMP':[1,1,1]}   
+    
+    
     return jump_dict[input]
 
 def clear_line(i):
@@ -72,8 +83,7 @@ def clear_file(lines):
          
     lines = [  clear_line(i) for i in lines ]
     lines = [ i for i in lines if '' != i]
-    print(lines)
-    
+   
     
     cant = 0    
     temp = []
@@ -86,27 +96,67 @@ def clear_file(lines):
     lines = temp
     del temp
     del cant
-    print(symbols)
     lines = [ ( '@' + str(symbols[i[1:]]) if i[0] == '@' and i[1:]  in symbols.keys() else i) for i in lines ]
     return lines
 
 def print_file(lines):
     for i in lines:
         print(i)
+        
+def toA(x):
+    x = int(x[1:len(x)])
+    final = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    binario = getBinario15(x)
+    final[-len(binario):] = binario
+    return final
+
+def toC(x):
+    dest_str = None
+    comp_str = None
+    jump_str = None
+    
+    dest_str , rest = ( x.split('=') if '=' in x else ('' , x) )
+    comp_str , jump_str = ( rest.split(';') if ';' in rest else (rest,'') )
+    
+    line = [1,1,1] + comp(comp_str) + dest(dest_str) + jump(jump_str)
+    
+    return line
+
+
+def translate(i):
+    line = None
+    if i[0] == '@':
+        line = toA(i)
+    else:
+        line = toC(i)       
+    
+    line = ''.join( [str(j) for j in line ] )
+    
+    return line
+
+
 
 def main():
     filename = sys.argv[1]   
+    filepath = filename.replace('asm','hack')
+    print(filepath)
 
     f = open(filename, "r")
     lines = [ i for i in f]
-
-    print('----------ARCHIVO ORIGINAL----------')
-    print_file(lines)
     lines = clear_file(lines)
 
     print('----------ARCHIVO LIMPIO----------')
     print_file(lines)
+    print('----------ARCHIVO TRADUCIDO----------')
     
+    tlines = [ translate(i) for i in lines ]    
+    
+    for i in tlines:
+        print(i)
+        
+    with open(filepath, 'w') as file:
+        for i in tlines:
+            file.write(i + '\n')
 
 if __name__ == "__main__":
     main()              
