@@ -24,12 +24,9 @@ que contenga el archivo assembler.py
 """    
 
 
-def getBinario15(p):
-    binario = bin(int(p))[2:]    
-    numBin = [ int(i) for i in binario]
-    return numBin
-
-
+# funcion comp, retorna en binario
+# el codigo correspondiente a la
+# operacion indicada
 def comp(input):
     comp_dict = {
     '0':   [0, 1, 0, 1, 0, 1, 0], 
@@ -73,8 +70,10 @@ def dest(input): #metodo dest
     'AMD':[1,1,1] }
     return dest_dict[input]
 
-
-def jump(input): #funcion para definir el jump
+# Funcion jump, retorna en binario
+# el codigo correspondiente a la condicion
+# jump indicada
+def jump(input): 
     jump_dict= {'': [0,0,0], 
     'JGT':[0,0,1],
     'JEQ':[0,1,0],
@@ -85,16 +84,22 @@ def jump(input): #funcion para definir el jump
     'JMP':[1,1,1]}          
     return jump_dict[input]
 
-
+# Funcion clear_line, sera usada
+# en la Funcion clear_file para
+# limpiar cada linea de forma indpendiente
 def clear_line(i):
-    i = ('' if i[0:2] == '//' else i)   
-    i = i.replace('\n','')
-    i = i.replace(' ' ,'')
-    i = (i.split('//')[0] if i != '' else i)
+    i = ('' if i[0:2] == '//' else i)        # Remueve lineas que comiencen con comentarios 
+    i = i.replace('\n','')                   # Remueve saltos de linea
+    i = i.replace(' ' ,'')                   # Remuve espacios en blanco
+    i = (i.split('//')[0] if i != '' else i) # Remueve comentarios en lineas de codigo
     return i
 
 
+# Funcion clear_file, retorna el archivo
+# limpio, y sin simbolos, esta dividio en:
 def clear_file(lines):
+    
+    # Creamos el diccionario symbols en donde almacenamidos los simbolos predefinidos
     symbols = {        
     }    
     _ = [ symbols.update({'R'+str(i) : i }) for i in range(16)]
@@ -102,9 +107,12 @@ def clear_file(lines):
     values =    [16384,24576,0,1,2,3,4]    
     _ = [ symbols.update({i:j}) for i,j in zip(names,values)]     
          
-    lines = [  clear_line(i) for i in lines ]
-    lines = [ i for i in lines if '' != i]   
+   
+    lines = [  clear_line(i) for i in lines ]  # limpiamos todas las lineas del archivo
+    lines = [ i for i in lines if '' != i]     # eliminamos lineas vacias
     
+    # Agregamos al diccionario symbols los labels symbols
+    # A su vez lo removemos del las lineas que componen el archivo
     cant = 0    
     temp = []
     for i,j in zip(lines,range(len(lines))):
@@ -117,41 +125,66 @@ def clear_file(lines):
     del temp
     del cant
     
+    # Remplazamos el label symbols por su valor respectivo
     lines = [ ( '@' + str(symbols[i[1:]]) if i[0] == '@' and i[1:]  in symbols.keys() else i) for i in lines ]    
     
-    variables = []    
+    # Agregamos las variable @nombre_variable al diccionario symbols
     variables =  [ i[1:] for i in lines if i[0] == '@' and  not i[1:].isnumeric() ]  
-    variables = list(dict.fromkeys(variables))    
-        
+    variables = list(dict.fromkeys(variables))            
     indices = list(range(16, 16+len(variables)))     
     _ = [ symbols.update({i:j}) for i,j in zip(variables,indices)]     
+    
+    # Reemplazamos las variables por su valor respectivo
     lines = [ ( '@' + str(symbols[i[1:]])  if  i[0] == '@' and  not i[1:].isnumeric() else i ) for i in lines  ]      
+    
     return lines
 
+
+# Funcion para imprimir el archivo linea por linea en consola
 def print_file(lines):
     for i in lines:
         print(i)
-     
-        
+
+# Funcion getBinario15, retorna
+# un arreglo de enteros en binario la entrada p
+def getBinario15(p):
+    binario = bin(int(p))[2:]    
+    numBin = [ int(i) for i in binario]
+    return numBin
+
+# Funcion toA, retorna en binario la intruccion A
+# de la forma @value como un vector de 16 posiciones
 def toA(x):
     x = int(x[1:len(x)])
-    final = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    final = [0]*16
     binario = getBinario15(x)
     final[-len(binario):] = binario
     return final
 
-
+# Funcion toC, retorna en binario la intruccion C
+# de la forma dest = comp ; jump
 def toC(x):
     dest_str = None
     comp_str = None
     jump_str = None
         
+    # Asignacion de la parte dest, si no hay igual (=) 
+    # dest es igual a vacio
     dest_str , rest = ( x.split('=') if '=' in x else ('' , x) )
-    comp_str , jump_str = ( rest.split(';') if ';' in rest else (rest,'') )    
+    
+    # Asignacion de la parte comp y jump
+    # si no hay punto y coma (;) jump es vacio 
+    comp_str , jump_str = ( rest.split(';') if ';' in rest else (rest,'') ) 
+    
+    # Creamos el arreglo de 16 posiciones el cual contendra la traduccion
+    # de la entrada x, de la forma:
+    # [1 1 1 a c1 c2 c3 c4 c5 c6 d1 d2 d3 j1 j2 j3]    
     line = [1,1,1] + comp(comp_str) + dest(dest_str) + jump(jump_str)    
     return line
 
-
+# Funcion translate
+# traduce la entrada i, identificando si es
+# una intruccion A o C
 def translate(i):
     line = None
     
@@ -160,28 +193,34 @@ def translate(i):
     else:
         line = toC(i)       
     
+    # Una vez se retorna el arreglo de 16 posiciones
+    # lo convertimos en un string de 16 posiciones
     line = ''.join( [str(j) for j in line ] )    
     return line
 
-
+# Funcion main, se autoejecuta cuando es llamada
+# desde la linea de comando, lee el argumento proporcionado
+# el cual contendra la ruta del archivo file.asm a traducir
 def main():
     filename = sys.argv[1]   
     filepath = filename.replace('asm','hack')
     print(filepath)
-
+    
+    # leemos el archivo y lo guardamos en un vector
+    # donde cada posicion es una linea del archivo
     f = open(filename, "r")
-    lines = [ i for i in f]
-    lines = clear_file(lines)
+    lines = [ i for i in f]                  
+    lines = clear_file(lines)                 # limpiamos el archivo
+    tlines = [ translate(i) for i in lines ]  # lo traducimos a binario
 
+    # Muestra en consola el archivo en limpio
     print('----------ARCHIVO LIMPIO----------')
     print_file(lines)
-    print('----------ARCHIVO TRADUCIDO----------')
-    
-    tlines = [ translate(i) for i in lines ]    
-    
-    for i in tlines:
-        print(i)
+    # Muestra en consola el archivo traducido
+    print('----------ARCHIVO TRADUCIDO----------')       
+    print_file(tlines)
         
+    # Guardamos el archivo como filename.hack linea por linea
     with open(filepath, 'w') as file:
         for i in tlines:
             file.write(i + '\n')
