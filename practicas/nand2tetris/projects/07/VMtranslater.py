@@ -4,8 +4,10 @@ from utils.arithmetic import *
 symbols = {
     "local": "LCL",
     "argument": "ARG",
+    "pointer": "3",
     "this": "THIS",
     "that": "THAT",
+    "temp": "5",
 }
 
 arithmetic = {
@@ -56,15 +58,108 @@ def constant(i):
     ]
     return line
 
+def static(i,j):
+    if j==0:
+        line = [
+            "@{current_file_name}." + i,
+            "D=M",
+            "@SP",
+            "A=M",
+            "M=D",
+            "@SP",
+            "M=M+1"
+        ]
+    else:
+        line = [
+            "@SP",
+            "M=M-1",
+            "A=M",
+            "D=M",
+            "@{current_file_name}." + i,
+            "M=D"
+        ]
+        pass
+    return line
+
+def memorySegments(s, i, j):
+    if j==0:
+        line = [
+            "@" + symbols[s],
+            "D=M",
+            "@" + i,
+            "A=A+D",
+            "D=M",
+            "@SP",
+            "A=M",
+            "M=D",
+            "@SP",
+            "M=M+1"
+        ]
+    else:
+        line = [
+            "@" + symbols[s],
+            "D=M",
+            "@" + i,
+            "D=A+D",
+            "@R13",
+            "M=D",
+            "@SP",
+            "M=M-1",
+            "A=M",
+            "D=M",
+            "@R13",
+            "A=M",
+            "M=D"
+        ]
+    return line
+
+def pointerTemp(s, i, j):
+    if j==0:
+        line = [
+            "@" + symbols[s],
+            "D=A",
+            "@" + i,
+            "A=A+D",
+            "D=M",
+            "@SP",
+            "A=M",
+            "M=D",
+            "@SP",
+            "M=M+1"
+        ]
+    else:
+        line = [
+            "@" + symbols[s],
+            "D=A",
+            "@" + i,
+            "D=A+D",
+            "@R13",
+            "M=D",
+            "@SP",
+            "M=M-1",
+            "A=M",
+            "D=M",
+            "@R13",
+            "A=M",
+            "M=D"
+        ]
+    return line
 
 def push(args):
     if args[0] in ["constant"]:
         return constant(args[1])
-
+    if args[0] in ["local", "argument","this","that"]:
+        return memorySegments(args[0], args[1], 0)
+    if args[0] in ["temp", "pointer"]:
+        return pointerTemp(args[0], args[1], 0)
     return args
 
 
 def pop(args):
+    if args[0] in ["local", "argument","this","that"]:
+        return memorySegments(args[0], args[1], 1)
+    if args[0] in ["temp", "pointer"]:
+        return pointerTemp(args[0], args[1], 1)
     return args
 
 
