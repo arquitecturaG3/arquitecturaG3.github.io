@@ -59,9 +59,10 @@ def constant(i):
     return line
 
 def static(i,j):
+    name = sys.argv[1].split("/")[2].split(".")[0]
     if j==0:
         line = [
-            "@{current_file_name}." + i,
+            "@"+name+"." + i,
             "D=M",
             "@SP",
             "A=M",
@@ -75,7 +76,7 @@ def static(i,j):
             "M=M-1",
             "A=M",
             "D=M",
-            "@{current_file_name}." + i,
+            "@"+name+"." + i,
             "M=D"
         ]
         pass
@@ -152,6 +153,8 @@ def push(args):
         return memorySegments(args[0], args[1], 0)
     if args[0] in ["temp", "pointer"]:
         return pointerTemp(args[0], args[1], 0)
+    if args[0] in ["static"]:
+        return static(args[1], 0)
     return args
 
 
@@ -160,6 +163,8 @@ def pop(args):
         return memorySegments(args[0], args[1], 1)
     if args[0] in ["temp", "pointer"]:
         return pointerTemp(args[0], args[1], 1)
+    if args[0] in ["static"]:
+        return static(args[1], 1)
     return args
 
 
