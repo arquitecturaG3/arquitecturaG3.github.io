@@ -1,13 +1,32 @@
 import sys
+from utils.arithmetic import *
 
 symbols = {   
     "local":"LCL",
     "argument": "ARG",
     "this": "THIS",
-    "that": "THAT",   
-    
+    "that": "THAT",       
 }
 
+arithmetic = {
+    "add" : add,
+    "sub" : sub,
+    "eq"  : eq,
+    "neg" : neg,
+    "gt"  : gt,
+    "lt"  : lt,
+    "and" : And,
+    "or"  : Or,
+    "not" : Not,
+}
+
+def incrementor():
+    info = {"count": -1}
+    def number():
+        info["count"] += 1
+        return info["count"]
+    
+    return number
 
 def clear_line(i):
     i = ('' if i[0:2] == '//' else i)        # Remueve lineas que comiencen con comentarios 
@@ -34,44 +53,21 @@ def constant(i):
 
 def push(args):
     if args[0] in ["constant"]:
-        return constant(args[1])   
+        return constant(args[1])
     
     return args
 
 def pop(args):
     return args
 
-def add():
-    line = [
-        "@SP",
-        "M=M-1",
-        "@SP",
-        "A=M",
-        "D=M",
-        "@SP",
-        "M=M-1",
-        "@SP",
-        "A=M",
-        "M=M+D",
-        "@SP",
-        "M=M+1"
-    ]    
-    return line
-
-
-aritmetic = {
-    "add": add    
-}
-    
-
-def translate(line): 
+def translate(line,iarith): 
     line = line.split(' ')
     
     opt = line[0]
     if opt in ["push","pop"]:
         line= eval(opt + "(args)", {"args":line[1:], "push":push ,"pop":pop})
     else:
-        line = aritmetic.get(opt, "error")()
+        line = arithmetic.get(opt, "error")(iarith)
     
     return line
 
@@ -84,8 +80,8 @@ def main():
     lines = [ i for i in f]   
     lines = clear_file(lines)
         
-        
-    tlines = [ translate(i)  for i in lines]
+    iarith = incrementor()
+    tlines = [ translate(i,iarith)  for i in lines]
     tlines = [ line for sublines in tlines for line in sublines]
     
     for i in tlines: 
