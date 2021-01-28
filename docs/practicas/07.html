@@ -104,7 +104,7 @@
 
 
         <div style="text-align:justify; align-content: center;padding-top: 10%;" id="practica3">
-          <div class="titulo"><b>Práctica 4: Lenguaje de Máquina y Arquitectura Computacional</b>
+          <div class="titulo"><b>Práctica 7: Máquinas Virtuales</b>
           </div>
           <br>
 
@@ -116,12 +116,12 @@
 
 
             <p>
-              <b>Proyecto 4:</b> Introducción en el concepto de lenguajes de bajo nivel, que mediante la ayuda de la herramienta assembler se aprecia la traducción que hacen desde el lenguaje simbólico al lenguaje de maquina, una herramienta adicional para visualizar el almacenamiento en memoria es el CPU emulator donde se visualiza la manera en que se almacenado el dato. 
+              <b>Proyecto 7:</b>
 
               <br><br>
 
-              <b>Proyecto 5:</b> El objetivo del  proyecto 5 es la implementacion de una memoria, CPU y una computadora, se realizo este proyecto usando regitros, and, or Mux que se implementaron en proyectos anteriores ademas de Memoria y CPU para la implementacion de la computadora.
-              
+              <b>Proyecto 8:</b>
+
               <br><br>
             </p>
 
@@ -135,8 +135,8 @@
             <br>
 
             <b>Códigos realizados <a
-                href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/tree/main/practicas/nand2tetris/projects/04">[Proyecto
-                04
+                href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/tree/main/practicas/nand2tetris/projects/07">[Proyecto
+                07
                 Github]</a> </b>
             <br>
             <br>
@@ -146,21 +146,17 @@
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion2" href="#Fill">
-                      Fill</a>
+                    <a data-toggle="collapse" data-parent="#accordion2" href="#VMtranslater">
+                      VMtranslater</a>
                   </h4>
                 </div>
 
-                <div id="Fill" class="panel-collapse collapse">
+                <div id="VMtranslater" class="panel-collapse collapse">
                   <div class="panel-body">
 
                     code
                     <script
-                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/04/fill/Fill.asm"></script>
-                    output
-                    <script
-                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/04/fill/FillAutomatic.out"></script>
-
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/VMtranslater.py"></script>
                   </div>
                 </div>
               </div>
@@ -169,41 +165,162 @@
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion2" href="#Mult">
-                      Mult</a>
+                    <a data-toggle="collapse" data-parent="#accordion2" href="#arithmetic">
+                      arithmetic</a>
                   </h4>
-                </div>  
+                </div>
 
-                <div id="Mult" class="panel-collapse collapse">
+                <div id="arithmetic" class="panel-collapse collapse">
                   <div class="panel-body">
 
                     code
                     <script
-                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/04/mult/mult.asm"></script>
-                    output
-                    <script
-                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/04/mult/Mult.out"></script>
-
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/utils/arithmetic.py"></script>
                   </div>
                 </div>
               </div>
 
             </div>
 
+            <b>Resultados</b> <br> <br>
 
-            <b>Códigos realizados <a
-                href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/tree/main/practicas/nand2tetris/projects/05">[Proyecto
-                05
-                Github]</a> </b>
-            <br>
-            <br>
 
             <div class="panel-group" id="accordion3">
 
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion3" href="#Memory">
+                    <a data-toggle="collapse" data-parent="#accordion3" href="#SimpleAdd">
+                      SimpleAdd</a>
+                  </h4>
+                </div>
+
+                <div id="SimpleAdd" class="panel-collapse collapse">
+                  <div class="panel-body">
+
+                    .vm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/StackArithmetic/SimpleAdd/SimpleAdd.vm"></script>
+                    .asm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/StackArithmetic/SimpleAdd/SimpleAdd.asm"></script>
+
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion3" href="#StackTest">
+                      StackTest</a>
+                  </h4>
+                </div>
+
+                <div id="StackTest" class="panel-collapse collapse">
+                  <div class="panel-body">
+
+                    .vm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/StackArithmetic/StackTest/StackTest.vm"></script>
+                    .asm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/StackArithmetic/StackTest/StackTest.asm"></script>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion3" href="#BasicTest">
+                      BasicTest</a>
+                  </h4>
+                </div>
+
+                <div id="BasicTest" class="panel-collapse collapse">
+                  <div class="panel-body">
+
+                    .vm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/MemoryAccess/BasicTest/BasicTest.vm"></script>
+                    .asm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/MemoryAccess/BasicTest/BasicTest.asm"></script>
+
+                  </div>
+                </div>
+              </div>     
+
+
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion3" href="#PointerTest">
+                      PointerTest</a>
+                  </h4>
+                </div>
+
+                <div id="PointerTest" class="panel-collapse collapse">
+                  <div class="panel-body">
+
+                    .vm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/MemoryAccess/PointerTest/PointerTest.vm"></script>
+                    .asm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/MemoryAccess/PointerTest/PointerTest.asm"></script>
+
+                  </div>
+                </div>
+              </div>     
+
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion3" href="#StaticTest">
+                      StaticTest</a>
+                  </h4>
+                </div>
+
+                <div id="StaticTest" class="panel-collapse collapse">
+                  <div class="panel-body">
+
+                    .vm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/MemoryAccess/StaticTest/StaticTest.vm"></script>
+                    .asm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/MemoryAccess/StaticTest/StaticTest.asm"></script>
+
+                  </div>
+                </div>
+              </div>    
+              
+      
+
+            </div>
+
+
+
+
+            <b>Códigos realizados <a
+                href="https://github.com/arquitecturaG3/arquitecturaG3.github.io/tree/main/practicas/nand2tetris/projects/08">[Proyecto
+                08
+                Github]</a> </b>
+            <br>
+            <br>
+
+            <div class="panel-group" id="accordion4">
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion4" href="#Memory">
                       Memory</a>
                   </h4>
                 </div>
@@ -222,7 +339,7 @@
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion3" href="#CPU">
+                    <a data-toggle="collapse" data-parent="#accordion4" href="#CPU">
                       CPU</a>
                   </h4>
                 </div>
@@ -242,7 +359,7 @@
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion3" href="#Computer">
+                    <a data-toggle="collapse" data-parent="#accordion4" href="#Computer">
                       Computer</a>
                   </h4>
                 </div>
@@ -271,82 +388,13 @@
 
             <p>
 
-              <ul>
-                <li><b>Brayan Esneider Monroy Chaparro</b></li>
-
-                <a href="https://juansec13.blogspot.com/2020/12/la-importancia-de-los-sistemas.html">
-                  Blog Juan Sebastian Estupiñan: La importancia de los sistemas operativos</a>
-                  <br>
-
-                <a href="https://arquitecturadecomputadores20202.blogspot.com/2020/11/blog-post.html">
-                  Blog Geison Blanco: Relación entre Arquitectura de Software y Arquitectura de Hardware  
-                </a>
-                <br>
-
-                <a href="https://arquitecturadecomputadores2020-2.blogspot.com/2020/11/evaluacion-de-rendimiento-de-sistemas.html">
-                  Blog Juan Camilo: Evaluación de Rendimiento de Sistemas Computacionales
-                </a>
-
-                <li><b>Juan Camilo Marín García</b></li>
-
-                <a href="https://blueandscissors.blogspot.com/2020/12/blog-arquitectura.html">
-
-                  Blog Deyci Toloza: La importancia del Sistema Operativo</a>
-                <br>
-                <a href="https://juanjimenez2173051.blogspot.com/">
-                  Blog Juan Jimenez: Lenguajes de Programación e Infraestructura
-                </a>
-
-               <a href="https://juanjimenez2173051.blogspot.com/">
-                  Blog Juan Jimenez: Lenguajes de Programación e Infraestructura
-                </a><br>
-                <a href="https://lsergiols.blogspot.com/">
-                  Blog Sergio Niño: Evaluación de Rendimiento de Sistemas Computacionales</a><br>
-                <a href="https://requerimientosarquitectura.blogspot.com/">
-                  Blog Marly Maldonado: La importancia de los requerimientos en la arquitectura computacional</a>  <br>
-                <a href="https://programacioneinfraestructura.blogspot.com/2020/11/lenguaje-de-programacion-e.html#comments">
-                  Blog Eduardo Serrano: Lenguaje de programación e Infraestructura.
-                </a><br>
-                <a href="https://bemc22.blogspot.com/2020/11/arquitectura-de-software-vs.html#comments">
-                  Blog Brayan Monroy: Arquitectura de Software vs Arquitectura de Hardware
-                </a><br>
-                <a href="https://juan2171979.wixsite.com/misitio/post/evaluaci%C3%B3n-de-rendimiento-de-sistemas-computacionales-1?postId=5fc5834af958e70017b5c0ce">
-                  Blog Juan Gonzales: Evaluación de Rendimiento de Sistemas Computacionales</a><br>
-                  <li><b>Jesus Daniel Lizcano Castro</b></li>
-
-
-                <a href="https://lenguajesdeprogramacionyarquitectura.blogspot.com/2020/12/lenguajes-de-programacion-e.html">
-                    Blog Juan David Porras: Lenguajes de Programación e infraestructura Computaciona</a>
-                <br>
-                <a href="https://rej5311.wixsite.com/sistemaoperativos">Blog Jhon Stewar Nuñez: La importancia del Sistema Operativo </a>
-
-                <li><b>Jhon Stewar Nuñez Castellanos</b></li>
-
-                <a href="https://veebac.blogspot.com/2020/12/la-importancia-de-la-definicion-de.html">Blog Valentina Escobar Bueno : Requerimientos en el diseño de arquitecturas computacionales</a>
-                <br>
-                <a href="https://cadenapinilla2705.wixsite.com/rendimiento-sistemas">Blog Samuel Yesid Cadena Pinilla: Evaluación de Rendimiento de Sistemas Computacionales</a>
-
-
-              </ul>
-
             </p>
-            
-
-
-            <br>
-
-            <br>
 
           </ol>
-
         </div>
-
-
 
       </div>
     </div>
-
-
 
   </div>
 
