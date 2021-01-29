@@ -320,18 +320,16 @@
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion4" href="#Memory">
-                      Memory</a>
+                    <a data-toggle="collapse" data-parent="#accordion4" href="#VMtranslate8">
+                      VMtranslate8</a>
                   </h4>
                 </div>
-                <div id="Memory" class="panel-collapse collapse">
+                <div id="VMtranslate8" class="panel-collapse collapse">
                   <div class="panel-body">
                     code
                     <script
-                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/05/Memory.hdl"></script>
-                    output
-                    <script
-                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/05/Memory.out"></script>
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/08/VMtranslate8.py"></script>
+                   
                   </div>
                 </div>
               </div>
@@ -339,18 +337,46 @@
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion4" href="#CPU">
-                      CPU</a>
+                    <a data-toggle="collapse" data-parent="#accordion4" href="#arithmetic">
+                      arithmetic</a>
                   </h4>
                 </div>
-                <div id="CPU" class="panel-collapse collapse">
+                <div id="arithmetic" class="panel-collapse collapse">
                   <div class="panel-body">
                     code
                     <script
-                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/05/CPU.hdl"></script>
-                    output
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/08/utils/arithmetic.py"></script>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+            
+            <b>Resultados</b> <br> <br>
+
+
+            <div class="panel-group" id="accordion3">
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion5" href="#SimpleAdd">
+                      FibonacciElement</a>
+                  </h4>
+                </div>
+
+                <div id="SimpleAdd" class="panel-collapse collapse">
+                  <div class="panel-body">
+
+                    .vm
                     <script
-                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/05/CPU.out"></script>
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/StackArithmetic/SimpleAdd/SimpleAdd.vm"></script>
+                    .asm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/StackArithmetic/SimpleAdd/SimpleAdd.asm"></script>
+
                   </div>
                 </div>
               </div>
@@ -359,21 +385,119 @@
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion4" href="#Computer">
-                      Computer</a>
+                    <a data-toggle="collapse" data-parent="#accordion5" href="#StackTest">
+                      NestedCall</a>
                   </h4>
                 </div>
-                <div id="Computer" class="panel-collapse collapse">
+
+                <div id="StackTest" class="panel-collapse collapse">
                   <div class="panel-body">
-                    code
+
+                    .vm
                     <script
-                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/05/Computer.hdl"></script>
-                    output
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/StackArithmetic/StackTest/StackTest.vm"></script>
+                    .asm
                     <script
-                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/05/ComputerAdd.out"></script>
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/StackArithmetic/StackTest/StackTest.asm"></script>
+
                   </div>
                 </div>
               </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion5" href="#BasicTest">
+                      SimpleFunction</a>
+                  </h4>
+                </div>
+
+                <div id="BasicTest" class="panel-collapse collapse">
+                  <div class="panel-body">
+
+                    .vm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/MemoryAccess/BasicTest/BasicTest.vm"></script>
+                    .asm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/MemoryAccess/BasicTest/BasicTest.asm"></script>
+
+                  </div>
+                </div>
+              </div>     
+
+
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion5" href="#PointerTest">
+                      StaticsTest</a>
+                  </h4>
+                </div>
+
+                <div id="PointerTest" class="panel-collapse collapse">
+                  <div class="panel-body">
+
+                    .vm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/MemoryAccess/PointerTest/PointerTest.vm"></script>
+                    .asm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/MemoryAccess/PointerTest/PointerTest.asm"></script>
+
+                  </div>
+                </div>
+              </div>     
+
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion5" href="#StaticTest">
+                      BasicLoop</a>
+                  </h4>
+                </div>
+
+                <div id="StaticTest" class="panel-collapse collapse">
+                  <div class="panel-body">
+
+                    .vm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/MemoryAccess/StaticTest/StaticTest.vm"></script>
+                    .asm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/MemoryAccess/StaticTest/StaticTest.asm"></script>
+
+                  </div>
+                </div>
+              </div>    
+
+
+              
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion5" href="#FibonacciSeries">
+                      FibonacciSeries</a>
+                  </h4>
+                </div>
+
+                <div id="FibonacciSeries" class="panel-collapse collapse">
+                  <div class="panel-body">
+
+                    .vm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/MemoryAccess/StaticTest/StaticTest.vm"></script>
+                    .asm
+                    <script
+                      src="https://gist-it.appspot.com/https://github.com/arquitecturaG3/arquitecturaG3.github.io/blob/main/practicas/nand2tetris/projects/07/MemoryAccess/StaticTest/StaticTest.asm"></script>
+
+                  </div>
+                </div>
+              </div>   
+              
+      
 
             </div>
 
