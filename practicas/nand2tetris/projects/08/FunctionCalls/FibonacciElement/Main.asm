@@ -1,6 +1,4 @@
-function
-Main.fibonacci
-0
+(Main.fibonacci)
 @ARG
 D=M
 @0

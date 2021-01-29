@@ -308,7 +308,7 @@ def translate(line, iarith):
     if opt in ["push", "pop"]:
         line = eval(opt + "(args)", {"args": line[1:], "push": push, "pop": pop})
         
-    elif opt in ["label","funcion"]:
+    elif opt in ["label","function"]:
         line = labelFuncion(line[1])
 
     elif opt in ["goto"]:

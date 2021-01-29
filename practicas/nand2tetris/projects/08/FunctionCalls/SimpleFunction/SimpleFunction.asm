@@ -1,6 +1,4 @@
-function
-SimpleFunction.test
-2
+(SimpleFunction.test)
 @LCL
 D=M
 @0

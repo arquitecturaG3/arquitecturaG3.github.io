@@ -1,6 +1,4 @@
-function
-Sys.init
-0
+(Sys.init)
 @4
 D=A
 @SP
