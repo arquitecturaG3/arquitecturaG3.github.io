@@ -1,6 +1,4 @@
-function
-Sys.init
-0
+(Sys.init)
 @4000	
 D=A
 @SP
@@ -107,9 +105,7 @@ M=D
 (LOOP)
 @LOOP
 0;JPM
-function
-Sys.main
-5
+(Sys.main)
 @4001
 D=A
 @SP
@@ -377,9 +373,7 @@ M=D
 @RETURN
 A=M
 0;JMP
-function
-Sys.add12
-0
+(Sys.add12)
 @4002
 D=A
 @SP

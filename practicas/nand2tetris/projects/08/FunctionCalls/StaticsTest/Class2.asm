@@ -1,6 +1,4 @@
-function
-Class2.set
-0
+(Class2.set)
 @ARG
 D=M
 @0
@@ -83,9 +81,7 @@ M=D
 @RETURN
 A=M
 0;JMP
-function
-Class2.get
-0
+(Class2.get)
 @StaticsTest.0
 D=M
 @SP
