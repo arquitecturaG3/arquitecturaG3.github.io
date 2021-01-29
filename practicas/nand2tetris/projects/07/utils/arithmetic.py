@@ -1,3 +1,6 @@
+# Modulo arithmetic, funciones que traducen cada comando airtmetico
+# En su respectivas intrucciones en el lenguaje ASM
+
 def add(i):
     line = [
         # SP--
