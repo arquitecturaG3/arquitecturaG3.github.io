@@ -1,6 +1,7 @@
 import sys
 from utils.arithmetic import *
 
+# Diccionario de reemplazo de simbolos
 symbols = {
     "local": "LCL",
     "argument": "ARG",
@@ -10,6 +11,8 @@ symbols = {
     "temp": "5",
 }
 
+# Dicionario con las funciones de traduccion
+# de comandos aritmeticos
 arithmetic = {
     "add": add,
     "sub": sub,
@@ -179,6 +182,7 @@ def clear_file(lines):
     return lines
 
 
+# Traduccion de instruccion: push constant i
 def constant(i):
     line = [
         "@" + i,
@@ -191,6 +195,8 @@ def constant(i):
     ]
     return line
 
+
+# Traduccion de instruccion: push/pop static i
 def static(i,j):
     name = sys.argv[1].split("\\")[2].split(".")[0]
     if j==0:
@@ -215,6 +221,7 @@ def static(i,j):
         pass
     return line
 
+# Traduccion de instruccion: push/pop symbols[s] i
 def memorySegments(s, i, j):
     if j==0:
         line = [
@@ -247,6 +254,7 @@ def memorySegments(s, i, j):
         ]
     return line
 
+# Traduccion de instruccion: push/pop pointer/temp i
 def pointerTemp(s, i, j):
     if j==0:
         line = [
@@ -279,6 +287,7 @@ def pointerTemp(s, i, j):
         ]
     return line
 
+# Si la funcion es push, traducimos dependiendo de memorysegment respectivo
 def push(args):
     if args[0] in ["constant"]:
         return constant(args[1])
@@ -291,6 +300,7 @@ def push(args):
     return args
 
 
+# Si la funcion es pop, traducimos dependiendo del memorysegment respectivo
 def pop(args):
     if args[0] in ["local", "argument","this","that"]:
         return memorySegments(args[0], args[1], 1)
@@ -301,6 +311,7 @@ def pop(args):
     return args
 
 
+# Traduce la linea ingresada, identifica si es intruccion push/pop o aritmetica
 def translate(line, iarith):
     line = line.split(' ')
 
@@ -329,7 +340,7 @@ def translate(line, iarith):
     return line
 
 
-
+# Funcion principal, limpia el archivo ingresado y traduce cad linea
 def main():
     filename = sys.argv[1]
     filepath = filename.replace('vm', 'asm')
@@ -337,7 +348,7 @@ def main():
 
     lines = [i for i in f]
     lines = clear_file(lines)
-
+    # autoincrementador para llevar conteo de los simbolos utilizados y diferenciarlos
     iarith = incrementor()
     tlines = [translate(i, iarith) for i in lines]
     tlines = [line for sublines in tlines for line in sublines]

@@ -194,7 +194,7 @@ def main():
 
     lines = [i for i in f]
     lines = clear_file(lines)
-     # autoincrementador para llevar conteo de los simbolos utilizados y diferenciarlos
+    # autoincrementador para llevar conteo de los simbolos utilizados y diferenciarlos
     iarith = incrementor()
     tlines = [translate(i, iarith) for i in lines]
     tlines = [line for sublines in tlines for line in sublines]
