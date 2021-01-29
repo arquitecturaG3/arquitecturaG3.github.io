@@ -59,7 +59,7 @@ def constant(i):
     return line
 
 def static(i,j):
-    name = sys.argv[1].split("\\")[2].split(".")[0]
+    name = sys.argv[1].split("/")[2].split(".")[0]
     if j==0:
         line = [
             "@"+name+"." + i,
@@ -198,7 +198,7 @@ def main():
     with open(filepath, 'w') as file:
         for i in tlines:
             file.write(i + '\n')
-            
+
 
 if __name__ == "__main__":
     main()
