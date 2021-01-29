@@ -323,8 +323,8 @@ def translate(line, iarith):
     elif opt in ["call"]:
         line = call(line[1])
 
-    #else:
-        #line = arithmetic.get(opt, "error")(iarith)
+    else:
+        line = arithmetic.get(opt, "error")(iarith)
 
     return line
 
