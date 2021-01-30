@@ -84,10 +84,10 @@ def constant(i):
 # Traduccion de instruccion: push/pop static i
 
 
-def static(i, j,fname):
+def static(i, j, fname):
     if j == 0:
         line = [
-            "@"+ fname+"." + i,
+            "@" + fname+"." + i,
             "D=M",
             "@SP",
             "A=M",
@@ -101,7 +101,7 @@ def static(i, j,fname):
             "M=M-1",
             "A=M",
             "D=M",
-            "@"+ fname+"." + i,
+            "@" + fname+"." + i,
             "M=D"
         ]
         pass
@@ -216,7 +216,8 @@ def translate(line, iarith, ifunc, icall, fname):
     args = line[1:]
 
     if opt in ["push", "pop"]:
-        line = eval(opt + "(args,fname)", {"args": line[1:], "fname": fname , "push": push, "pop": pop})
+        line = eval(opt + "(args,fname)",
+                    {"args": line[1:], "fname": fname, "push": push, "pop": pop})
 
     elif opt in ["label", "goto", "if-goto"]:
         line = branching.get(opt, error)(args)
@@ -233,38 +234,43 @@ def translate(line, iarith, ifunc, icall, fname):
     return line
 
 # Funcion principal, limpia el archivo ingresado y traduce cad linea
+
+
 def main():
     filename = sys.argv[1]
-
-    if os.path.isdir(filename):
-        files = [os.path.join(filename, f)
-                              for f in os.listdir(filename) if f.endswith('.vm')]
-        filepath = filename + "\\" + filename.split("\\")[-1] + ".asm"
-    else:
-        files = [filename]
-        filepath = filename.replace('vm', 'asm')
-
     tfile = []
 
     iarith = incrementor()
     ifunc = incrementor()
     icall = incrementor()
 
+    if os.path.isdir(filename):
+        files = [os.path.join(filename, f)
+                 for f in os.listdir(filename) if f.endswith('.vm')]
+        filepath = filename + "\\" + filename.split("\\")[-1] + ".asm"
+        tfile += init_asm(icall)
+
+    else:
+        files = [filename]
+        filepath = filename.replace('vm', 'asm')
+
+    print(tfile)
     for file in files:
 
-        fname = file.split("\\")[-1].split(".")[0]
 
+        fname = file.split("\\")[-1].split(".")[0]
 
         f = open(file, "r")
 
         lines = [i for i in f]
         lines = clear_file(lines)
         # autoincrementador para llevar conteo de los simbolos utilizados y diferenciarlos
-        tlines= [translate(i, iarith, ifunc, icall, fname) for i in lines]
+        tlines = [translate(i, iarith, ifunc, icall, fname) for i in lines]
         tlines = [line for sublines in tlines for line in sublines]
 
-        for i in tlines:
-            print(i)
+        # for i in tlines:
+        #     print(i)
+
         tfile += tlines
 
     with open(filepath, 'w') as file:
