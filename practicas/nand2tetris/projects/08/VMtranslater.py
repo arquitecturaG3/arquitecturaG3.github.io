@@ -254,7 +254,6 @@ def main():
         files = [filename]
         filepath = filename.replace('vm', 'asm')
 
-    print(tfile)
     for file in files:
 
 
@@ -270,7 +269,6 @@ def main():
 
         # for i in tlines:
         #     print(i)
-
         tfile += tlines
 
     with open(filepath, 'w') as file:
