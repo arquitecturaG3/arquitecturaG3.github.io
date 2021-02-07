@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--
+    Plain-Academic by Vasilios Mavroudis
+    Released under the Simplified BSD License/FreeBSD (2-clause) License.
+    https://github.com/mavroudisv/plain-academic
+-->
+
+<html lang="en">
+
+<head>
+    <title>Arquitectura</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+
+</head>
+
+<body>
+
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+        <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+            <li><a href="../../index.html">Inicio</a></li>
+            <li><a href="../integrantes.html">Integrantes</a></li>
+            <li><a href="../practicas.html">Practicas</a></li>
+            <li><a href="../proyecto.html">Proyecto</a></li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+
+
+    <!-- Page Content -->
+    <div class="container" style="margin-top: 3%;">
+        <div class="col-md-3">
+        <div class="menu" style="position: fixed; margin-top:  3%;">
+            <div class="titulo" style="font-size: 30px; margin-bottom:10%"><b>Benchmarking y <br>Supercomputo: Green500</b></div>
+            <ol>
+            <li type="disc">
+                <dd><a href="./introduccion.html"> Introducción</a></dd>
+
+            </li>
+            <li type="disc">
+
+                <dd><a href="./marcoTeorico.html">Marco Teorico</a></dd>
+            </li>
+
+            <li type="disc">
+
+                <dd><a href="./green500.html">Green500</a></dd>
+            </li>
+
+            <li type="disc">
+
+                <dd><a href="./metodologia.html">Metodología</a></dd>
+            </li>
+
+            <li type="disc">
+
+                <dd><a href="./resultados.html">Resultados</a></dd>
+            </li>
+
+            <li type="disc">
+
+                <dd><a href="./conclusiones.html">Conclusiones</a></dd>
+            </li>
+
+            <li type="disc">
+
+                <dd><a href="./referencias.html">Referencias</a></dd>
+            </li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-7 align-self-center">
+            <div style="text-align:justify; align-content: center;padding-top: 10%;" id="introduccion">
+                <div class="titulo"><b></b>
+                </div>
+                <br>
+                <ol>
+                <h2 style="font-size: 28px">INTRODUCCION</h2>
+                <br>
+                <p style="font-size: 14px">En informática, el benchmarking consiste en una prueba de rendimiento dirigida a medir el desempeño de un ordenador a nivel general o componentes específicos del mismo (procesadores, memorias, etc), normalmente mediante la ejecución de una serie de pruebas estándar y ensayos objetivos las cuales permitan el análisis y comparación de resultados entre distintos equipos. Estas pruebas de rendimiento nos ayudan a ver como es el rendimiento de un producto frente a otros.
+                </p>
+                
+                <p style="font-size: 14px">El benchmarking esta normalmente relacionado con la evaluación de las características de ejecución de los equipos informáticos, por ejemplo, la ejecución de la operación de punto flotante de una CPU. Sin embargo, existen circunstancias en las que el método es además pertinente para el software. Los benchmark de software se ejecutan, por ejemplo, en compiladores o marcos de administración de bases de datos (DBMS). </p>
+    
+                <p style="font-size: 14px"> A medida que avanza la arquitectura de la computadoras, se hace más difícil comparar el rendimiento de varios sistemas informáticos con solo observar sus especificaciones. Por tanto, se han desarrollado pruebas que permiten la comparación de diferentes arquitecturas. Por ejemplo, los procesadores Pentium 4 generalmente operaban a una frecuencia de reloj más alta que los procesadores Athlon XP o PowerPC, lo que no necesariamente se traducía en más potencia computacional; una frecuencia de reloj más lenta puede funcionar bien o incluso mejor que un procesador que opera a una frecuencia más alta.</p>
+    
+                <p style="font-size: 14px">Los benchmarks están diseñados para imitar un tipo particular de carga de trabajo en un componente o sistema. Los  benchmark sintéticos hacen esto mediante programas especialmente creados que imponen la carga de trabajo al componente. Los benchmarks de aplicaciones ejecutan programas del mundo real en el sistema. Si bien las evaluaciones comparativas de aplicaciones generalmente brindan una medida mucho mejor del rendimiento del mundo real en un sistema dado, las evaluaciones comparativas sintéticas son útiles para probar componentes individuales, como un disco duro.</p>
+    
+                <p style="font-size: 14px">Los benchmarks son fundamentales en el diseño del procesador, ya que brindan a los arquitectos de procesadores la capacidad de medir y hacer concesiones en las decisiones de micro-arquitectura. Por ejemplo, si un benchmark extrae los algoritmos críticos de una aplicación, contendrá los aspectos sensibles al rendimiento de la aplicación. Ejecutar este fragmento mucho más pequeño en cycle-accurate simulator (CAS) puede dar pistas sobre cómo mejorar el rendimiento.
+                Antes de 2000, los arquitectos de computadoras y microprocesadores usaban SPEC para hacer esto, aunque los benchmarks basados en Unix de SPEC eran bastante largos y, por lo tanto, difíciles de manejar intactos.</p>
+
+                <p style="font-size: 14px">Se sabe que los fabricantes de computadoras configuran sus sistemas para brindar un rendimiento alto irreal en los benchmarks los cuales no se reflejan en el uso real. Por ejemplo, durante la década de 1980, algunos compiladores podían detectar una operación matemática específica utilizada en un benchmark de punto flotante bien conocido y reemplazar la operación con una operación matemáticamente equivalente más rápida. Sin embargo, tal transformación rara vez fue útil fuera del benchmark hasta mediados de la década de 1990, cuando las arquitecturas RISC y VLIW enfatizaron la importancia de la tecnología de compilación relacionada con el rendimiento. Las empresas que ofrecen compiladores utilizan regularmente los benchmarks para mejorar sus propias puntuaciones y el rendimiento real de las aplicaciones.</p>
+    
+                <p style="font-size: 14px">Las CPU con muchas unidades de ejecución, como una CPU superescalar, una CPU VLIW o una CPU informática reconfigurable, suelen tener velocidades de reloj más lentas que una CPU secuencial con una o dos unidades de ejecución cuando se construyen a partir de transistores que son igual de rápidos. Sin embargo, las CPU con muchas unidades de ejecución a menudo completan las tareas del mundo real y de benchmark en menos tiempo que la CPU supuestamente más rápida de alta velocidad.</p>
+    
+                <p style="font-size: 14px">Dada la gran cantidad de evaluaciones comparativas disponibles, un fabricante generalmente puede encontrar al menos una evaluación comparativa que muestre que su sistema superará a otro sistema; los otros sistemas pueden sobresalir con un benchmark diferente.
+                Los fabricantes generalmente informan solo aquellos benchmarks (o aspectos de los benchmarks) que muestran sus productos de la mejor manera. También se sabe que tergiversan la importancia de los benchmark para mostrar sus productos en el mejor escenario posible, tomados en conjunto; estas prácticas se denominan bench-marketing.
+                Idealmente, los benchmarks solo deben sustituir a las aplicaciones reales si la aplicación no está disponible o es demasiado difícil o costosa de trasladar a un procesador o sistema informático específico. Si el rendimiento es crítico, el único benchmark que importa es la suite de aplicaciones del entorno de destino</p>
+    
+                <p style="font-size: 14px">Contando ya con un contexto general sobre la motivación e importancia de la evaluación de rendimiento de los equipos computacionales mediante benchmark y la finalidad de comparar el desempeños de estos, es común entonces que se generen listados clasificatorios en donde podamos encontrar aquellos ordenadores que ofrecen el mayor desempeño, el ranking mas conocido de este tipo es Top500 donde se presentan las supercomputadoras con mayor rendimiento en el mundo. En este articulo profundizaremos en un ranking particular denominado Green500 el cual toma aquellos ordenadores presentados en el listado de Top500 y son comparados desde el punto de vista de eficiencia energética, para ello se usa la medida de potencia por vatio, es decir la capacidad de computo que puede realizar el computador por vatio consumido. A su vez, en este articulo presentamos una comparativa bajo un benchmark enfocado en la eficiencia energética entre un ordenador de uso común, dos nodos de computo del superordenador GUANE-1 del grupo de supercomputación SC3UIS de la Universidad Industrial de Santander. La motivación principal del articulo es analizar como se encuentra Colombia en términos de supercomputación y cuales son las mejores decisiones que deberían tomarse para posicionar un un maquina dentro de las 10 primeras del Top500.</p>
+                <br>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!--
+    Plain-Academic by Vasilios Mavroudis
+    Released under the Simplified BSD License/FreeBSD (2-clause) License.
+    https://github.com/mavroudisv/plain-academic
+-->
+
+<html lang="en">
+
+<head>
+    <title>Arquitectura</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+
+</head>
+
+<body>
+
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+        <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+            <li><a href="../../index.html">Inicio</a></li>
+            <li><a href="../integrantes.html">Integrantes</a></li>
+            <li><a href="../practicas.html">Practicas</a></li>
+            <li><a href="../proyecto.html">Proyecto</a></li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+
+
+    <!-- Page Content -->
+    <div class="container" style="margin-top: 3%;">
+        <div class="col-md-3">
+        <div class="menu" style="position: fixed; margin-top:  3%;">
+            <div class="titulo" style="font-size: 30px; margin-bottom:10%"><b>Benchmarking y <br>Supercomputo: Green500</b></div>
+            <ol>
+                <li type="disc">
+                    <dd><a href="./introduccion.html"> Introducción</a></dd>
+    
+                </li>
+                <li type="disc">
+    
+                    <dd><a href="./marcoTeorico.html">Marco Teorico</a></dd>
+                </li>
+    
+                <li type="disc">
+    
+                    <dd><a href="./green500.html">Green500</a></dd>
+                </li>
+    
+                <li type="disc">
+    
+                    <dd><a href="./metodologia.html">Metodología</a></dd>
+                </li>
+    
+                <li type="disc">
+    
+                    <dd><a href="./resultados.html">Resultados</a></dd>
+                </li>
+    
+                <li type="disc">
+    
+                    <dd><a href="./conclusiones.html">Conclusiones</a></dd>
+                </li>
+    
+                <li type="disc">
+    
+                    <dd><a href="./referencias.html">Referencias</a></dd>
+                </li>
+                </ol>
+        </div>
+
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-7 align-self-center">
+            <div style="text-align:justify; align-content: center;padding-top: 10%;" id="introduccion">
+                <div class="titulo"><b></b>
+                </div>
+                <br>
+                <ol>
+                <h2 style="font-size: 28px">GREEN500</h2>
+                <br>
+                <p style="font-size: 14px">Green500 clasifica a las 500 mejores supercomputadoras del mundo por eficiencia energética. El enfoque de las operaciones informáticas de rendimiento a cualquier costo ha llevado a la aparición de supercomputadoras que consumen grandes cantidades de energía eléctrica y producen tanto calor que deben construirse grandes instalaciones de refrigeración para garantizar un rendimiento adecuado. Para abordar esta tendencia, la lista Green500 destaca el rendimiento de eficiencia energética para la supercomputación sostenible.
+                </p>
+                
+                <p style="font-size: 14px">Para evaluar la eficiencia energética, Green500 toma la métrica de "Flops-per-Watts", realizando el cociente entre la puntuación obtenida en el benchmark Linpack y el Consumo en Watts alcanzado durante dicho benchmark. La unidad Flops hace referencia operaciones de coma flotante por segundo, se argumenta la elección de dicha metrica al ya ser una bastante extendida en la comunidad de benchmarking. </p>
+    
+                <p style="font-size: 14px"> El benchmark utilizado deriva de la biblioteca de software LINPACK, enfocada en la realización de álgebra lineal numérica en computadoras digitales. Fue escrito en Fortran por Jack Dongarra, Jim Bunch, Cleve Moler y Gilbert Stewart, y fue diseñado para su uso en supercomputadoras en la década de 1970 y principios de la de 1980. Actualmente Green500 mide el rendimiento por vatio utilizando la medida TOP500 de los benchmark HPLinpack de alto rendimiento en formato de punto flotante de doble precisión. </p>
+
+                <p style="font-size: 16px"><strong> HPLinpack</strong></p>
+
+                <p style="font-size: 14px">Los benchmarks anteriores a HPLinpack (Linpack 100 y Linpack 1000) no son adecuados para probar equipos en paralelo, y se introdujo el denominado benchmark de Computación Altamente Paralela de Linpack o HPLinpack. En HPLinpack, el tamaño <i>n</i>  del problema se puede hacer tan grande como sea necesario para optimizar los resultados de rendimiento de la máquina. Se toma <i>2 / 3n<sup>2</sup> + 2n<sup>2</sup></i> como el número de operaciones con n = 1000, con independencia del algoritmo utilizado. No se permite el uso del algoritmo de Strassen porque distorsiona la tasa de ejecución real. La precisión debe ser tal que se cumpla la siguiente expresión: </p>
+                
+                <div align="center"><img src="eq/eq1.png"></div><br>
+                <p style="font-size: 12px">donde ε es la precisión de la maquina, y <i>n</i> el tamaño del problema, || denota la norma matricial  y <i> O(1)</i> corresponde a la cota superior asintótica.</p>
+                <br>
+                <p style="font-size: 14px">Para cada sistema computacional, se reportan las siguientes cantidades:</p>
+                <ul>
+                    <li><strong><i>R<sub>max</sub> :</i></strong>  El rendimiento en GFLOPS para el mayor problema ejecutado en una máquina. </li>
+                    <li><strong><i>N<sub>max</sub> :</i></strong>  El tamaño del problema más grande que se ejecuta en una máquina. </li>
+                    <li><strong><i>R<sub>peak</sub> :</i></strong>  El tamaño donde se alcanza la mitad de la tasa de ejecución <strong><i>R<sub>max</i></sub></strong> .</li>
+                    <li><strong><i>N<sub>1/2</sub> :</i></strong>  El rendimiento máximo teórico GFLOPS de la máquina. </li>
+                </ul><br>
+                <p style="font-size: 14px">Estos resultados se utilizan para compilar la lista TOP500 dos veces al año, con las computadoras más poderosas del mundo. TOP500 mide estos en formato de punto flotante de doble precisión (FP64). </p>
+
+                <h4 align="center" style="font-size: 20px">Top10 Green500 Noviembre 2020</h4><br>
+                <div class="figure">
+                    <img src="tables/t1.png">
+                    <p align="center"><strong> Cuadro I:  Top10 Green500 Noviembre 2020.</strong></p>
+                </div><br>
+                <p style="font-size: 14px">En el cuadro I encontramos las primeras 10 posiciones en el ranking de Green500 de los superordenador con la mayor eficiencia Flops/watts pertenecientes a la lista de Top500 de superordenadores en el mundo, la columna que nos interesa principalmente es <strong> Power Efficiency</strong>, en esta podemos ver como respecto noviembre de 2020 el titulo al superordenador mas eficiente del mundo se lo lleva el NVIDIA DGX SuperPOD, el cual presenta las siguiente especificaciones:</p>
+                <ul>
+                    <li><strong>Fabricante: </strong>Nvidia</li>
+                    <li><strong>Nucleos: </strong>19,840</li>
+                    <li><strong>Memoria: </strong>40,000 GB </li>
+                    <li><strong>Procesador: </strong>AMD EPYC 7742 64C 2.25GHz</li>
+                    <li><strong>Linpack Performance (Rmax): </strong>2,356 TFlop/s</li>
+                    <li><strong>Power: </strong>89.94 kW </li>
+                </ul>
+                <h4 align="center" style="font-size: 20px">Especificaciones Top10 Green500 Noviembre 2020</h4><br>
+                <div class="figure">
+                    <img src="tables/TL2.png">
+                    <p align="center"><strong> Cuadro II:  Especificaciones Top10 Green500 Noviembre 2020.</strong></p>
+                </div><br>
+                <P style="font-size: 14px">En el cuadro II encontramos las especificaciones mas relevantes de cada uno de los superordenadores pertenecientes a las 10 primeras posiciones de la lista Green500, podemos observar 3 familias principales de procesadores, AMD Epyc , Xeon y Fujitsu A64FX, el conjunto de instrucciones (ISA) mas frecuente es x86 y siendo el diseño CISC aquel que ocupa las 5 primeras posiciones en la clasificación. Es de destacar también como la Arquitectura ARM/RISC ya se posiciona como una opción competente en lo que respecta a supercomputación ofreciendo una eficiencia energética destacable.</P>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    </div>
+</body>
+
+</html>
