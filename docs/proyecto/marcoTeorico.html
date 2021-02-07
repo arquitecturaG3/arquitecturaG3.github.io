@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--
+    Plain-Academic by Vasilios Mavroudis
+    Released under the Simplified BSD License/FreeBSD (2-clause) License.
+    https://github.com/mavroudisv/plain-academic
+-->
+
+<html lang="en">
+
+<head>
+    <title>Arquitectura</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+
+</head>
+
+<body>
+
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+        <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+            <li><a href="../../index.html">Inicio</a></li>
+            <li><a href="../integrantes.html">Integrantes</a></li>
+            <li><a href="../practicas.html">Practicas</a></li>
+            <li><a href="../proyecto.html">Proyecto</a></li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+
+
+    <!-- Page Content -->
+    <div class="container" style="margin-top: 3%;">
+        <div class="col-md-3">
+        <div class="menu" style="position: fixed; margin-top:  3%;">
+            <div class="titulo" style="font-size: 30px; margin-bottom:10%"><b>Benchmarking y <br>Supercomputo: Green500</b></div>
+            <ol>
+                <li type="disc">
+                    <dd><a href="./introduccion.html"> Introducción</a></dd>
+    
+                </li>
+                <li type="disc">
+    
+                    <dd><a href="./marcoTeorico.html">Marco Teorico</a></dd>
+                </li>
+    
+                <li type="disc">
+    
+                    <dd><a href="./green500.html">Green500</a></dd>
+                </li>
+    
+                <li type="disc">
+    
+                    <dd><a href="./metodologia.html">Metodología</a></dd>
+                </li>
+    
+                <li type="disc">
+    
+                    <dd><a href="./resultados.html">Resultados</a></dd>
+                </li>
+    
+                <li type="disc">
+    
+                    <dd><a href="./conclusiones.html">Conclusiones</a></dd>
+                </li>
+    
+                <li type="disc">
+    
+                    <dd><a href="./referencias.html">Referencias</a></dd>
+                </li>
+                </ol>
+        </div>
+
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-7 align-self-center">
+            <div style="text-align:justify; align-content: center;padding-top: 10%; " id="introduccion">
+                <div class="titulo"><b></b>
+                </div>
+                <br>
+                <ol type=I style="font-size: 15px">
+                <h2 style="font-size: 28px">MARCO TEORICO</h2>
+                <br>
+                <li ><strong style="font-size: 19px">Principios de un benchmark</strong>
+                <br><br>
+                <p style="font-size: 15px">Existen siete características vitales para los benchmarks. estas  son:
+                </p>
+                <ul><strong> Relevancia:</strong>  Los benchmarks deben medir características relativamente vitales.</ul>
+                <ul><strong>Representatividad:</strong> Las métricas de rendimiento de los benchmarks deben ser ampliamente aceptadas por la industria y el mundo académico.</ul>
+                <ul><strong>Equidad:</strong> Todos los sistemas deben compararse de manera justa.</ul>
+                <ul><strong>Repetibilidad:</strong> Se pueden verificar los resultados de los benchmarks.</ul>
+                <ul><strong>Rentabilidad:</strong> Los benchmarks son económicos.</ul>
+                <ul><strong>Escalabilidad:</strong> Los benchmarks deberían funcionar en sistemas que posean una gama de recursos de menor a mayor.
+                </ul>
+                <ul><strong>Transparencia:</strong> las métricas del benchmark deben ser fáciles de entender.</ul></li>
+                <br>
+                <li><strong style="font-size: 19px">Limitaciones de los benchmarks</strong></li>
+                <br>
+                <p style="font-size: 14px">El benchmarks y pruebas de rendimiento ("benchmarks") miden diferentes aspectos del rendimiento del procesador y / o del sistema. Si bien ninguna medición numérica puede describir completamente el rendimiento de un dispositivo complejo como un microprocesador o una computadora personal, los puntos de referencia pueden ser herramientas útiles para comparar diferentes componentes y sistemas. Sin embargo, la única forma totalmente precisa de medir el rendimiento de su sistema es probar las aplicaciones de software que utiliza en su sistema informático.</p>
+    
+                <p style="font-size: 14px">Los benchmarks se pueden dividir en dos tipos, de componentes y de sistema. Los puntos de referencia de componentes miden el rendimiento de partes específicas de un sistema informático, como un microprocesador o una unidad de disco duro, mientras que los puntos de referencia del sistema suelen medir el rendimiento de todo el sistema informático. En cualquier caso, es casi seguro que el rendimiento que ve en el uso diario variará del rendimiento de referencia, por varias razones. Primero, los componentes individuales por lo general deben probarse en un sistema informático completo, y no siempre es posible eliminar los efectos considerables que las diferencias en el diseño y la configuración del sistema tendrán en los resultados del benchmark. Por ejemplo, los proveedores de sistemas venden sistemas con una amplia variedad de capacidades y velocidades de disco, memoria del sistema, características del bus del sistema y capacidades de vídeo y gráficas, todo lo cual influye en el desempeño de los componentes del sistema (como el microprocesador) y el sistema informático. uso real y puede afectar drásticamente los resultados de las comparativas. Además, las diferencias en el software, incluidos los sistemas operativos y los compiladores, afectarán el rendimiento de los componentes y del sistema. Por último, las pruebas comparativas se escriben normalmente para ser ejemplares de un determinado tipo de aplicación informática, que puede ser similar a sus aplicaciones o no.  </p>
+                <br>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    </div>
+</body>
+
+</html>
