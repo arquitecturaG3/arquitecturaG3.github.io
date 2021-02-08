@@ -54,7 +54,7 @@ class JackTokenizer:
     def __str__(self):
         tokens = [str(t) for t in self.tokens]
         tokens = ''.join(tokens)
-        return tokens
+        return f"<tokens>\n {tokens} </tokens>\n"
 
     def load(self, path):
         self.reset()
@@ -139,16 +139,526 @@ class Grammar():
                 text = text + ''.join(txt)
             else:
                 text = text + '\t' + str(rule)
-        
+
         return text + f"</{self.name}>\n"
 
     def add_rule(self, rule):
         self.rules.append(rule)
 
 
-def main():
-    print("work")
+class JackAnalizer:
 
+    def __init__(self, path):
+        self.path = path
+        tokenizer = JackTokenizer(path)
+        tokenizer.split()
+        self.tokens = tokenizer.tokens
+        self.pos = 0
+        self.grammars = None
+
+    def __str__(self):
+        return str(self.grammars)
+
+    def analizer(self):
+        self.grammars = self.compile_class()
+
+    def write(self):
+        file = open(self.path.replace(".jack", "_.xml"), 'w')
+        file.write(str(self))
+        file.close()
+
+    def sig(self):
+        self.pos = self.pos + 1
+        return self.tokens[self.pos-1]
+
+    def repos(self, pos):
+        self.pos = pos
+
+    def dev(self):
+        self.pos = self.pos - 1
+
+    def tipo(self, token):
+        return token.value in ['int', 'char', 'boolean'] or token.lex_type == "identifier"
+
+    def param(self, token1, token2):
+        return self.tipo(token1) and token2.lex_type == "identifier"
+
+    def compile_class(self):
+        ini = self.pos
+        gram = Grammar("class")
+        token = self.sig()
+        if token.value == "class":
+            gram.add_rule(token)
+            token = self.sig()
+            if token.lex_type == "identifier":
+                gram.add_rule(token)
+                token = self.sig()
+                if token.value == "{":
+                    gram.add_rule(token)
+                    varc = self.compile_vars()
+                    while varc:
+                        gram.add_rule(varc)
+                        varc = self.compile_vars()
+                    dsr = self.compile_subrutine()
+                    while dsr:
+                        gram.add_rule(dsr)
+                        dsr = self.compile_subrutine()
+                    token = self.sig()
+                    if token.value == "}":
+                        gram.add_rule(token)
+                        return gram
+        self.repos(ini)
+        return None
+
+    def compile_vars(self):
+        ini = self.pos
+        gram = Grammar("classVarDec")
+        token = self.sig()
+        if token.value in ['static', 'field']:
+            gram.add_rule(token)
+            token = self.sig()
+            if self.tipo(token):
+                gram.add_rule(token)
+                token = self.sig()
+                if token.lex_type == "identifier":
+                    gram.add_rule(token)
+                    token = self.sig()
+                    while token.value == ",":
+                        tok_aux = self.sig()
+                        if tok_aux.lex_type == "identifier":
+                            gram.add_rule(token)
+                            gram.add_rule(tok_aux)
+                            token = self.sig()
+                        else:
+                            self.dev()
+                            self.dev()
+                            return None
+                    if token.value == ";":
+                        gram.add_rule(token)
+                        return gram
+        self.repos(ini)
+        return None
+
+    def compile_subrutine(self):
+        ini = self.pos
+        gram = Grammar("subroutineDec")
+        token = self.sig()
+        if token.value in ['constructor', 'function', 'method']:
+            gram.add_rule(token)
+            token = self.sig()
+            if self.tipo(token) or token.value == "void":
+                gram.add_rule(token)
+                token = self.sig()
+                if token.lex_type == "identifier":
+                    gram.add_rule(token)
+                    token = self.sig()
+                    if token.value == "(":
+                        gram.add_rule(token)
+                        gram.add_rule(self.compile_params())
+                        token = self.sig()
+                        if token.value == ")":
+                            gram.add_rule(token)
+                            csr = self.compile_body_subrutine()
+                            if csr:
+                                gram.add_rule(csr)
+                                return gram
+        self.repos(ini)
+        return None
+
+    def compile_params(self):
+        ini = self.pos
+        gram = Grammar("parameterList")
+        token1 = self.sig()
+        token2 = self.sig()
+        if self.param(token1, token2):
+            gram.add_rule(token1)
+            gram.add_rule(token2)
+            token = self.sig()
+            while token.value == ",":
+                token1 = self.sig()
+                token2 = self.sig()
+                if self.param(token1, token2):
+                    gram.add_rule(token)
+                    gram.add_rule(token1)
+                    gram.add_rule(token2)
+                    token = self.sig()
+                else:
+                    self.dev()
+                    self.dev()
+                    self.dev()
+                    return gram
+            self.dev()
+            return gram
+        self.repos(ini)
+        return gram
+
+    def compile_body_subrutine(self):
+        ini = self.pos
+        gram = Grammar("subroutineBody")
+        token = self.sig()
+        if token.value == "{":
+            gram.add_rule(token)
+            var = self.compile_var()
+            while var:
+                gram.add_rule(var)
+                var = self.compile_var()
+            gram.add_rule(self.compile_declarations())
+            token = self.sig()
+            if token.value == "}":
+                gram.add_rule(token)
+                return gram
+        self.repos(ini)
+        return None
+
+    def compile_var(self):
+        ini = self.pos
+        gram = Grammar("varDec")
+        token = self.sig()
+        if token.value == "var":
+            gram.add_rule(token)
+            token = self.sig()
+            if self.tipo(token):
+                gram.add_rule(token)
+                token = self.sig()
+                if token.lex_type == "identifier":
+                    gram.add_rule(token)
+                    token = self.sig()
+                    while token.value == ",":
+                        tok_aux = self.sig()
+                        if tok_aux.lex_type == "identifier":
+                            gram.add_rule(token)
+                            gram.add_rule(tok_aux)
+                            token = self.sig()
+                        else:
+                            self.dev()
+                            self.dev()
+                            return None
+                    if token.value == ";":
+                        gram.add_rule(token)
+                        return gram
+        self.repos(ini)
+        return None
+
+    def compile_declarations(self):
+        gram = Grammar("statements")
+        dec = self.compile_declaration()
+        while dec:
+            gram.add_rule(dec)
+            dec = self.compile_declaration()
+        return gram
+
+    def compile_declaration(self):
+        token = self.sig()
+        self.dev()
+        if token.value == "let":
+            return self._let()
+        elif token.value == "if":
+            return self._if()
+        elif token.value == "while":
+            return self._while()
+        elif token.value == "do":
+            return self._do()
+        elif token.value == "return":
+            return self._return()
+        else:
+            return None
+
+    def _let(self):
+        ini = self.pos
+        gram = Grammar("letStatement")
+        token = self.sig()
+        if token.value == "let":
+            gram.add_rule(token)
+            token = self.sig()
+            if token.lex_type == "identifier":  # nombre de variable
+                gram.add_rule(token)
+                token = self.sig()
+                if token.value == "=":
+                    gram.add_rule(token)
+                    exp = self.compile_expression()
+                    if exp:
+                        gram.add_rule(exp)
+                        token = self.sig()
+                        if token.value == ";":
+                            gram.add_rule(token)
+                            return gram
+                elif token.value == "[":
+                    gram.add_rule(token)
+                    exp = self.compile_expression()
+                    if exp:
+                        gram.add_rule(exp)
+                        token = self.sig()
+                        if token.value == "]":
+                            gram.add_rule(token)
+                            token = self.sig()
+                            if token.value == "=":
+                                gram.add_rule(token)
+                                exp = self.compile_expression()
+                                if exp:
+                                    gram.add_rule(exp)
+                                    token = self.sig()
+                                    if token.value == ";":
+                                        gram.add_rule(token)
+                                        return gram
+        self.repos(ini)
+        return None
+
+    def _if(self):
+        ini = self.pos
+        gram = Grammar("ifStatement")
+        token = self.sig()
+        if token.value == "if":
+            gram.add_rule(token)
+            token = self.sig()
+            if token.value == "(":
+                gram.add_rule(token)
+                exp = self.compile_expression()
+                if exp:
+                    gram.add_rule(exp)
+                    token = self.sig()
+                    if token.value == ")":
+                        gram.add_rule(token)
+                        token = self.sig()
+                        if token.value == "{":
+                            gram.add_rule(token)
+                            stm = self.compile_declarations()
+                            if stm:
+                                gram.add_rule(stm)
+                                token = self.sig()
+                                if token.value == "}":
+                                    gram.add_rule(token)
+                                    token = self.sig()
+                                    if token.value != "else":
+                                        self.dev()
+                                        return gram
+                                    else:
+                                        gram.add_rule(token)
+                                        token = self.sig()
+                                        if token.value == "{":
+                                            gram.add_rule(token)
+                                            stm = self.compile_declarations()
+                                            if stm:
+                                                gram.add_rule(stm)
+                                                token = self.sig()
+                                                if token.value == "}":
+                                                    gram.add_rule(token)
+                                                    return gram
+        self.repos(ini)
+        return None
+
+    def _while(self):
+        ini = self.pos
+        gram = Grammar("whileStatement")
+        token = self.sig()
+        if token.value == "while":
+            gram.add_rule(token)
+            token = self.sig()
+            if token.value == "(":
+                gram.add_rule(token)
+                exp = self.compile_expression()
+                if exp:
+                    gram.add_rule(exp)
+                    token = self.sig()
+                    if token.value == ")":
+                        gram.add_rule(token)
+                        token = self.sig()
+                        if token.value == "{":
+                            gram.add_rule(token)
+                            stm = self.compile_declarations()
+                            if stm:
+                                gram.add_rule(stm)
+                                token = self.sig()
+                                if token.value == "}":
+                                    gram.add_rule(token)
+                                    return gram
+        self.repos(ini)
+        return None
+
+    def _do(self):
+        ini = self.pos
+        gram = Grammar("doStatement")
+        token = self.sig()
+        if token.value == "do":
+            gram.add_rule(token)
+            token = self.sig()
+            if token.lex_type == "identifier":
+                gram.add_rule(token)
+                token = self.sig()
+                if token.value == "(":
+                    gram.add_rule(token)
+                    exl = self.compile_list_expression()
+                    if exl:
+                        gram.add_rule(exl)
+                        token = self.sig()
+                        if token.value == ")":
+                            gram.add_rule(token)
+                            token = self.sig()
+                            if token.value == ";":
+                                gram.add_rule(token)
+                                return gram
+                elif token.value == ".":
+                    gram.add_rule(token)
+                    token = self.sig()
+                    if token.lex_type == "identifier":  # nombre subrutina
+                        gram.add_rule(token)
+                        token = self.sig()
+                        if token.value == "(":
+                            gram.add_rule(token)
+                            exl = self.compile_list_expression()
+                            if exl:
+                                gram.add_rule(exl)
+                                token = self.sig()
+                                if token.value == ")":
+                                    gram.add_rule(token)
+                                    token = self.sig()
+                                    if token.value == ";":
+                                        gram.add_rule(token)
+                                        return gram
+        self.repos(ini)
+        return None
+
+    def _return(self):
+        ini = self.pos
+        gram = Grammar("returnStatement")
+        token = self.sig()
+        if token.value == "return":
+            gram.add_rule(token)
+            exp = self.compile_expression()
+            if exp:
+                gram.add_rule(exp)
+            token = self.sig()
+            if token.value == ";":
+                gram.add_rule(token)
+                return gram
+        self.repos(ini)
+        return None
+
+    def compile_list_expression(self):
+        gram = Grammar("expressionList")
+        exp = self.compile_expression()
+        if exp:
+            gram.add_rule(exp)
+            token = self.sig()
+            while token.value == ",":
+                exp = self.compile_expression()
+                if exp:
+                    gram.add_rule(token)
+                    gram.add_rule(exp)
+                    token = self.sig()
+                else:
+                    self.dev()
+                    return gram
+            self.dev()
+            return gram
+        return gram
+
+    def compile_expression(self):
+        ini = self.pos
+        gram = Grammar("expression")
+        ter = self.compile_term()
+        if ter:
+            gram.add_rule(ter)
+            token = self.sig()
+            while token.value in OPERATIONS:
+                ter = self.compile_term()
+                if ter:
+                    gram.add_rule(token)
+                    gram.add_rule(ter)
+                    token = self.sig()
+                else:
+                    self.dev()
+                    return gram
+            self.dev()
+            return gram
+        self.repos(ini)
+        return None
+
+    def compile_term(self):
+        ini = self.pos
+        gram = Grammar("term")
+        token = self.sig()
+        if token.lex_type == "integerConstant":
+            gram.add_rule(token)
+            return gram
+        elif token.lex_type == "stringConstant":
+            gram.add_rule(token)
+            return gram
+        elif token.value in KEYWORDS_CONS:
+            gram.add_rule(token)
+            return gram
+        elif token.value == "(":
+            gram.add_rule(token)
+            exp = self.compile_expression()
+            if exp:
+                gram.add_rule(exp)
+                token = self.sig()
+                if token.value == ")":
+                    gram.add_rule(token)
+                    return gram
+        elif token.value in UNARY_OPT:
+            gram.add_rule(token)
+            ter = self.compile_term()
+            if ter:
+                gram.add_rule(ter)
+                return gram
+        # nombre Subrutina, clase, variable, variable(arreglo)
+        elif token.lex_type == "identifier":
+            gram.add_rule(token)
+            token = self.sig()
+            if token.value == "[":
+                gram.add_rule(token)
+                exp = self.compile_expression()
+                if exp:
+                    gram.add_rule(exp)
+                    token = self.sig()
+                    if token.value == "]":
+                        gram.add_rule(token)
+                        return gram
+            elif token.value == "(":
+                gram.add_rule(token)
+                exl = self.compile_list_expression()
+                if exl:
+                    gram.add_rule(exl)
+                    token = self.sig()
+                    if token.value == ")":
+                        gram.add_rule(token)
+                        return gram
+            elif token.value == ".":
+                gram.add_rule(token)
+                token = self.sig()
+                if token.lex_type == "identifier":  # nombre subrutina
+                    gram.add_rule(token)
+                    token = self.sig()
+                    if token.value == "(":
+                        gram.add_rule(token)
+                        exl = self.compile_list_expression()
+                        if exl:
+                            gram.add_rule(exl)
+                            token = self.sig()
+                            if token.value == ")":
+                                gram.add_rule(token)
+                                return gram
+            else:
+                self.dev()
+                return gram
+        self.repos(ini)
+        return None
+
+
+def main():
+    path = sys.argv[1]
+    print(path)
+    
+    Tok = JackTokenizer(path)
+    Tok.split()
+    Tok.write()
+
+    An = JackAnalizer(path)
+    An.analizer()
+    An.write()
+    
+    print(An)
+    
     return 0
 
 
