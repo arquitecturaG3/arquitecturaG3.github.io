@@ -34,9 +34,9 @@ class Token():
             raise NameError("tipo no valido")
 
         self.special = {
-            "<": "&lt",
-            ">": "&gt",
-            "&": "&amp"
+            "<": "&lt;",
+            ">": "&gt;",
+            "&": "&amp;"
         }
 
     def __str__(self):
@@ -89,7 +89,7 @@ class JackTokenizer:
             num = 1
         elif token.isdigit():
             num = 2
-        elif not token[0].isdigit():
+        elif not token[0].isdigit() and token[0] != '"':
             num = 3
         elif '"' in token:
             itoken = token[1:-1]
@@ -656,8 +656,6 @@ def main():
     An = JackAnalizer(path)
     An.analizer()
     An.write()
-    
-    print(An)
     
     return 0
 

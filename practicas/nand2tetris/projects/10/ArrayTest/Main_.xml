@@ -46,7 +46,7 @@
 							<expressionList>
 								<expression>
 									<term>
-										<identifier> "HOW MANY NUMBERS? " </identifier>
+										<stringConstant> HOW MANY NUMBERS?  </stringConstant>
 									</term>
 								</expression>
 							</expressionList>
@@ -95,7 +95,7 @@
 						<term>
 							<identifier> i </identifier>
 						</term>
-						<symbol> &lt </symbol>
+						<symbol> &lt; </symbol>
 						<term>
 							<identifier> length </identifier>
 						</term>
@@ -123,7 +123,7 @@
 									<expressionList>
 										<expression>
 											<term>
-												<identifier> "ENTER THE NEXT NUMBER: " </identifier>
+												<stringConstant> ENTER THE NEXT NUMBER:  </stringConstant>
 											</term>
 										</expression>
 									</expressionList>
@@ -179,7 +179,7 @@
 						<term>
 							<identifier> i </identifier>
 						</term>
-						<symbol> &lt </symbol>
+						<symbol> &lt; </symbol>
 						<term>
 							<identifier> length </identifier>
 						</term>
@@ -236,7 +236,7 @@
 					<expressionList>
 						<expression>
 							<term>
-								<identifier> "THE AVERAGE IS: " </identifier>
+								<stringConstant> THE AVERAGE IS:  </stringConstant>
 							</term>
 						</expression>
 					</expressionList>
