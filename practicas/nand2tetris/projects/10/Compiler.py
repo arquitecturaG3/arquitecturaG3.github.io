@@ -1,5 +1,6 @@
 import sys
 import os
+import CompilationEngine
 
 
 LEXICAL_ELEMENTS = {
