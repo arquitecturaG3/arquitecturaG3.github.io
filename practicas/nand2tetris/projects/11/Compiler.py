@@ -1070,7 +1070,7 @@ class codeGenerator:
 
     def _op(self, operador):
         oper = {'+': "add", '-': "sub", '*': "call Math.multiply 2",
-                '/': "call Math.multiply 2", '&': "and", '|': "or", '<': "lt", '>': "gt", '=': "eq"}
+                '/': "call Math.divide  2", '&': "and", '|': "or", '<': "lt", '>': "gt", '=': "eq"}
         return oper[operador]
 
     def _un(self, operador):

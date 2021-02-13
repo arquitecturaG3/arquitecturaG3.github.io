@@ -302,11 +302,11 @@ push argument 0
 pop pointer 0
 push this 2
 push constant 10
-call Math.multiply 2
+call Math.divide  2
 pop local 2
 push this 3
 push constant 10
-call Math.multiply 2
+call Math.divide  2
 pop local 3
 push argument 1
 push constant 0
@@ -359,7 +359,7 @@ push constant 50
 neg
 call Math.multiply 2
 push local 2
-call Math.multiply 2
+call Math.divide  2
 pop local 1
 push this 1
 push local 1
@@ -381,7 +381,7 @@ push local 3
 push constant 50
 call Math.multiply 2
 push local 2
-call Math.multiply 2
+call Math.divide  2
 pop local 1
 push this 1
 push local 1
@@ -404,7 +404,7 @@ push constant 25
 neg
 call Math.multiply 2
 push local 3
-call Math.multiply 2
+call Math.divide  2
 pop local 0
 push this 0
 push local 0
@@ -420,7 +420,7 @@ push local 2
 push constant 25
 call Math.multiply 2
 push local 3
-call Math.multiply 2
+call Math.divide  2
 pop local 0
 push this 0
 push local 0
