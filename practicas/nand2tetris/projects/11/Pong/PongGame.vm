@@ -1,5 +1,5 @@
 function PongGame.new 0
-push constant 8
+push constant 7
 call Memory.alloc 1
 pop pointer 0
 call Screen.clearScreen 0
@@ -23,7 +23,7 @@ pop this 1
 push this 1
 push constant 400
 push constant 0
-call Ball.setDestination 2
+call Ball.setDestination 3
 pop temp 0
 push constant 0
 push constant 238
@@ -65,14 +65,14 @@ push constant 0
 pop this 5
 push pointer 0
 return
-function PongGame.dispose 1
+function PongGame.dispose 0
 push argument 0
 pop pointer 0
 push this 0
-call Bat.dispose 0
+call Bat.dispose 1
 pop temp 0
 push this 1
-call Ball.dispose 0
+call Ball.dispose 1
 pop temp 0
 push pointer 0
 call Memory.deAlloc 1
@@ -90,12 +90,12 @@ return
 function PongGame.run 1
 push argument 0
 pop pointer 0
-label WHILE-EXP0
+label PongGame.run_WHILE_START_1
 push this 3
 not
 not
-if-goto WHILE-END0
-label WHILE-EXP1
+if-goto PongGame.run_WHILE_END_2
+label PongGame.run_WHILE_START_3
 push local 0
 push constant 0
 eq
@@ -103,56 +103,56 @@ push this 3
 not
 and
 not
-if-goto WHILE-END1
+if-goto PongGame.run_WHILE_END_4
 call Keyboard.keyPressed 0
 pop local 0
 push this 0
-call Bat.move 0
+call Bat.move 1
 pop temp 0
 push pointer 0
-call PongGame.moveBall 2
+call PongGame.moveBall 1
 pop temp 0
 push constant 50
 call Sys.wait 1
 pop temp 0
-goto WHILE-EXP1
-label WHILE-END1
+goto PongGame.run_WHILE_START_3
+label PongGame.run_WHILE_END_4
 push local 0
 push constant 130
 eq
-if-goto IF-TRUE0
-goto IF-FALSE0
-label IF-TRUE0
+not
+if-goto PongGame.run_IF_FALSE_6
 push this 0
 push constant 1
-call Bat.setDirection 1
+call Bat.setDirection 2
 pop temp 0
-goto IF-END0
-label IF-FALSE0
+goto PongGame.run_IF_TRUE_5
+label PongGame.run_IF_FALSE_6
 push local 0
 push constant 132
 eq
-if-goto IF-TRUE1
-goto IF-FALSE1
-label IF-TRUE1
+not
+if-goto PongGame.run_IF_FALSE_8
 push this 0
 push constant 2
-call Bat.setDirection 1
+call Bat.setDirection 2
 pop temp 0
-goto IF-END1
-label IF-FALSE1
+goto PongGame.run_IF_TRUE_7
+label PongGame.run_IF_FALSE_8
 push local 0
 push constant 140
 eq
 not
-if-goto IF-END2
+if-goto PongGame.run_IF_FALSE_10
 push constant 0
 not
 pop this 3
-label IF-END2
-label IF-END1
-label IF-END0
-label WHILE-EXP1
+goto PongGame.run_IF_TRUE_9
+label PongGame.run_IF_FALSE_10
+label PongGame.run_IF_TRUE_9
+label PongGame.run_IF_TRUE_7
+label PongGame.run_IF_TRUE_5
+label PongGame.run_WHILE_START_11
 push local 0
 push constant 0
 eq
@@ -161,25 +161,25 @@ push this 3
 not
 and
 not
-if-goto WHILE-END1
+if-goto PongGame.run_WHILE_END_12
 call Keyboard.keyPressed 0
 pop local 0
 push this 0
-call Bat.move 0
+call Bat.move 1
 pop temp 0
 push pointer 0
-call PongGame.moveBall 2
+call PongGame.moveBall 1
 pop temp 0
 push constant 50
 call Sys.wait 1
 pop temp 0
-goto WHILE-EXP1
-label WHILE-END1
-goto WHILE-EXP0
-label WHILE-END0
+goto PongGame.run_WHILE_START_11
+label PongGame.run_WHILE_END_12
+goto PongGame.run_WHILE_START_1
+label PongGame.run_WHILE_END_2
 push this 3
 not
-if-goto IF-END0
+if-goto PongGame.run_IF_FALSE_14
 push constant 10
 push constant 27
 call Output.moveCursor 2
@@ -206,13 +206,16 @@ push constant 114
 call String.appendChar 2
 call Output.printString 1
 pop temp 0
-label IF-END0
+goto PongGame.run_IF_TRUE_13
+label PongGame.run_IF_FALSE_14
+label PongGame.run_IF_TRUE_13
 push constant 0
 return
-function PongGame.moveBall 1
+function PongGame.moveBall 5
 push argument 0
 pop pointer 0
 push this 1
+call Ball.move 1
 pop this 2
 push this 2
 push constant 0
@@ -223,24 +226,28 @@ eq
 not
 and
 not
-if-goto IF-END4
+if-goto PongGame.moveBall_IF_FALSE_16
 push this 2
 pop this 5
 push constant 0
 pop local 0
 push this 0
+call Bat.getLeft 1
 pop local 1
 push this 0
+call Bat.getRight 1
 pop local 2
 push this 1
+call Ball.getLeft 1
 pop local 3
 push this 1
+call Ball.getRight 1
 pop local 4
 push this 2
 push constant 4
 eq
 not
-if-goto IF-END5
+if-goto PongGame.moveBall_IF_FALSE_18
 push local 1
 push local 4
 gt
@@ -252,38 +259,39 @@ pop this 3
 push this 3
 not
 not
-if-goto IF-END6
+if-goto PongGame.moveBall_IF_FALSE_20
 push local 4
 push local 1
 push constant 10
 add
 lt
-if-goto IF-TRUE7
-goto IF-FALSE7
-label IF-TRUE7
+not
+if-goto PongGame.moveBall_IF_FALSE_22
 push constant 1
 neg
 pop local 0
-goto IF-END7
-label IF-FALSE7
+goto PongGame.moveBall_IF_TRUE_21
+label PongGame.moveBall_IF_FALSE_22
 push local 3
 push local 2
 push constant 10
 sub
 gt
 not
-if-goto IF-END8
+if-goto PongGame.moveBall_IF_FALSE_24
 push constant 1
 pop local 0
-label IF-END8
-label IF-END7
+goto PongGame.moveBall_IF_TRUE_23
+label PongGame.moveBall_IF_FALSE_24
+label PongGame.moveBall_IF_TRUE_23
+label PongGame.moveBall_IF_TRUE_21
 push this 6
 push constant 2
 sub
 pop this 6
 push this 0
 push this 6
-call Bat.setWidth 1
+call Bat.setWidth 2
 pop temp 0
 push this 4
 push constant 1
@@ -296,12 +304,18 @@ pop temp 0
 push this 4
 call Output.printInt 1
 pop temp 0
-label IF-END6
-label IF-END5
+goto PongGame.moveBall_IF_TRUE_19
+label PongGame.moveBall_IF_FALSE_20
+label PongGame.moveBall_IF_TRUE_19
+goto PongGame.moveBall_IF_TRUE_17
+label PongGame.moveBall_IF_FALSE_18
+label PongGame.moveBall_IF_TRUE_17
 push this 1
 push local 0
-call Ball.bounce 1
+call Ball.bounce 2
 pop temp 0
-label IF-END4
+goto PongGame.moveBall_IF_TRUE_15
+label PongGame.moveBall_IF_FALSE_16
+label PongGame.moveBall_IF_TRUE_15
 push constant 0
 return

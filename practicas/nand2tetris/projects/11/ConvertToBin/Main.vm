@@ -1,4 +1,8 @@
 function Main.main 1
+push constant 8000
+push constant 10
+call Memory.poke 2
+pop temp 0
 push constant 8001
 push constant 16
 push constant 1

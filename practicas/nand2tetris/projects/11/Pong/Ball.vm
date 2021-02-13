@@ -21,7 +21,7 @@ pop this 13
 push constant 0
 pop this 14
 push pointer 0
-call Ball.show 2
+call Ball.show 1
 pop temp 0
 push pointer 0
 return
@@ -41,7 +41,7 @@ not
 call Screen.setColor 1
 pop temp 0
 push pointer 0
-call Ball.draw 2
+call Ball.draw 1
 pop temp 0
 push constant 0
 return
@@ -52,7 +52,7 @@ push constant 0
 call Screen.setColor 1
 pop temp 0
 push pointer 0
-call Ball.draw 2
+call Ball.draw 1
 pop temp 0
 push constant 0
 return
@@ -155,7 +155,7 @@ function Ball.move 1
 push argument 0
 pop pointer 0
 push pointer 0
-call Ball.hide 2
+call Ball.hide 1
 pop temp 0
 push this 4
 push constant 0
@@ -293,7 +293,7 @@ push this 13
 pop this 1
 label IF-END1
 push pointer 0
-call Ball.show 2
+call Ball.show 1
 pop temp 0
 push this 14
 return
@@ -434,7 +434,7 @@ label IF-END12
 push pointer 0
 push local 0
 push local 1
-call Ball.setDestination 3
+call Ball.setDestination 2
 pop temp 0
 push constant 0
 return

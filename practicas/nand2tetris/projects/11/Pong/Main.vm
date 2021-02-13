@@ -4,10 +4,10 @@ pop temp 0
 call PongGame.getInstance 0
 pop local 0
 push local 0
-call PongGame.run 0
+call PongGame.run 1
 pop temp 0
 push local 0
-call PongGame.dispose 0
+call PongGame.dispose 1
 pop temp 0
 push constant 0
 return

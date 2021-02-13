@@ -982,7 +982,7 @@ class codeGenerator:
                 self._vm.append("push pointer 0")
                 par = par + 1
             self.escribe_lista_expresiones(do[3].rules)
-            self._vm.append(f"call {self._clase}.{do[1].value} {par}")
+            self._vm.append(f"call {self._clase}.{do[1].value} {par - 1}")
             self._vm.append("pop temp 0")
         elif do[1].cat == "class":
             self.escribe_lista_expresiones(do[5].rules)
