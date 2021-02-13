@@ -952,14 +952,14 @@ class codeGenerator:
     def escribe_if(self, ifs, n):
         self.escribe_expresion(ifs[2].rules)
         if len(ifs) == 11:
-            self._vm.append("if-goto IF-TRUE"+str(n))
-            self._vm.append("goto IF-FALSE"+str(n))
-            self._vm.append("label IF-TRUE"+str(n))
+            self._vm.append("if-goto " + self._clase +".IF-TRUE"+str(n))
+            self._vm.append("goto " + self._clase +".IF-FALSE"+str(n))
+            self._vm.append("label " + self._clase +".IF-TRUE"+str(n))
             self.escribe_declaraciones(ifs[5].rules)
-            self._vm.append("goto IF-END"+str(n))
-            self._vm.append("label IF-FALSE"+str(n))
+            self._vm.append("goto " + self._clase +".IF-END"+str(n))
+            self._vm.append("label " + self._clase +".IF-FALSE"+str(n))
             self.escribe_declaraciones(ifs[9].rules)
-            self._vm.append("label IF-END"+str(n))
+            self._vm.append("label " + self._clase +".IF-END"+str(n))
         else:
             self._vm.append("not")
             self._vm.append("if-goto IF-END"+str(n))
