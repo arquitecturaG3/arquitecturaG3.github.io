@@ -79,8 +79,6 @@ class JackTokenizer:
         lines = [self.clear_line(i) for i in lines]
         lines = [i for i in lines if "" != i]
         self.file = ''.join(lines)
-
-        print(lines)
         file.close()
         print("Archivo cargado")
 
@@ -188,7 +186,7 @@ class TokenVar:
             self.rol = rol
 
     def __str__(self):
-        
+
         if self.cat == "this":
             cat = "field"
         else:
@@ -815,7 +813,6 @@ class FullAnalizer:
     def keywordConstant(self, token):
         return token.value in ["true", "false", "null", "this"]
 
-
     def unaryOp(self, token):
         return token.value in ["-", "~"]
 
@@ -850,7 +847,7 @@ class codeGenerator:
         nfile = open(nPath, 'w')
         nfile.write(str(self))
         nfile.close()
-            
+
     def generar(self):
         sub = self._gramaticas.rules  # Nodos hijos del nodo clase:
         self.define_metodos(sub)
@@ -859,8 +856,11 @@ class codeGenerator:
             for i in range(3, len(sub)-1):
                 subdec = sub[i].rules
                 if sub[i].value == "subroutineDec":
+                    # print(self._subrutinas[subdec[2].value][1])
+                    print(self._subrutinas)
                     self._vm.append(
-                        f"function {self._clase}.{subdec[2].value} { ( self._subrutinas[subdec[2].value][2] > 1 )*( self._subrutinas[subdec[2].value][2] - 1) }")
+                        # f"function {self._clase}.{subdec[2].value} { ( self._subrutinas[subdec[2].value][2] > 1 )*( self._subrutinas[subdec[2].value][2] - 1) }")
+                        f"function {self._clase}.{subdec[2].value} {  self._subrutinas[subdec[2].value][-1] }")
                     # input("Stop")
                     if subdec[0].value == "method":
                         self._vm.append("push argument 0")
@@ -871,7 +871,7 @@ class codeGenerator:
                         self._vm.append("call Memory.alloc 1")
                         self._vm.append("pop pointer 0")
                     # Entra a los hijos de subroutineBody
-                    body = subdec[-1].rules
+                    body=subdec[-1].rules
                     # Solo se para como parametro los Statement y Clases
                     self.escribe_cuerpo(body[1:-1])
 
@@ -879,56 +879,62 @@ class codeGenerator:
     def define_metodos(self, sub):
         if len(sub)-4 > 0:
             for i in range(3, len(sub)-1):
-                subdec = sub[i].rules
+                subdec=sub[i].rules
                 if sub[i].value == "subroutineDec":
                     # Entra a los nodos hijos del primer subroutineDec
-                    subdec = sub[i].rules
-                    nom_subrut = subdec[2].value
-                    fcm_subrut = subdec[0].value
-                    tipo_subrut = subdec[1].value
+                    subdec=sub[i].rules
+                    nom_subrut=subdec[2].value
+                    fcm_subrut=subdec[0].value
+                    tipo_subrut=subdec[1].value
+                    print(nom_subrut)
+                    print(fcm_subrut)
+                    print(tipo_subrut)
+                    argum = 0
                     if fcm_subrut == "method":
                         # Enrta a los nodos hijos de parameter list
-                        param = subdec[4].rules
+                        param=subdec[4].rules
                         # Encuentra el número de parametros a pedir
-                        param = len(param)//3 + 1 + (nom_subrut == "method")
+                        param=len(param)//3 + 1 + (nom_subrut == "method")
+                        argum = print(self.cuenta_parametros(subdec[-1].rules))
                     elif fcm_subrut == "function":
-                        param = self.cuenta_parametros(subdec[-1].rules)
+                        param=self.cuenta_parametros(subdec[-1].rules)
                     else:
-                        param = 0
-                    self._subrutinas[nom_subrut] = [
-                        fcm_subrut, tipo_subrut, param]
+                        param=0
+                    self._subrutinas[nom_subrut]=[
+                        fcm_subrut, tipo_subrut, param, argum]
 
     def cuenta_parametros(self, body):
-        params = 0
+        params=0
+        print("aaa")
         for bdy in body:
             if bdy.value == "varDec":
-                params = params + len(bdy.rules[1:-1])/2
+                params=params + len(bdy.rules[1:-1])/2
         return int(params)
 
     def cuenta_campos(self, sub):
-        campos = 0
+        campos=0
         for s in sub:
             if s.value == "classVarDec":
-                campos = campos + len(s.rules[1:-1])/2
+                campos=campos + len(s.rules[1:-1])/2
         return int(campos)
 
     def escribe_cuerpo(self, body):
         for bdy in body:
             if bdy.value == "statements":
-                stat = bdy.rules
+                stat=bdy.rules
                 self.escribe_declaraciones(stat)
 
     def escribe_declaraciones(self, sts):
-        ni = self.nif
-        nw = self.nwhile
+        ni=self.nif
+        nw=self.nwhile
         for dec in sts:
             if dec.value == "letStatement":
                 self.escribe_let(dec.rules)
             elif dec.value == "ifStatement":
-                self.nif = self.nif + 1
+                self.nif=self.nif + 1
                 self.escribe_if(dec.rules, ni)
             elif dec.value == "whileStatement":
-                self.nwhile = self.nwhile + 1
+                self.nwhile=self.nwhile + 1
                 self.escribe_while(dec.rules, nw)
             elif dec.value == "doStatement":
                 self.escribe_do(dec.rules)
@@ -952,14 +958,14 @@ class codeGenerator:
     def escribe_if(self, ifs, n):
         self.escribe_expresion(ifs[2].rules)
         if len(ifs) == 11:
-            self._vm.append("if-goto " + self._clase +".IF-TRUE"+str(n))
-            self._vm.append("goto " + self._clase +".IF-FALSE"+str(n))
-            self._vm.append("label " + self._clase +".IF-TRUE"+str(n))
+            self._vm.append("if-goto " + self._clase + ".IF-TRUE"+str(n))
+            self._vm.append("goto " + self._clase + ".IF-FALSE"+str(n))
+            self._vm.append("label " + self._clase + ".IF-TRUE"+str(n))
             self.escribe_declaraciones(ifs[5].rules)
-            self._vm.append("goto " + self._clase +".IF-END"+str(n))
-            self._vm.append("label " + self._clase +".IF-FALSE"+str(n))
+            self._vm.append("goto " + self._clase + ".IF-END"+str(n))
+            self._vm.append("label " + self._clase + ".IF-FALSE"+str(n))
             self.escribe_declaraciones(ifs[9].rules)
-            self._vm.append("label " + self._clase +".IF-END"+str(n))
+            self._vm.append("label " + self._clase + ".IF-END"+str(n))
         else:
             self._vm.append("not")
             self._vm.append("if-goto IF-END"+str(n))
@@ -977,10 +983,10 @@ class codeGenerator:
 
     def escribe_do(self, do):
         if do[1].cat == "subroutine":
-            par = self._subrutinas[do[1].value][-1]
+            par=self._subrutinas[do[1].value][2]
             if self._subrutinas[do[1].value][0] == "method":
                 self._vm.append("push pointer 0")
-                par = par + 1
+                par=par + 1
             self.escribe_lista_expresiones(do[3].rules)
             self._vm.append(f"call {self._clase}.{do[1].value} {par - 1}")
             self._vm.append("pop temp 0")
@@ -1018,7 +1024,7 @@ class codeGenerator:
             self._vm.append(self._op(exp[ind-1].value))
 
     def escribe_termino(self, term):
-        tok1 = term[0]
+        tok1=term[0]
         if tok1.lex_type == "integerConstant":
             self._vm.append(f"push constant {tok1.value}")
         elif tok1.lex_type == "stringConstant":
@@ -1053,7 +1059,7 @@ class codeGenerator:
             self.escribe_lista_expresiones(term[4].rules)
             self._vm.append(
                 f"call {term[0].value}.{term[2].value} {(len(term[4].rules)+1)//2}")
-            #self._vm.append("pop temp 0")
+            # self._vm.append("pop temp 0")
         elif tok1.cat == "pointer" and len(term) == 6:
             self._vm.append(f"push {tok1.cat} {tok1.ind}")
             self.escribe_lista_expresiones(term[4].rules)
@@ -1069,22 +1075,20 @@ class codeGenerator:
             self._vm.append(f"push {tok1.cat} {tok1.ind}")
 
     def _op(self, operador):
-        oper = {'+': "add", '-': "sub", '*': "call Math.multiply 2",
+        oper={'+': "add", '-': "sub", '*': "call Math.multiply 2",
                 '/': "call Math.divide  2", '&': "and", '|': "or", '<': "lt", '>': "gt", '=': "eq"}
         return oper[operador]
 
     def _un(self, operador):
-        ops = {'-': "neg", '~': "not"}
+        ops={'-': "neg", '~': "not"}
         return ops[operador]
-    
+
 # Dada una ruta dada
 # Realiza su traducción
 def main():
-    path = sys.argv[1]
-    vm = codeGenerator(path)
-    vm.generar() 
-    vm.write()  
-    print(vm)
+    path=sys.argv[1]
+    vm=codeGenerator(path)
+    vm.generar()
 
     return 0
 
