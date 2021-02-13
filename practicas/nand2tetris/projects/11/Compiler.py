@@ -860,7 +860,7 @@ class codeGenerator:
                 subdec = sub[i].rules
                 if sub[i].value == "subroutineDec":
                     self._vm.append(
-                        f"function {self._clase}.{subdec[2].value} {self._subrutinas[subdec[2].value][2]}")
+                        f"function {self._clase}.{subdec[2].value} { ( self._subrutinas[subdec[2].value][2] > 1 )*( self._subrutinas[subdec[2].value][2] - 1) }")
                     # input("Stop")
                     if subdec[0].value == "method":
                         self._vm.append("push argument 0")
