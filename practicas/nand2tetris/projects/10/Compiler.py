@@ -2,6 +2,7 @@ import sys
 import os
 
 
+# Etiquetas de cada toquen
 LEXICAL_ELEMENTS = {
     0: "keyword",
     1: "symbol",
@@ -9,22 +10,30 @@ LEXICAL_ELEMENTS = {
     3: "identifier",
     4: "stringConstant"}
 
+# Palabras clave
 KEYWORDS = ["class", "constructor", "function",
             "method", "field", "static", "var", "int",
             "char", "boolean", "void", "true", "false",
             "null", "this", "let", "do", "if", "else",
             "while", "return"]
 
+# Claves constantes
 KEYWORDS_CONS = ["true", "false", "null", "this"]
 
+# Operaciones
 OPERATIONS = ["+", "-", "*", "/", "&", "|", "<", ">", "="]
 
+# Operaciones unitarias
 UNARY_OPT = ["-", "~"]
 
+# Simbolos
 SYMBOLS = ["{", "}", "(", ")", "[", "]", ".", ",", ";",
            "+", "-", "*", "/", "&", "|", "<", ">", "=", "~"]
 
 
+# Clase Token
+# recibe un string y su lext_type
+# convierte de la forma <tipo> valor </tipo>
 class Token():
     def __init__(self, value, lex_type):
         self.value = value
@@ -46,7 +55,9 @@ class Token():
             line = f"<{self.lex_type}> {self.value} </{self.lex_type}>\n"
         return line
 
-
+# Clase JackTokenizer
+# Descompone el input en sus respectivos simbolos
+# y lo pasa a todos por la clase tokens
 class JackTokenizer:
     def __init__(self, path):
         self.load(path)
@@ -56,6 +67,7 @@ class JackTokenizer:
         tokens = ''.join(tokens)
         return f"<tokens>\n {tokens} </tokens>\n"
 
+    # Funcion carga del archivo
     def load(self, path):
         self.reset()
         self.path = path
@@ -69,6 +81,7 @@ class JackTokenizer:
         file.close()
         print("Archivo cargado")
 
+    # Divide por espacios cada linea
     def split(self):
         file_split = self.file.split('"')
         for i, string in enumerate(file_split):
@@ -80,6 +93,7 @@ class JackTokenizer:
             else:
                 self.cast_token([f'"{string}"'])
 
+    # Identifica el lex_type al que pertenece el token
     def check_token(self, token):
         itoken, num = token, None
 
@@ -98,9 +112,11 @@ class JackTokenizer:
         token = Token(itoken, LEXICAL_ELEMENTS[num])
         return token
 
+    # convierte en token los tokens dados
     def cast_token(self, tokens):
         _ = [self.tokens.append(self.check_token(t)) for t in tokens]
 
+    # Escribe el archivo filenaname.jack en filenameT_.xml
     def write(self):
         nPath = self.path.replace(".jack", "T_.xml")
         nfile = open(nPath, 'w')
@@ -109,6 +125,7 @@ class JackTokenizer:
         nfile.close()
         self.reset()
 
+    # Limpia cada linea, remueve espacios y comentarios
     def clear_line(self, line):
         line = line.strip()
 
@@ -119,11 +136,12 @@ class JackTokenizer:
                     if line.find('//') != -1 else line.strip())
         return line
 
+    # Reseteamos la clase para ser usada con una ruta diferente
     def reset(self):
         self.file = ""
         self.tokens = []
 
-
+# Gramatica, Anida otra gramatica o serie de statements
 class Grammar():
     def __init__(self, name):
         self.name = name
@@ -145,7 +163,9 @@ class Grammar():
     def add_rule(self, rule):
         self.rules.append(rule)
 
-
+# Clase JackAnalizer
+# Conviertne el archivo tokenizer
+# en el archivo .xml con los arboles de gramaticas apropiados
 class JackAnalizer:
 
     def __init__(self, path):
@@ -156,33 +176,42 @@ class JackAnalizer:
         self.pos = 0
         self.grammars = None
 
+    # retorna el archivo
     def __str__(self):
         return str(self.grammars)
 
+    # convercion tokenizer a compileEngine
     def analizer(self):
         self.grammars = self.compile_class()
 
+    # Escribe el archivo filename.jack a filename_.xml
     def write(self):
         file = open(self.path.replace(".jack", "_.xml"), 'w')
         file.write(str(self))
         file.close()
 
+    # Pasa al siguiente token
     def sig(self):
         self.pos = self.pos + 1
         return self.tokens[self.pos-1]
 
+    # mantiene su posicion
     def repos(self, pos):
         self.pos = pos
 
+    # regresa una posicion
     def dev(self):
         self.pos = self.pos - 1
 
+    # defino si el tipo de token es un tipo de dato int, char , boolean o identifier
     def tipo(self, token):
         return token.value in ['int', 'char', 'boolean'] or token.lex_type == "identifier"
 
+    # define si es parametro
     def param(self, token1, token2):
         return self.tipo(token1) and token2.lex_type == "identifier"
 
+    # Anidados y traducimos una clase
     def compile_class(self):
         ini = self.pos
         gram = Grammar("class")
@@ -210,6 +239,7 @@ class JackAnalizer:
         self.repos(ini)
         return None
 
+    # Anidamos y traducimos variables
     def compile_vars(self):
         ini = self.pos
         gram = Grammar("classVarDec")
@@ -239,6 +269,7 @@ class JackAnalizer:
         self.repos(ini)
         return None
 
+    # Traducimos una subrutina
     def compile_subrutine(self):
         ini = self.pos
         gram = Grammar("subroutineDec")
@@ -265,6 +296,7 @@ class JackAnalizer:
         self.repos(ini)
         return None
 
+    # Compilamos parametros
     def compile_params(self):
         ini = self.pos
         gram = Grammar("parameterList")
@@ -292,6 +324,7 @@ class JackAnalizer:
         self.repos(ini)
         return gram
 
+    # Compilamos el cuerpo de la subrutina
     def compile_body_subrutine(self):
         ini = self.pos
         gram = Grammar("subroutineBody")
@@ -310,6 +343,7 @@ class JackAnalizer:
         self.repos(ini)
         return None
 
+    # Compilamos una variable
     def compile_var(self):
         ini = self.pos
         gram = Grammar("varDec")
@@ -339,6 +373,7 @@ class JackAnalizer:
         self.repos(ini)
         return None
 
+    # Compilamos varias declaraciones
     def compile_declarations(self):
         gram = Grammar("statements")
         dec = self.compile_declaration()
@@ -347,6 +382,9 @@ class JackAnalizer:
             dec = self.compile_declaration()
         return gram
 
+    # Compilamos una declaración
+    # Identificamos si es una declaracion:
+    # let, if , while do o return
     def compile_declaration(self):
         token = self.sig()
         self.dev()
@@ -363,6 +401,7 @@ class JackAnalizer:
         else:
             return None
 
+    # Traduccion de let
     def _let(self):
         ini = self.pos
         gram = Grammar("letStatement")
@@ -403,6 +442,7 @@ class JackAnalizer:
         self.repos(ini)
         return None
 
+    # Traduccion del if
     def _if(self):
         ini = self.pos
         gram = Grammar("ifStatement")
@@ -446,6 +486,7 @@ class JackAnalizer:
         self.repos(ini)
         return None
 
+    # Traduccion del while
     def _while(self):
         ini = self.pos
         gram = Grammar("whileStatement")
@@ -474,6 +515,7 @@ class JackAnalizer:
         self.repos(ini)
         return None
 
+    # Traduccion del do
     def _do(self):
         ini = self.pos
         gram = Grammar("doStatement")
@@ -517,6 +559,7 @@ class JackAnalizer:
         self.repos(ini)
         return None
 
+    # Traduccion del return
     def _return(self):
         ini = self.pos
         gram = Grammar("returnStatement")
@@ -533,6 +576,7 @@ class JackAnalizer:
         self.repos(ini)
         return None
 
+    # Compilamos uan expressionList
     def compile_list_expression(self):
         gram = Grammar("expressionList")
         exp = self.compile_expression()
@@ -552,6 +596,7 @@ class JackAnalizer:
             return gram
         return gram
 
+    # Compialamos una expression
     def compile_expression(self):
         ini = self.pos
         gram = Grammar("expression")
@@ -573,6 +618,7 @@ class JackAnalizer:
         self.repos(ini)
         return None
 
+    # Compialmos un termino
     def compile_term(self):
         ini = self.pos
         gram = Grammar("term")
@@ -644,18 +690,21 @@ class JackAnalizer:
         self.repos(ini)
         return None
 
-
+# Dada una ruta dada
+# Realiza su tokenizer y analizer
 def main():
     path = sys.argv[1]
     print(path)
     
-    Tok = JackTokenizer(path)
+    Tok = JackTokenizer(path) 
     Tok.split()
     Tok.write()
 
     An = JackAnalizer(path)
     An.analizer()
     An.write()
+    
+    print(An)
     
     return 0
 
