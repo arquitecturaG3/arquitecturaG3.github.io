@@ -8,6 +8,7 @@
  * For each test, the expected result is printed, along with the
  * actual result. In each test, the two results should be equal.
  */
+ 
 class Main {
 
     function void main() {
