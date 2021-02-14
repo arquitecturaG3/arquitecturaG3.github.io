@@ -121,7 +121,6 @@ class JackTokenizer:
     def write(self):
         nPath = self.path.replace(".jack", "T_.xml")
         nfile = open(nPath, 'w')
-        print(str(self))
         nfile.write(str(self))
         nfile.close()
         self.reset()
@@ -272,9 +271,7 @@ class FullAnalizer:
         ini = self._pos
         gram = Grammar("class")
         token = self._sig()
-        print(token)
         if token.value == "class":
-            print("HERE")
             gram.add_rule(token)
             token = self._sig()
             if token.lex_type == "identifier":
@@ -857,7 +854,6 @@ class codeGenerator:
                 subdec = sub[i].rules
                 if sub[i].value == "subroutineDec":
                     # print(self._subrutinas[subdec[2].value][1])
-                    print(self._subrutinas)
                     self._vm.append(
                         # f"function {self._clase}.{subdec[2].value} { ( self._subrutinas[subdec[2].value][2] > 1 )*( self._subrutinas[subdec[2].value][2] - 1) }")
                         f"function {self._clase}.{subdec[2].value} {  self._subrutinas[subdec[2].value][-1] }")
@@ -886,30 +882,28 @@ class codeGenerator:
                     nom_subrut=subdec[2].value
                     fcm_subrut=subdec[0].value
                     tipo_subrut=subdec[1].value
-                    print(nom_subrut)
-                    print(fcm_subrut)
-                    print(tipo_subrut)
                     argum = 0
                     if fcm_subrut == "method":
                         # Enrta a los nodos hijos de parameter list
                         param=subdec[4].rules
                         # Encuentra el número de parametros a pedir
                         param=len(param)//3 + 1 + (nom_subrut == "method")
-                        argum = print(self.cuenta_parametros(subdec[-1].rules))
+                        argum = self.cuenta_parametros(subdec[-1].rules) 
                     elif fcm_subrut == "function":
                         param=self.cuenta_parametros(subdec[-1].rules)
                     else:
                         param=0
+   
+                    print([nom_subrut, fcm_subrut, tipo_subrut, param, argum])
                     self._subrutinas[nom_subrut]=[
                         fcm_subrut, tipo_subrut, param, argum]
 
     def cuenta_parametros(self, body):
-        params=0
-        print("aaa")
+        params= 1
         for bdy in body:
             if bdy.value == "varDec":
-                params=params + len(bdy.rules[1:-1])/2
-        return int(params)
+                params=params + len(bdy.rules[1:-1])/2  - 1
+        return int(params) 
 
     def cuenta_campos(self, sub):
         campos=0
@@ -983,12 +977,15 @@ class codeGenerator:
 
     def escribe_do(self, do):
         if do[1].cat == "subroutine":
-            par=self._subrutinas[do[1].value][2]
+            par=self._subrutinas[do[1].value][-1]
+            
+            print(self._subrutinas[do[1].value][0] )
+            
             if self._subrutinas[do[1].value][0] == "method":
                 self._vm.append("push pointer 0")
                 par=par + 1
             self.escribe_lista_expresiones(do[3].rules)
-            self._vm.append(f"call {self._clase}.{do[1].value} {par - 1}")
+            self._vm.append(f"call {self._clase}.{do[1].value} {par -1 }")
             self._vm.append("pop temp 0")
         elif do[1].cat == "class":
             self.escribe_lista_expresiones(do[5].rules)
@@ -1089,6 +1086,7 @@ def main():
     path=sys.argv[1]
     vm=codeGenerator(path)
     vm.generar()
+    vm.write()
 
     return 0
 
