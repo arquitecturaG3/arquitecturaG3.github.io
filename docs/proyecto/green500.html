@@ -129,13 +129,15 @@
                     <li><strong><i>N<sub>1/2</sub> :</i></strong>  El rendimiento máximo teórico GFLOPS de la máquina. </li>
                 </ul><br>
                 <p style="font-size: 14px">Estos resultados se utilizan para compilar la lista TOP500 dos veces al año, con las computadoras más poderosas del mundo. TOP500 mide estos en formato de punto flotante de doble precisión (FP64). </p>
-
-                <h4 align="center" style="font-size: 20px">Top10 Green500 Noviembre 2020</h4><br>
+                <div class="figure">
+                    <img src="metodologia/hpl.png" width="550" >
+                    <p><strong> Figura 1: </strong>Los resultados de rendimiento de HPL Linpack se ejecutan en el clúster de 16 nodos. La pequeña diferencia de rendimiento entre el uso de 2 procesadores lógicos y el uso de 1 procesador físico indica la limitación del soporte HT en Linux .</p>
+                </div><br>
+                <h4 align="center" style="font-size: 20px">Tabla I: Top10 Green500 Noviembre 2020</h4><br>
                 <div class="figure">
                     <img src="tables/t1.png">
-                    <p align="center"><strong> Cuadro I:  Top10 Green500 Noviembre 2020.</strong></p>
                 </div><br>
-                <p style="font-size: 14px">En el cuadro I encontramos las primeras 10 posiciones en el ranking de Green500 de los superordenador con la mayor eficiencia Flops/watts pertenecientes a la lista de Top500 de superordenadores en el mundo, la columna que nos interesa principalmente es <strong> Power Efficiency</strong>, en esta podemos ver como respecto noviembre de 2020 el titulo al superordenador mas eficiente del mundo se lo lleva el NVIDIA DGX SuperPOD, el cual presenta las siguiente especificaciones:</p>
+                <p style="font-size: 14px">En la tabla I encontramos las primeras 10 posiciones en el ranking de Green500 de los superordenador con la mayor eficiencia Flops/watts pertenecientes a la lista de Top500 de superordenadores en el mundo, la columna que nos interesa principalmente es <strong> Power Efficiency</strong>, en esta podemos ver como respecto noviembre de 2020 el titulo al superordenador mas eficiente del mundo se lo lleva el NVIDIA DGX SuperPOD, el cual presenta las siguiente especificaciones:</p>
                 <ul>
                     <li><strong>Fabricante: </strong>Nvidia</li>
                     <li><strong>Nucleos: </strong>19,840</li>
@@ -144,12 +146,11 @@
                     <li><strong>Linpack Performance (Rmax): </strong>2,356 TFlop/s</li>
                     <li><strong>Power: </strong>89.94 kW </li>
                 </ul>
-                <h4 align="center" style="font-size: 20px">Especificaciones Top10 Green500 Noviembre 2020</h4><br>
+                <h4 align="center" style="font-size: 20px">Tabla II: Especificaciones Top10 Green500 Noviembre 2020</h4><br>
                 <div class="figure">
                     <img src="tables/TL2.png">
-                    <p align="center"><strong> Cuadro II:  Especificaciones Top10 Green500 Noviembre 2020.</strong></p>
                 </div><br>
-                <P style="font-size: 14px">En el cuadro II encontramos las especificaciones mas relevantes de cada uno de los superordenadores pertenecientes a las 10 primeras posiciones de la lista Green500, podemos observar 3 familias principales de procesadores, AMD Epyc , Xeon y Fujitsu A64FX, el conjunto de instrucciones (ISA) mas frecuente es x86 y siendo el diseño CISC aquel que ocupa las 5 primeras posiciones en la clasificación. Es de destacar también como la Arquitectura ARM/RISC ya se posiciona como una opción competente en lo que respecta a supercomputación ofreciendo una eficiencia energética destacable.</P>
+                <P style="font-size: 14px">En la tabla II encontramos las especificaciones mas relevantes de cada uno de los superordenadores pertenecientes a las 10 primeras posiciones de la lista Green500, podemos observar 3 familias principales de procesadores, AMD Epyc , Xeon y Fujitsu A64FX, el conjunto de instrucciones (ISA) mas frecuente es x86 y siendo el diseño CISC aquel que ocupa las 5 primeras posiciones en la clasificación. Es de destacar también como la Arquitectura ARM/RISC ya se posiciona como una opción competente en lo que respecta a supercomputación ofreciendo una eficiencia energética destacable.</P>
             </div>
             </div>
         </div>
