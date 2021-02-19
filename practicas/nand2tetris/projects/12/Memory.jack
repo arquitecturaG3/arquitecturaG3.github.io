@@ -7,28 +7,119 @@
  * This library provides two services: direct access to the computer's main
  * memory (RAM), and allocation and recycling of memory blocks. The Hack RAM
  * consists of 32,768 words, each holding a 16-bit binary number.
- */ 
+ */
 class Memory {
+
+    /** Memory array */
+    static Array memory;
+
+    /** Heap memory array and */
+    static Array heap;
+
+    /** List of available memory segments */
+    static Array freeList;
+
+    /** Heap base address */
+    static int heapBase;
+
+    /** Max heap length */
+    static int heapLength;
+
+    /** Number of free segments */
+    /* static int nSegments; */
 
     /** Initializes the class. */
     function void init() {
+        var Array segment;
+
+        let memory = 0;
+        let heapBase = 2048;
+        let heapLength = 16384 - heapBase;
+        let heap = heapBase;
+
+        // Make freeList one large segment
+        /* let nSegments = 1; */
+        let segment = heap;
+        let segment[0] = heapLength;  // segment size
+        let segment[1] = null;        // pointer to the next segment (null)
+
+        let freeList = segment;
+
+        return;
     }
 
     /** Returns the RAM value at the given address. */
     function int peek(int address) {
+        return memory[address];
     }
 
     /** Sets the RAM value at the given address to the given value. */
     function void poke(int address, int value) {
+        let memory[address] = value;
+        return;
     }
 
     /** Finds an available RAM block of the given size and returns
      *  a reference to its base address. */
     function int alloc(int size) {
+        var Array segment, selected_segment, block, prev_segment;
+        var int diff, min_diff;  // for the best-fit
+        var boolean found;
+
+        if (size < 0) {
+            do Sys.error(5);
+        }
+
+        if (size > (heapLength - 2)) {
+            do Sys.error(6);
+        }
+
+        /* let found = false; */
+        let segment = freeList;
+        let selected_segment = segment;
+        let prev_segment = null;
+        let min_diff = segment[0] - size - 2;
+
+        // Find a free segment (best-fit)
+        while (~(segment[1] = null)) {
+            let diff = segment[0] - size - 2;
+            if ((diff > -1) & (diff < min_diff)) {
+                let min_diff = diff;
+                let selected_segment = segment;
+                /* let found = true; */
+            }
+            let prev_segment = segment;
+            let segment = segment[1];
+        }
+
+        // Check whether a segment was found
+        /* if (prev_segment = null) {  // only 1 segment in freeList => always ok */
+        /*     let found = true;       // (checked in the beginning) */
+        /* } */
+
+        /* if (~(found)) { */
+        /*     do Sys.error(6);  // or attempt defragmentation */
+        /* } */
+
+        // block size
+        let selected_segment[min_diff+1] = size + 1;
+        // assign block
+        let block = selected_segment + selected_segment[0] - size;
+        // adjust original segment size
+        let selected_segment[0] = 1 + min_diff;
+
+        return block;
     }
 
     /** De-allocates the given object (cast as an array) by making
      *  it available for future allocations. */
     function void deAlloc(Array o) {
-    }    
+        var Array segment;
+
+        let segment = o - 1;
+        let segment[1] = freeList;
+        let freeList = segment;
+
+        return;
+    }
 }
