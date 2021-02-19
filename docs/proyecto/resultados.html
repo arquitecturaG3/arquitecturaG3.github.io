@@ -58,7 +58,7 @@
     <div class="container" style="margin-top: 3%;">
         <div class="col-md-3">
         <div class="menu" style="position: fixed; margin-top:  3%;">
-            <div class="titulo" style="font-size: 30px; margin-bottom:10%"><b>Benchmarking y <br>Supercomputo: Green500</b></div>
+            <div class="titulo" style="font-size: 30px; margin-bottom:10%"><b>Benchmarking y <br>Supercomputo</b></div>
             <ol>
                 <li type="disc">
                     <dd><a href="./introduccion.html"> Introducción</a></dd>
@@ -109,8 +109,33 @@
                 <br>
                 
                 <br>
-                <p style="font-size: 14px">El benchmarks y pruebas de rendimiento ("benchmarks") miden diferentes aspectos del rendimiento del procesador y / o del sistema. Si bien ninguna medición numérica puede describir completamente el rendimiento de un dispositivo complejo como un microprocesador o una computadora personal, los puntos de referencia pueden ser herramientas útiles para comparar diferentes componentes y sistemas. Sin embargo, la única forma totalmente precisa de medir el rendimiento de su sistema es probar las aplicaciones de software que utiliza en su sistema informático.</p>
-    
+                <p style="font-size: 14px">En esta sección podemos encontrar los resultados obteníamos por el benchmark HPLinpack (Potencia en GFlops) en la tabla III mostrados en las figuras 5-6, su consumo medido por el TDP máximo (extraídos de la pagina oficial del fabricante y finalmente la eficiencia energetica calculada como el cociente entre las métricas anteriores, como se puede ver en el tabla IV.</p>
+                <h4 align="center" style="font-size: 20px"> Tabla IV: Ordenadores empleados</h4><br>
+                <div class="figure">
+                    <img src="tables/tabl4.png" width="600">
+                </div><br>
+                <div class="figure">
+                    <img src="metodologia/guane_bench.jpeg" width="600">
+                    <p align="center"><strong> Figura 5:  Resultados Ordenador Comercial.</strong></p>
+                </div><br>
+                <p style="font-size: 14px">Al observar los resultados obtenidos, podemos ver como el superordenador NVIDIA DGX SuperPOD presentan el mayor rendimiento y la mayor eficiencia energética, encontramos algo curioso ya que el segundo equipo con el mayor rendimiento es el Superordenador GUANE-1 (algo de esperarse) pero quien se lleva el segundo puesto entorno a la eficiencia energética es el ordenador comercial. Una explicación de este resultado podemos encontrarla al observar el año se salida de cada procesador respectivo véase tabla III, podemos encontrar como a mas cercana la fecha de salida, mayor eficiencia energética, teniendo el procesador del ordenador comercial una fecha de salida 7 años después de el superordenador GUANE-1.</p>
+                <div class="figure">
+                    <img src="metodologia/pc_bench.jpeg" width="600">
+                    <p align="center"><strong> Figura 6:  Resultados Superordenador GUANE-1.</strong></p>
+                </div><br>
+                <p style="font-size: 14px">Igualmente pese a que el GUANE-1 presenta mayor potencia de computo que el ordenador de comercial, la diferencia en realidad no aparenta ser tan significativa como se esperaría (entorno a un 6\%), también cabe aclarar que del superordenador GUANE-1 se hizo uso de únicamente 2 nodos por lo que no es la potencia total de dicho superordenador, estos nodos están conformados por 12 núcleos y 12 hilos a una frecuencia de 2.39 Ghz y en el ordenador comercial 4 núcleos y 4 hilos a una frecuencia de 3.62 Ghz, aparentando indicar como una mayor potencia monóculo es la razón de que el ordenador de sobremesa lograse alcanzar en cierta medida el rendimiento de supercomputador GUANE-1 pese a contar con menor cantidad de núcleos.</p>
+                <div class="figure">
+                    <img src="metodologia/nov2020.png" width="850">
+                    <p align="center"><strong> Figura 7:  Lista Green500 Noviembre 2020.</strong></p>
+                </div><br>
+                <div class="figure">
+                    <img src="metodologia/junio2020.png" width="800">
+                    <p align="center"><strong> Figura 8:  Lista Green500 Junio 2020.</strong></p>
+                </div><br>
+                <div class="figure">
+                    <img src="metodologia/nov2019.png" width="800">
+                    <p align="center"><strong> Figura 9:  Lista Green500 Noviembre 2019.</strong></p>
+                </div><br>
             </div>
             </div>
         </div>

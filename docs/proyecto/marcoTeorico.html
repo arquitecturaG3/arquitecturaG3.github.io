@@ -58,7 +58,7 @@
     <div class="container" style="margin-top: 3%;">
         <div class="col-md-3">
         <div class="menu" style="position: fixed; margin-top:  3%;">
-            <div class="titulo" style="font-size: 30px; margin-bottom:10%"><b>Benchmarking y <br>Supercomputo: Green500</b></div>
+            <div class="titulo" style="font-size: 30px; margin-bottom:10%"><b>Benchmarking y <br>Supercomputo</b></div>
             <ol>
                 <li type="disc">
                     <dd><a href="./introduccion.html"> Introducción</a></dd>
@@ -125,7 +125,30 @@
                 <p style="font-size: 14px">El benchmarks y pruebas de rendimiento ("benchmarks") miden diferentes aspectos del rendimiento del procesador y / o del sistema. Si bien ninguna medición numérica puede describir completamente el rendimiento de un dispositivo complejo como un microprocesador o una computadora personal, los puntos de referencia pueden ser herramientas útiles para comparar diferentes componentes y sistemas. Sin embargo, la única forma totalmente precisa de medir el rendimiento de su sistema es probar las aplicaciones de software que utiliza en su sistema informático.</p>
     
                 <p style="font-size: 14px">Los benchmarks se pueden dividir en dos tipos, de componentes y de sistema. Los puntos de referencia de componentes miden el rendimiento de partes específicas de un sistema informático, como un microprocesador o una unidad de disco duro, mientras que los puntos de referencia del sistema suelen medir el rendimiento de todo el sistema informático. En cualquier caso, es casi seguro que el rendimiento que ve en el uso diario variará del rendimiento de referencia, por varias razones. Primero, los componentes individuales por lo general deben probarse en un sistema informático completo, y no siempre es posible eliminar los efectos considerables que las diferencias en el diseño y la configuración del sistema tendrán en los resultados del benchmark. Por ejemplo, los proveedores de sistemas venden sistemas con una amplia variedad de capacidades y velocidades de disco, memoria del sistema, características del bus del sistema y capacidades de vídeo y gráficas, todo lo cual influye en el desempeño de los componentes del sistema (como el microprocesador) y el sistema informático. uso real y puede afectar drásticamente los resultados de las comparativas. Además, las diferencias en el software, incluidos los sistemas operativos y los compiladores, afectarán el rendimiento de los componentes y del sistema. Por último, las pruebas comparativas se escriben normalmente para ser ejemplares de un determinado tipo de aplicación informática, que puede ser similar a sus aplicaciones o no.  </p>
-                <br>
+                <p style="font-size: 14px">Los benchmarks difieren según el software utilizado o la persona que realiza las pruebas. Dado que a menudo se centrarán en diferentes áreas, puede utilizar varias pruebas para obtener una imagen más amplia del rendimiento del hardware.</p>
+                <p style="font-size: 14px">Estas son algunas de las pruebas más comunes, lo que significan y lo que miden cada una.</p>
+                <p style="font-size: 16px"><strong> CPU benchmarks</strong></p>
+                <ul>
+                    <li><strong>Pruebas de coma flotante:</strong>  Utilizadas por la mayoría de las herramientas, estas pruebas evalúan la capacidad del procesador para realizar una serie de funciones matemáticas básicas. Un punto flotante indica que los números usados involucran fracciones; las pruebas de números enteros que usan números enteros también se prueban por separado. Los resultados a menudo se muestran en milisegundos, por lo que los números más bajos indican un rendimiento más rápido. </li>
+                    <li><strong>Pruebas de compresión:</strong>  Prueban la velocidad a la que el procesador puede comprimir grandes bloques de datos sin pérdidas. Los resultados pueden mostrarse como una velocidad, en kilobytes por segundo, por lo que un número más alto es mejor.  </li>
+                    <li><strong>Pruebas de un solo núcleo:</strong>  El tamaño donde se alcanza la mitad de la tasa de ejecución 
+                </ul><br>
+                <p style="font-size: 16px"><strong> GPU benchmarks</strong></p>
+                <ul>
+                    <li><strong>Pruebas de gráficos 2D: </strong>  Las pruebas de gráficos 2D se centran en dibujar, mover y escalar líneas, fuentes, elementos dentro de una interfaz de usuario, etc. A menudo se mide en fotogramas por segundo, por lo que un número más alto es mejor.</li>
+                    <li><strong>Pruebas de gráficos 3D:</strong>  PUna prueba importante para video-juegos y aplicaciones de gráficos intensivos, y utilizada por herramientas como Heaven Benchmark (cuya prueba puede ver en el video de arriba) o 3DMark. Estas pruebas implican la representación de pocos o muchos objetos 3D en la pantalla, en diferentes niveles de complejidad, incluidos detalles, sombras, suavizado y más, así como probar diferentes API (como DirectX y OpenGL).  </li>
+                </ul><br>
+                <p style="font-size: 16px"><strong> Disco duro</strong></p>
+                <ul>
+                    <li><strong>Pruebas secuenciales:</strong>  Las pruebas de rendimiento de los discos duros a menudo se centran en velocidades de lectura y escritura secuenciales y velocidades de lectura y escritura aleatorias. Secuencial se refiere a archivos que se almacenan en un solo fragmento en la unidad, como un archivo grande escrito en un disco duro no fragmentado. Los resultados pueden mostrarse en MB por segundo, por lo que un número más alto es mejor. OpenGL). </li>
+                    <li><strong>Pruebas aleatorias:</strong>  Prueban el rendimiento de la unidad cuando es necesario para acceder a una gran cantidad de datos almacenados aleatoriamente en toda la unidad. Los tiempos de lectura y escritura aleatorios serán considerablemente más lentos que los tiempos secuenciales.  </li>
+                </ul><br>
+                <p style="font-size: 16px"><strong> Smartphones</strong></p>
+                <p style="font-size: 14px">Los benchmarks centrados en smartphones prueban la mayoría de los mismos elementos que los de las computadoras de escritorio y portátiles. Pero también incluyen algunos extras, como: </p>
+                <ul>
+                    <li><strong>Velocidad de lectura / escritura de la tarjeta SD:</strong>  Similar a las pruebas de disco duro, esto determina la velocidad a la que se pueden leer o escribir los datos en una tarjeta de memoria (o almacenamiento interno). Al igual que con los discos duros, se mide en MB / s, por lo que un número más alto indica un rendimiento más rápido. </li>
+                    <li><strong>Database IO:</strong>  Utilizado en la mayoría de las aplicaciones de evaluación comparativa de teléfonos inteligentes como AnTuTu, mide la velocidad de lectura y escritura en la base de datos del dispositivo. El rendimiento lento aquí puede afectar el rendimiento general de un dispositivo.   </li>
+                </ul><br>
             </div>
             </div>
         </div>

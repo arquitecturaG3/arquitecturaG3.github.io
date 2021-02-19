@@ -58,7 +58,7 @@
     <div class="container" style="margin-top: 3%;">
         <div class="col-md-3">
         <div class="menu" style="position: fixed; margin-top:  3%;">
-            <div class="titulo" style="font-size: 30px; margin-bottom:10%"><b>Benchmarking y <br>Supercomputo: Green500</b></div>
+            <div class="titulo" style="font-size: 30px; margin-bottom:10%"><b>Benchmarking y <br>Supercomputo</b></div>
             <ol>
                 <li type="disc">
                     <dd><a href="./introduccion.html"> Introducción</a></dd>
@@ -109,20 +109,29 @@
                 <br>
                 <p style="font-size: 14px">En esta describiremos la metodologia utilizada para la realización de la comparativa entre la eficiencia energética ofrecida por un ordenador comercial, dos nodos de computo del superordenador GUANE-1 del grupo de supercomputación SC3UIS de la Universidad Industrial de Santander, y el superordenador que ocupa la primera posición en la lista Green500 en Noviembre del 2020. Para la comparativa mediremos la eficiencia energética usando la misma métrica utilizada por Green500 (Flops/Watts) para ellos haremos uso del benchmark Linpack Xtreme el cual nos ofrece el rendimiento en Flops alcanzado por el equipo, para pasar a la misma métrica usada por Green500 haremos el cociente los Flops alcanzado y el TDP máximo en Watts ofrecido durante la prueba.
                 </p>
-
-                <h4 align="center" style="font-size: 20px">Ordenadores empleados</h4><br>
-                <div class="figure">
-                    <img src="tables/TL3.png">
-                    <p align="center"><strong> Cuadro III:  Ordenadores empleados.</strong></p>
-                </div><br>
                 <P style="font-size: 16px"><strong>Benchmark: Linkpack Xtreme</strong> </P>
                 <p style="font-size: 14px">Linpack Xtreme es un front-end de consola con la última versión de Linpack (Intel Math Kernel Library Benchmarks 2018.3.011). Linpack es un benchmark  y el software de pruebas de estrés más agresivo disponible en la actualidad. Se utiliza mejor para probar la estabilidad de PC con overclock. Linpack tiende a bloquear las PC inestables en un período de tiempo más corto en comparación con otras aplicaciones de pruebas de estrés.</p>
                 
                 <P style="font-size: 14px">Linpack resuelve un sistema denso (real * 8) de ecuaciones lineales (Ax = b), mide la cantidad de tiempo que se tarda en factorizar y resolver el sistema, convierte ese tiempo en una tasa de rendimiento y prueba la precisión de los resultados. La generalización está en el número de ecuaciones (N) que puede resolver, que no se limita a 1000. Linpack utiliza pivotamiento parcial para asegurar la precisión de los resultados. </P>
 
+                <P style="font-size: 16px"><strong>Ordenadores Empleados</strong> </P>
+                <p style="font-size: 14px">Como ya se ha mencionado, la finalidad de un benchmark es medir el rendimiento de un equipo de tal forma que pueda ser comparable con otros equipos. Dicho esto para las pruebas comparativas, se realizara el benchmark Linpack Xtreme mencionado anteriormente de forma que podamos comparar el rendimiento ofrecido por un Ordenador comercial, para el uso domestico, el ordenador de Supercomputo de la Universidad Industrial de Santander, GUANE-1 específicamente se realizara dicho benchmark en 2 nodos de computo de dicho ordenador y finalmente el ordenador el cual ocupa el primer puesto en la lista de Green500 el NVIDIA DGX SuperPOD.</p>
+                <h4 align="center" style="font-size: 20px"> Tabla III: Ordenadores empleados</h4><br>
+                <div class="figure">
+                    <img src="tables/TL3.png">
+                </div><br>
+
                 <div class="figure">
                     <img src="figures/fig1.png">
-                    <p align="center"><strong> Figura 1:  Menu inicial Lincpack Xtreme.</strong></p>
+                    <p align="center"><strong> Figura 2:  Menu inicial Lincpack Xtreme.</strong></p>
+                </div><br>
+                <div class="figure">
+                    <img src="metodologia/pc_stats.jpg">
+                    <p align="center"><strong> Figura 3:  Especificaciones Ordenador Comercial</strong></p>
+                </div><br>
+                <div class="figure">
+                    <img src="metodologia/pc_bench.jpeg">
+                    <p align="center"><strong> Figura 4:  Especificaciones Superordendor GUANE-1</strong></p>
                 </div><br>
             </div>
             </div>
