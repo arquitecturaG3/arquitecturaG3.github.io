@@ -1,11 +1,11 @@
 function Main.main 1
-call SquareGame.new 0
+call Pizarra.new 0
 pop local 0
 push local 0
-call SquareGame.run 1
+call Pizarra.run 1
 pop temp 0
 push local 0
-call SquareGame.dispose 1
+call Pizarra.dispose 1
 pop temp 0
 push constant 0
 return

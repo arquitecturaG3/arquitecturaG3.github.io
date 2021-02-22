@@ -1,0 +1,107 @@
+// este programa es una mejora al programa square proporcionado por www.nand2tetris.org
+// se encuentra en : projects/09/Square/SquareGame.jack
+
+/**
+* el juego Pizarra nos ofrece una ventana con un cuadrado de tamaño
+*10x10 pixeles el cual se podrá mover por toda la ventana con las teclas
+*de las flechas para empezar a dejar rastro de por donde pasa el cuadrado
+* debemos oprimir la tecla x y empresara a dibujar y para salir de esta opcion
+* y a su vez borrar el color de los pixeles donde se encuentra sera necesario 
+* oprimir la tecla z
+*/
+class Pizarra {
+   field Square square; 
+   field int direction; 
+                       
+
+// constructor para el cuadrado inicializa sin movimiento
+   constructor Pizarra new() {
+      
+      let square = Square.new(0, 0, 10);
+      let direction = 0; 
+      return this;
+   }
+
+   
+   method void dispose() {
+      do square.dispose();
+      do Memory.deAlloc(this);
+      return;
+   }
+
+  //metodo para mover el cuadro sin estar pintando 
+   method void moveSquare() {
+      if (direction = 1) { do square.moveUp();let direction = 0;}
+      if (direction = 2) { do square.moveDown(); let direction = 0;}
+      if (direction = 3) { do square.moveLeft();let direction = 0;}
+      if (direction = 4) { do square.moveRight();let direction = 0;}
+      do Sys.wait(50);  // delays the next movement
+	  
+      return;
+   }
+   //metodo para mover el cuadro en la opcion de pintar
+     method void moveSquare2() {
+      if (direction = 1) { do square.moveUp2();let direction = 0;}
+      if (direction = 2) { do square.moveDown2(); let direction = 0;}
+      if (direction = 3) { do square.moveLeft2();let direction = 0;}
+      if (direction = 4) { do square.moveRight2();let direction = 0;}
+      do Sys.wait(50);  // delays the next movement
+	  
+      return;
+   }
+
+   
+   method void run() {
+      var char key;  
+      var boolean exit;
+      let exit = false;
+      
+      while (~exit) {
+       
+         if (key = 81)  { let exit = true; }     // q key
+       
+         if (key = 88)  { do run2(); } // x key//paint
+         if (key = 131) { let direction = 1; }   // up arrow
+         if (key = 133) { let direction = 2; }   // down arrow
+         if (key = 130) { let direction = 3; }   // left arrow
+         if (key = 132) { let direction = 4; }   // right arrow
+
+     
+		let key = Keyboard.keyPressed();
+		do moveSquare();
+			
+         
+     } // while
+     return;
+   }
+   
+  
+
+   
+   method void run2() {
+      var char key;  
+      var boolean exit;
+      let exit = false;
+      
+      while (~exit) {
+       
+         if (key = 81)  { let exit = true; }     // q key
+         
+           if (key = 90)  { do run(); } // z key//clean
+         if (key = 131) { let direction = 1; }   // up arrow
+         if (key = 133) { let direction = 2; }   // down arrow
+         if (key = 130) { let direction = 3; }   // left arrow
+         if (key = 132) { let direction = 4; }   // right arrow
+
+     
+		let key = Keyboard.keyPressed();
+		do moveSquare2();
+			
+         
+     } // while
+     return;
+   }
+}
+
+
+
