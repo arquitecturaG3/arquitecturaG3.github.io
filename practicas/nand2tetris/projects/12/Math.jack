@@ -1,0 +1,196 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Math.jack
+
+/**
+ * A library of commonly used mathematical functions.
+ * Note: Jack compilers implement multiplication and division using OS method calls.
+ */
+class Math {
+    /** powOfTwo[i] = 2^i */
+    static Array powOfTwo;
+
+    /** This is a help variable for divide */
+    static int _div_qy2;
+
+    /** Initializes the library. */
+    function void init() {
+        var int i, x;
+
+        let x = 1;
+        let powOfTwo = Array.new(16);
+
+        let i = 0;
+        while (i < 16) {
+            let powOfTwo[i] = x;
+            let x = x + x; // x = 2*x
+            let i = i + 1;
+        }
+
+        let _div_qy2 = 0;
+
+        return;
+    }
+
+    /** Returns the absolute value of x. */
+    function int abs(int x) {
+        if (x < 0) {
+            return -x;
+        } else {
+            return x;
+        }
+    }
+
+    /** Returns the product of x and y.
+     *  When a Jack compiler detects the multiplication operator '*' in the
+     *  program's code, it handles it by invoking this method. In other words,
+     *  the Jack expressions x*y and multiply(x,y) return the same value.
+     */
+    function int multiply(int x, int y) {
+        var int sum, x_shift, i;
+
+        let sum = 0;
+        let x_shift = x;
+
+        let i = 0;
+        while (i < 16) {
+            if (Math.bit(y, i)) {
+                let sum = sum + x_shift;
+            }
+            let x_shift = x_shift + x_shift;
+            let i = i + 1;
+        }
+
+        return sum;
+    }
+
+    /** Returns the integer part of x/y.
+     *  When a Jack compiler detects the multiplication operator '/' in the
+     *  program's code, it handles it by invoking this method. In other words,
+     *  the Jack expressions x/y and divide(x,y) return the same value.
+     */
+    function int divide(int x, int y) {
+        var boolean negSign;
+        var int res;
+
+        // Resolve zeros and y = -32768
+        if (y = 0) {
+            do Sys.error(3);
+        }
+
+        if (y = (32767+1)) {
+            if (x = y) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+
+        // Set sign
+        let negSign = false;
+
+        if (x < 0) {
+            let x = -x;
+            let negSign = ~negSign;
+        }
+
+        if (y < 0) {
+            let y = -y;
+            let negSign = ~negSign;
+        }
+
+        let res = Math._recurse_div(x, y);
+        let _div_qy2 = 0;
+
+        if (negSign) {
+            return -res;
+        } else {
+            return res;
+        }
+    }
+
+    /** Returns the integer part of the square root of x. */
+    function int sqrt(int x) {
+        var int i, y, prod;
+
+        if (x < 0) {
+            do Sys.error(4);
+        }
+
+        let y = 0;
+        let i = 7;
+        while (i > -1) {
+            let prod = (y + powOfTwo[i]) * (y + powOfTwo[i]);
+            if (((prod < x) | (prod = x)) & (prod > 0)) {
+                let y = y + powOfTwo[i];
+            }
+            let i = i - 1;
+        }
+
+        return y;
+    }
+
+    /** Returns the greater number. */
+    function int max(int a, int b) {
+        if (a > b) {
+            return a;
+        } else {
+            return b;
+        }
+    }
+
+    /** Returns the smaller number. */
+    function int min(int a, int b) {
+        if (a < b) {
+            return a;
+        } else {
+            return b;
+        }
+    }
+
+    /** Returns j-th bit of x as true/false */
+    function boolean bit(int x, int j) {
+        if ((powOfTwo[j] & x) = 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /** Returns x modulo m */
+    function int mod(int x, int m) {
+        var int div;
+
+        let div = x / m;
+
+        return x - (m * div);
+    }
+
+    /** Returns 2^x */
+    function int powOfTwo(int x) {
+        return powOfTwo[x];
+    }
+
+    /** Recursive division algorithm assuming both x and y are > 0 */
+    function int _recurse_div(int x, int y) {
+        var int q, xm, ym;
+
+        let xm = x - 1;  // Using x-1 and y-1 for comparison to avoid x=-32768
+        let ym = y - 1;  // overflow.
+
+        if ( (ym > xm) | (ym < 0)) { // y<0 => overflow => y>x can be assumed
+            return 0;
+        }
+
+        let q = Math._recurse_div(x, y+y);
+
+        if ((xm - _div_qy2) < ym) {
+            return q+q; // previous y is y/2 but q is 2q => no change to 2*q*y
+        } else {
+            let _div_qy2 = _div_qy2 + y; // (2q+1)y == 2qy + y
+            return q+q+1;
+        }
+    }
+
+}
